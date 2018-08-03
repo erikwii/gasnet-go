@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="<?php echo base_url()?>assets/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url()?>assets/css/dataTables.min.css">
     <link rel="stylesheet" href="<?php echo base_url()?>assets/css/animate.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>assets/css/clockpicker.css">
 
     <!-- development version, includes helpful console warnings -->
     <script src="<?php echo base_url()?>assets/js/polyfill.min.js"></script>
@@ -40,6 +41,7 @@
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/dataTables.bootstrap.js"></script>
 
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url()?>assets/js/clockpicker.js"></script>
 
     <style>
         #loader {
@@ -70,6 +72,11 @@
 
         .app {
             margin-top: 70px;
+            margin-bottom: 80px;
+        }
+
+        .form-app {
+            margin-top: 80px;
             margin-bottom: 80px;
         }
 
