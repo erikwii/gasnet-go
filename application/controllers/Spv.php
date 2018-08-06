@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Permohonan extends CI_Controller {
+class Spv extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
@@ -12,28 +12,20 @@ class Permohonan extends CI_Controller {
 	public function index()
 	{
 		$this->auth();
-
 		$data = array(
-            'title'=> 'GasnetGo! - Permohonan Kendaraan Operasional',
+            'title'=> 'GasnetGo! - Data permohonan kendaraan operasional',
             'nav' => 'nav.php',
-            'isi' => 'pages/permohonan',
-            'nav_active' => 'permohonan'
+            'isi' => 'pages/data_permohonan',
+            'permohonan' => $this->admin_model->get_permohonan(),
+            'nav_active' => 'data'
         );
         $this->load->view('layout/wrapper',$data);
 	}
 
-	public function data()
+	public function data_permohonan($IDpermohonan)
 	{
-		$this->auth();
-
-		$data = array(
-            'title'=> 'GasnetGo! - Permohonan Kendaraan Operasional',
-            'nav' => 'nav.php',
-            'isi' => 'pages/data_permohonan',
-            'permohonan' => $this->admin_model->get_permohonan(array('permohonan_kendaraan.email' => $_SESSION['go_email'])),
-            'nav_active' => 'data'
-        );
-        $this->load->view('layout/wrapper',$data);
+		$data = $this->admin_model->get_permohonan(array('IDpermohonan' => $IDpermohonan));
+		echo json_encode($data);
 	}
 
 	public function tambah_permohonan()
@@ -48,7 +40,7 @@ class Permohonan extends CI_Controller {
 		$jamKembali = $this->input->post('jamKembali');
 		$noPol = $this->input->post('noPol');
 		$pengemudi = $this->input->post('pengemudi');
-		$tanggalPermohonan = date('Y-m-d');
+		$tanggalPermohonan = date('d-m-Y');
 		$email = $_SESSION['go_email'];
 		
 		$data = array(
@@ -65,8 +57,8 @@ class Permohonan extends CI_Controller {
 		);
 		$this->db->insert('permohonan_kendaraan',$data);
 
-		$_SESSION['success'] = 'Permohonan kendaraan berhasil dikirim. Silahkan cek data Persetujuan 1x24 jam';
-		redirect(base_url().'permohonan/');
+		$_SESSION['success'] = 'Permohonan kendaraan berhasil ditambahkan :)';
+		redirect(base_url().'spv/');
 	}
 
 	public function edit_permohonan()
@@ -91,35 +83,69 @@ class Permohonan extends CI_Controller {
 			'jamBerangkat' => $jamBerangkat,
 			'jamKembali' => $jamKembali,
 			'noPol' => $noPol,
-			'pengemudi' => $pengemudi
+			'pengemudi' => $pengemudi,
 		);
 		$this->db->set($data);
 		$this->db->where('IDpermohonan',$IDpermohonan);
 		$this->db->update('permohonan_kendaraan');
 
 		$_SESSION['success'] = 'Permohonan kendaraan berhasil diupdate!';
-		redirect(base_url().'permohonan/data/');
+		redirect(base_url().'spv/');
 	}
 
 	public function hapus_permohonan($id)
 	{	
 		$this->auth();
 
-		if (!isset($_SESSION['go_email']) || !isset($_SESSION['go_password'])) {
-			$_SESSION['login_error'] = 'Anda belum melakukan login';
-			redirect(base_url());
-		}
-
 		$this->db->delete('permohonan_kendaraan', array('IDpermohonan' => $id));
 
 		$_SESSION['success'] = 'Anda berhasil menghapus data permohonan!';
-		redirect(base_url()."permohonan/");
+		redirect(base_url()."spv/");
+	}
+
+	public function setuju($id)
+	{
+		$this->auth();
+
+		$data = array(
+			'approval' => 'Disetujui Supervisor'
+		);
+		$this->db->set($data);
+		$this->db->where('IDpermohonan',$id);
+		$this->db->update('permohonan_kendaraan');
+		redirect(base_url()."spv/");
+	}
+
+	public function batal_setuju($id)
+	{
+		$this->auth();
+
+		$data = array(
+			'approval' => 'Belum ada persetujuan'
+		);
+		$this->db->set($data);
+		$this->db->where('IDpermohonan',$id);
+		$this->db->update('permohonan_kendaraan');
+		redirect(base_url()."spv/");
+	}
+
+	public function tidak_setuju($id)
+	{
+		$this->auth();
+
+		$data = array(
+			'approval' => 'Tidak disetujui Supervisor'
+		);
+		$this->db->set($data);
+		$this->db->where('IDpermohonan',$id);
+		$this->db->update('permohonan_kendaraan');
+		redirect(base_url().'spv/');
 	}
 
 	public function auth()
 	{
-		if (!isset($_SESSION['go_email'])) {
-			$_SESSION['login_error'] = 'Anda belum melakukan login ke halaman Admin'.$_SESSION['go_level'];
+		if (!isset($_SESSION['go_email']) || ($_SESSION['go_level'] != 2)) {
+			$_SESSION['login_error'] = 'Anda belum melakukan login ke halaman supervisor';
 			redirect(base_url()."home/");
 		}
 	}

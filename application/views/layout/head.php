@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="<?php echo base_url()?>assets/css/dataTables.min.css">
     <link rel="stylesheet" href="<?php echo base_url()?>assets/css/animate.css">
     <link rel="stylesheet" href="<?php echo base_url()?>assets/css/clockpicker.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>assets/css/bootstrap-datepicker.css">
 
     <!-- development version, includes helpful console warnings -->
     <script src="<?php echo base_url()?>assets/js/polyfill.min.js"></script>
@@ -42,6 +43,8 @@
 
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/clockpicker.js"></script>
+    <script type="text/javascript" src="<?php echo base_url()?>assets/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="<?php echo base_url()?>assets/js/bootstrap-datepicker.id.min.js"></script>
 
     <style>
         #loader {

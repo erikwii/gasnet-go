@@ -1,15 +1,31 @@
 <div class="container app login">
 	<div class="row my-3">
+		<div class="col-lg-4 offset-lg-4">
+			<img src="<?php echo base_url() ?>assets/img/gasnet.png" class="w-100">
+		</div>
+	</div>
+	<div class="row my-3">
         <div class="col-12 col-lg-4 offset-lg-4 col-md-4">
         	<?php if (isset($_SESSION['login_error'])): ?>
-        		<div class="alert alert-danger alert-dismissible fade show" role="alert">
-				  <?php echo $_SESSION['login_error'] ?>
-				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				    <span aria-hidden="true">&times;</span>
-				  </button>
-				</div>
+        		<script>
+        			swal({
+					  	title: "Error!",
+					  	text: "<?php echo $_SESSION['login_error']?>",
+					  	icon: "error",
+					});
+        		</script>
+				<?php unset($_SESSION['error']) ?>
         	<?php endif ?>
-        	<?php unset($_SESSION['login_error']) ?>
+        	<?php if (isset($_SESSION['login_success'])): ?>
+        		<script>
+        			swal({
+					  	title: "Berhasil!",
+					  	text: "<?php echo $_SESSION['login_success'] ?>",
+					  	icon: "success",
+					});
+        		</script>
+				<?php unset($_SESSION['success']) ?>
+        	<?php endif ?>
         	<form action="<?php echo base_url() ?>home/login" class="needs-validation" method="post">
 			  	<div class="form-group">
 			    	<label for="exampleInputEmail1">Email</label>

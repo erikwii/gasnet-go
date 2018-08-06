@@ -7,26 +7,18 @@ class Admin extends CI_Controller {
 		parent::__construct();
 		$this->load->model('home_model');
 		$this->load->model('admin_model');
-		
-		// if(!isset($_SESSION["go-level"]) || $_SESSION["go-level"] != 2 || $_SESSION["go-level"] != 3){
-		// 	$_SESSION['login_error'] = "Anda tidak bisa mengakses halaman Admin...";
-		// 	redirect(base_url()."home/");
-		// }
 	}
 
 	public function index()
 	{
-		if (!isset($_SESSION['go_email']) || ($_SESSION['go_level'] == 1)) {
-			$_SESSION['login_error'] = 'Anda belum melakukan login';
-			redirect(base_url()."home/");
-		}
+		$this->auth();
 
 		$data = array(
             'title'=> 'GasnetGo! - Data permohonan kendaraan operasional',
             'nav' => 'nav.php',
             'isi' => 'pages/data_permohonan',
             'permohonan' => $this->admin_model->get_permohonan(),
-            'nav_active' => 'permohonan'
+            'nav_active' => 'data'
         );
         $this->load->view('layout/wrapper',$data);
 	}
@@ -39,10 +31,7 @@ class Admin extends CI_Controller {
 
 	public function tambah_permohonan()
 	{
-		if (!isset($_SESSION['go_email']) || !isset($_SESSION['go_password'])) {
-			$_SESSION['login_error'] = 'Anda belum melakukan login';
-			redirect(base_url());
-		}
+		$this->auth();
 
 		$tanggalBerangkat = $this->input->post('tanggalBerangkat');
 		$namaPengguna = $this->input->post('namaPengguna');
@@ -75,83 +64,90 @@ class Admin extends CI_Controller {
 
 	public function edit_permohonan()
 	{
-		if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
-			$_SESSION['login_error'] = 'Anda belum melakukan login';
-			redirect(base_url());
-		}
+		$this->auth();
 
-		$IDinventaris = $this->input->post('IDinventaris');
-		$kodeBarang = $this->input->post('editkodeBarang');
-		$jenisAset = $this->input->post('editjenisAset');
-		$namaBarang = $this->input->post('editnamaBarang');
-		$merk = $this->input->post('editmerk');
-		$harga = $this->input->post('edithargBarang');
-		$noMesin = $this->input->post('editnoMesin');
-		$lokasi = $this->input->post('editlokasi');
-		$bahan = $this->input->post('editbahan');
-		$bulan = $this->input->post('editbulan');
-		$tahun = $this->input->post('edittahun');
-		$fileImage = $this->input->post('namaFile');
-
-		// check if barang is not exist on table barang
-		$check = $this->home_model->get_barang_where(array('namaBarang'=>$namaBarang));
-		if ($check == false) {
-			$this->db->insert('barang', array('namaBarang' => $namaBarang));
-			$IDbarang = $this->home_model->get_barang_where(array('namaBarang'=>$namaBarang))['IDbarang'];
-		} else {
-			$IDbarang = $check['IDbarang'];
-		}
+		$IDpermohonan = $this->input->post('IDpermohonan');
+		$tanggalBerangkat = $this->input->post('edittanggalBerangkat');
+		$namaPengguna = $this->input->post('editnamaPengguna');
+		$satuanKerja = $this->input->post('editsatuanKerja');
+		$tujuan = $this->input->post('edittujuan');
+		$jamBerangkat = $this->input->post('editjamBerangkat');
+		$jamKembali = $this->input->post('editjamKembali');
+		$noPol = $this->input->post('editnoPol');
+		$pengemudi = $this->input->post('editpengemudi');
 		
-		$fileImageName = array(null, null);
-
-		$config['upload_path']          = 'assets/img/inventaris/';
-		$config['allowed_types']        = 'gif|jpg|png';
-		$config['max_size']             = 0;
-		$config['max_width']            = 0;
-		$config['max_height']           = 0;
-
-		$this->load->library('upload', $config);
-
-		if ( ! $this->upload->do_upload('editfileImage')){
-			$error = array('error' => $this->upload->display_errors());			
-		}else{
-			$data = array('upload_data' => $this->upload->data());
-			$fileImageName = array('success', $this->upload->data()['file_name']);
-		}
-
-		if ($fileImageName[1] == null) {
-			$fileImageName = array('success', $fileImage);
-		}
-
 		$data = array(
-			'kodeBarang' => $kodeBarang,
-			'jenisAset' => $jenisAset,
-			'IDbarang' => $IDbarang,
-			'merk' => $merk,
-			'harga' => $harga,
-			'noMesin' => $noMesin,
-			'lokasi' => $lokasi,
-			'bahan' => $bahan,
-			'bulan' => $bulan,
-			'tahun' => $tahun,
-			'noInventaris' => $kodeBarang.'/'.$IDinventaris.'/'.$this->bulan_to_romawi($bulan).'/'.$tahun,
-			'fileImage' => $fileImageName[1]
+			'tanggalBerangkat' => $tanggalBerangkat,
+			'namaPengguna' => $namaPengguna,
+			'satuanKerja' => $satuanKerja,
+			'tujuan' => $tujuan,
+			'jamBerangkat' => $jamBerangkat,
+			'jamKembali' => $jamKembali,
+			'noPol' => $noPol,
+			'pengemudi' => $pengemudi,
 		);
 		$this->db->set($data);
-		$this->db->where('IDinventaris', $IDinventaris);
-		$this->db->update('inventaris');
+		$this->db->where('IDpermohonan',$IDpermohonan);
+		$this->db->update('permohonan_kendaraan');
 
-		$_SESSION['success'] = 'Inventaris berhasil diupdate :)';
-		redirect(base_url().'/home/inventaris');
+		$_SESSION['success'] = 'Permohonan kendaraan berhasil diupdate!';
+		redirect(base_url().'admin/');
 	}
 
 	public function hapus_permohonan($id)
 	{	
-		$file = $this->home_model->get_inventaris($id)['fileImage'];
-		unlink(FCPATH.'assets/img/inventaris/'.$file);
-		$this->db->delete('inventaris', array('IDinventaris' => $id));
+		$this->auth();
 
-		$_SESSION['success'] = 'Anda berhasil menghapus data inventaris!';
-		redirect(base_url());
+		$this->db->delete('permohonan_kendaraan', array('IDpermohonan' => $id));
+
+		$_SESSION['success'] = 'Anda berhasil menghapus data permohonan!';
+		redirect(base_url()."admin/");
+	}
+
+	public function auth()
+	{
+		if (($_SESSION['go_level'] != 0 && $_SESSION['go_level'] != 3) || !isset($_SESSION['go_email']) ) {
+			$_SESSION['login_error'] = 'Anda belum melakukan login ke halaman Admin'.$_SESSION['go_level'];
+			redirect(base_url()."home/");
+		}
+	}
+
+	public function setuju($id)
+	{
+		$this->auth();
+
+		$data = array(
+			'approval' => 'Disetujui Pusat'
+		);
+		$this->db->set($data);
+		$this->db->where('IDpermohonan',$id);
+		$this->db->update('permohonan_kendaraan');
+		redirect(base_url()."admin/");
+	}
+
+	public function batal_setuju($id)
+	{
+		$this->auth();
+
+		$data = array(
+			'approval' => 'Disetujui Supervisor'
+		);
+		$this->db->set($data);
+		$this->db->where('IDpermohonan',$id);
+		$this->db->update('permohonan_kendaraan');
+		redirect(base_url()."admin/");
+	}
+
+	public function tidak_setuju($id)
+	{
+		$this->auth();
+
+		$data = array(
+			'approval' => 'Tidak disetujui Pusat'
+		);
+		$this->db->set($data);
+		$this->db->where('IDpermohonan',$id);
+		$this->db->update('permohonan_kendaraan');
+		redirect(base_url().'admin/');
 	}
 }

@@ -2,21 +2,23 @@
 	<div class="row my-3">
         <div class="col-8 offset-2 col-lg-8 col-md-4">
         	<?php if (isset($_SESSION['error'])): ?>
-        		<div class="alert alert-danger alert-dismissible fade show" role="alert">
-				  <?php echo $_SESSION['error'] ?>
-				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				    <span aria-hidden="true">&times;</span>
-				  </button>
-				</div>
+        		<script>
+        			swal({
+					  	title: "Error!",
+					  	text: "<?php echo $_SESSION['error'] ?>",
+					  	icon: "error",
+					});
+        		</script>
 				<?php unset($_SESSION['error']) ?>
         	<?php endif ?>
         	<?php if (isset($_SESSION['success'])): ?>
-        		<div class="alert alert-success alert-dismissible fade show" role="alert">
-				  <?php echo $_SESSION['success'] ?>
-				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				    <span aria-hidden="true">&times;</span>
-				  </button>
-				</div>
+        		<script>
+        			swal({
+					  	title: "Berhasil!",
+					  	text: "<?php echo $_SESSION['success'] ?>",
+					  	icon: "success",
+					});
+        		</script>
 				<?php unset($_SESSION['success']) ?>
         	<?php endif ?>
 			<div class="card">
@@ -79,7 +81,7 @@
 						  	<div class="form-group col-md-6">
 						    	<label for="namaPengemudi">Nama Pengemudi</label>
 						    	<input type="text" class="form-control" id="namaPengemudi" name="pengemudi" placeholder="Nama Pengemudi" required />
-						    	<div class="invalid-feedback">Anda harus mengisi Satuan Kerja</div>
+						    	<div class="invalid-feedback">Anda harus mengisi Nama Pengemudi</div>
 						  	</div>
 					  	</div>
 					  	<div class="form-group">

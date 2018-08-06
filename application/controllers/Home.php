@@ -16,10 +16,7 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		// if (isset($_SESSION['go-email']) && isset($_SESSION['go-password']) && isset($_SESSION['go-level'])) {
-		// 	redirect(base_url()."admin/");
-		// }
-
+		$this->check_auth();
 		$data = array(
             'title'=> 'GasnetGo! - Login',
             'nav' => 'nav.php',
@@ -70,10 +67,15 @@ class Home extends CI_Controller {
                     $this->session->set_userdata('go_email', $email);
                     $this->session->set_userdata('go_password', $password);
                     $this->session->set_userdata('go_level', $level);
-                    if ($level == 1) {
-                    	redirect(base_url()."permohonan/");
-                    } else if ($level == 2 || $level == 3 || $level == 0) {
-                    	redirect(base_url()."admin/");
+
+                    $_SESSION['success'] = "Selamat datang kembali di GasnetGo!";
+
+                    if ($_SESSION['go_level'] == 0 || $_SESSION['go_level'] == 3) {
+                    	redirect(base_url()."admin");
+                    }elseif ($_SESSION['go_level'] == 1) {
+                    	redirect(base_url()."permohonan");
+                    }elseif ($_SESSION['go_level'] == 2){
+                    	redirect(base_url()."spv");
                     }
                 }else{
                 	$this->session->set_userdata('login_error', 'Password yang dimasukkan salah....');
@@ -93,8 +95,22 @@ class Home extends CI_Controller {
                 $_SESSION['go_level']
             );
             $this->session->sess_destroy();
-       }
-       redirect(base_url());
+       	}
+       	$_SESSION['login_success'] = "Anda berhasil logout";
+       	redirect(base_url());
+    }
+
+    public function check_auth()
+    {
+    	if (isset($_SESSION['go_level'])) {
+    		if ($_SESSION['go_level'] == 0 || $_SESSION['go_level'] == 3) {
+				redirect(base_url()."admin/");
+			}elseif($_SESSION['go_level'] == 2){
+				redirect(base_url()."spv/");
+			}else{
+				redirect(base_url()."permohonan/");
+			}
+    	}
     }
 
     public function bulan_to_romawi($val)
