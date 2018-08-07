@@ -36,109 +36,36 @@
 	    <div class="tab-content" id="v-pills-tabContent">
 	      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
 	      	<div class="table-responsive">
-        		<table class="table table-striped w-100" id="permohonan_table">
+        		<table class="table table-striped w-100" id="user_table">
 				  <thead>
 				    <tr>
 				      <th scope="col">No</th>
-				      <th scope="col">Hari/Tgl. Keberangkatan</th>
-				      <th scope="col">Nama Pengguna</th>
-				      <th scope="col">Satuan Kerja</th>
-				      <th scope="col">Tujuan</th>
-				      <th scope="col">Jam Berangkat</th>
-				      <th scope="col">Jam Kembali</th>
-				      <th scope="col">No. Polisi</th>
-				      <th scope="col">Pengemudi</th>
-				      <th scope="col">KM. Awal</th>
-				      <th scope="col">KM. Akhir</th>
-				      <th scope="col">Pemohon</th>
-				      <th scope="col">Persetujuan</th>
-				      <?php if ($_SESSION['go_level'] != 1): ?>
-				      	<th scope="col">Setujui</th>
-				      <?php endif ?>
+				      <th scope="col">Email</th>
+				      <th scope="col">Nama</th>
+				      <th scope="col">Posisi</th>
+				      <th scope="col">Status</th>
 				      <th scope="col">Action</th>
 				    </tr>
 				  </thead>
 				  <tbody>
 				  	<?php $i = 1; ?>
-				  	<?php foreach ($permohonan as $p): ?>
-				  		<?php 
-				  			$timestamp = strtotime($p->tanggalBerangkat);
-							$day = date('D', $timestamp);
-				  		?>
+				  	<?php foreach ($user as $u): ?>
 				  		<tr>
 					      <th scope="row"><?php echo $i ?></th>
-					      <td><?php echo $this->home_model->tranlate_day_to_indo($day)."/".$this->home_model->read_date($p->tanggalBerangkat) ?></td>
-					      <td><?php echo $p->namaPengguna ?></td>
-					      <td><?php echo $p->satuanKerja ?></td>
-					      <td><?php echo $p->tujuan ?></td>
-					      <td><?php echo $p->jamBerangkat ?></td>
-					      <td><?php echo $p->jamKembali ?></td>
-					      <td><?php echo $p->noPol ?></td>
-					      <td><?php echo $p->pengemudi ?></td>
-					      <td><?php echo $p->kmAwal ?></td>
-					      <td><?php echo $p->kmAkhir ?></td>
-					      <td><?php echo $p->nama ?></td>
+					      <td><?php echo $u->email ?></td>
+					      <td><?php echo $u->nama ?></td>
+					      <td><?php echo $u->posisi ?></td>
 					      <td>
-				      		<?php if ($p->approval == 'Belum ada persetujuan'): ?>
-				      			<span class="text-warning"><?php echo $p->approval ?></span>
-				      		<?php elseif($p->approval == 'Disetujui Supervisor'): ?>
-				      			<span class="text-success"><?php echo $p->approval ?></span>
-				      		<?php elseif($p->approval == 'Disetujui Pusat'): ?>
-				      			<span class="text-primary"><?php echo $p->approval ?></span>
-				      		<?php else: ?>
-				      			<span class="text-danger"><?php echo $p->approval ?></span>
-				      		<?php endif ?>
-					      </td>
-					    <?php if ($_SESSION['go_level'] != 1): ?>
-					      <td>
-					      	<?php if ($_SESSION['go_level'] == 1): ?>
-					      		<?php if ($p->approval == 'Belum ada persetujuan'): ?>
-					      			<span class="text-warning"><?php echo $p->approval ?></span>
-					      		<?php elseif($p->approval == 'Disetujui Supervisor'): ?>
-					      			<span class="text-success"><?php echo $p->approval ?></span>
-					      		<?php elseif($p->approval == 'Disetujui Pusat'): ?>
-					      			<span class="text-primary"><?php echo $p->approval ?></span>
-					      		<?php else: ?>
-					      			<span class="text-danger"><?php echo $p->approval ?></span>
-					      		<?php endif ?>
-					      	<?php elseif ($_SESSION['go_level'] == 2): ?>
-					      		<?php if($p->approval == 'Disetujui Supervisor'): ?>
-					      			<a href="<?php echo base_url() ?>spv/batal_setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-outline-secondary">Batal Setuju</a>
-					      		<?php elseif($p->approval == 'Disetujui Pusat'): ?>
-					      			<span class="text-primary">Telah <?php echo $p->approval ?></span>
-					      		<?php elseif($p->approval == 'Tidak disetujui Supervisor'): ?>
-					      			<a href="<?php echo base_url() ?>spv/setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-outline-primary">Setujui</a>
-					      		<?php elseif($p->approval == 'Tidak disetujui Pusat'): ?>
-					      			<span class="text-danger">Pusat tidak setuju</span>
-					      		<?php else: ?>
-					      			<div class="btn-group">
-							      		<a href="<?php echo base_url() ?>spv/setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-outline-primary">Setuju</a>
-							      		<a href="<?php echo base_url() ?>spv/tidak_setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-outline-secondary">Tidak</a>
-							      	</div>
-					      		<?php endif ?>
+					      	<?php if ($u->status == 'aktif'): ?>
+					      		<h5><span class="badge badge-success"><?php echo $u->status ?></span></h5>
 					      	<?php else: ?>
-					      		<?php if($p->approval == 'Disetujui Supervisor'): ?>
-					      			<div class="btn-group">
-							      		<a href="<?php echo base_url() ?>admin/setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-outline-primary">Setuju</a>
-							      		<a href="<?php echo base_url() ?>admin/tidak_setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-outline-secondary">Tidak</a>
-							      	</div>
-					      		<?php elseif($p->approval == 'Disetujui Pusat'): ?>
-					      			<a href="<?php echo base_url() ?>admin/batal_setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-outline-secondary">Batal Setuju</a>
-					      		<?php elseif($p->approval == 'Tidak disetujui Supervisor'): ?>
-					      			<span class="text-danger"><?php echo $p->approval ?></span>
-					      		<?php elseif($p->approval == 'Tidak disetujui Pusat'): ?>
-							      	<a href="<?php echo base_url() ?>admin/setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-outline-primary">Setujui</a>
-							    <?php else: ?>
-							    	<span class="text-warning">Belum ada persetujuan Supervisor</span>
-					      		<?php endif ?>
+					      		<span class="badge badge-danger"><?php echo $u->status ?></span>
 					      	<?php endif ?>
 					      </td>
-					  	<?php endif; ?>
 					      <td>
 					      	<div class="btn-group">
-					      		<button class="btn btn-info" onclick="lihat_permohonan(<?php echo $p->IDpermohonan ?>)">Lihat Data</button>
-					      		<button class="btn btn-warning" onclick="edit_permohonan(<?php echo $p->IDpermohonan ?>)">Edit</button>
-					      		<button class="btn btn-danger" onclick='hapus_permohonan(<?php echo $p->IDpermohonan ?>)'>Hapus</button>
+					      		<button class="btn btn-warning" onclick="edit_permohonan(<?php echo $u->email ?>)">Edit</button>
+					      		<button class="btn btn-danger" onclick='hapus_permohonan(<?php echo $u->email ?>)'>Hapus</button>
 					      	</div>
 					      </td>
 					    </tr>
@@ -148,8 +75,88 @@
 				</table>
         	</div>
 	      </div>
-	      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
-	      <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+	      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+	      	<div class="table-responsive">
+        		<table class="table table-striped w-100" id="spv_table">
+				  <thead>
+				    <tr>
+				      <th scope="col">No</th>
+				      <th scope="col">Email</th>
+				      <th scope="col">Nama</th>
+				      <th scope="col">Posisi</th>
+				      <th scope="col">Status</th>
+				      <th scope="col">Action</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	<?php $i = 1; ?>
+				  	<?php foreach ($supervisor as $spv): ?>
+				  		<tr>
+					      <th scope="row"><?php echo $i ?></th>
+					      <td><?php echo $spv->email ?></td>
+					      <td><?php echo $spv->nama ?></td>
+					      <td><?php echo $spv->posisi ?></td>
+					      <td>
+					      	<?php if ($spv->status == 'aktif'): ?>
+					      		<h5><span class="badge badge-success"><?php echo $spv->status ?></span></h5>
+					      	<?php else: ?>
+					      		<span class="badge badge-danger"><?php echo $spv->status ?></span>
+					      	<?php endif ?>
+					      </td>
+					      <td>
+					      	<div class="btn-group">
+					      		<button class="btn btn-warning" onclick="edit_permohonan(<?php echo $spv->email ?>)">Edit</button>
+					      		<button class="btn btn-danger" onclick='hapus_permohonan(<?php echo $spv->email ?>)'>Hapus</button>
+					      	</div>
+					      </td>
+					    </tr>
+					    <?php $i++; ?>
+				  	<?php endforeach ?>
+				  </tbody>
+				</table>
+        	</div>
+	      </div>
+	      <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+	      	<div class="table-responsive">
+        		<table class="table table-striped w-100" id="admin_table">
+				  <thead>
+				    <tr>
+				      <th scope="col">No</th>
+				      <th scope="col">Email</th>
+				      <th scope="col">Nama</th>
+				      <th scope="col">Posisi</th>
+				      <th scope="col">Status</th>
+				      <th scope="col">Action</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	<?php $i = 1; ?>
+				  	<?php foreach ($admin as $a): ?>
+				  		<tr>
+					      <th scope="row"><?php echo $i ?></th>
+					      <td><?php echo $a->email ?></td>
+					      <td><?php echo $a->nama ?></td>
+					      <td><?php echo $a->posisi ?></td>
+					      <td>
+					      	<?php if ($a->status == 'aktif'): ?>
+					      		<h5><span class="badge badge-success"><?php echo $a->status ?></span></h5>
+					      	<?php else: ?>
+					      		<span class="badge badge-danger"><?php echo $a->status ?></span>
+					      	<?php endif ?>
+					      </td>
+					      <td>
+					      	<div class="btn-group">
+					      		<button class="btn btn-warning" onclick="edit_permohonan(<?php echo $a->email ?>)">Edit</button>
+					      		<button class="btn btn-danger" onclick='hapus_permohonan(<?php echo $a->email ?>)'>Hapus</button>
+					      	</div>
+					      </td>
+					    </tr>
+					    <?php $i++; ?>
+				  	<?php endforeach ?>
+				  </tbody>
+				</table>
+        	</div>
+	      </div>
 	      <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
 	    </div>
 	  </div>
@@ -560,55 +567,54 @@
 <script>
 
 	$(document).ready(function(){
-		if(!$("table#permohonan_table tr td").hasClass('null')) {
-			var preRegTable = $('#permohonan_table').DataTable({
+		if(!$("table#user_table tr td").hasClass('null')) {
+			var userTable = $('#user_table').DataTable({
 				info: false,
 				dom: '<"top"B>flt<"bottom"p><"clear">',
 				oLanguage: {sLengthMenu: "_MENU_"},
 				lengthMenu: [[5, 10, 25, 50, -1], ["5 Rows","10 Rows", "25 Rows", "50 Rows", "All"]],
 				order: [[0, "asc"]],
-				"columnDefs": [
-		            {
-		                "targets": [ 5 ],
-		                "visible": false
-		            },
-		            {
-		                "targets": [ 6 ],
-		                "visible": false
-		            },
-		            {
-		                "targets": [ 7 ],
-		                "visible": false
-		            },
-		            {
-		                "targets": [ 8 ],
-		                "visible": false
-		            },
-		            {
-		                "targets": [ 9 ],
-		                "visible": false
-		            },
-		            {
-		                "targets": [ 10 ],
-		                "visible": false
-		            },
-		            {
-		                "targets": [ 11 ],
-		                "visible": false
-		            }
-		            <?php if($_SESSION['go_level'] == 0 || $_SESSION['go_level'] == 3): ?>
-		            	,
-			            {
-			                "targets": [ 12 ],
-			                "visible": false
-			            }
-		            <?php endif; ?>
-		        ],
 				buttons: [
 		            {
 		                extend: 'excelHtml5',
 		                exportOptions: {
-		                    columns: [0,1,2,3,5,4,6,7,8,9,10,11,12]
+		                    columns: [0,1,2,3,4]
+		                }
+		            }
+		        ]
+			});
+		}
+
+		if(!$("table#spv_table tr td").hasClass('null')) {
+			var spvTable = $('#spv_table').DataTable({
+				info: false,
+				dom: '<"top"B>flt<"bottom"p><"clear">',
+				oLanguage: {sLengthMenu: "_MENU_"},
+				lengthMenu: [[5, 10, 25, 50, -1], ["5 Rows","10 Rows", "25 Rows", "50 Rows", "All"]],
+				order: [[0, "asc"]],
+				buttons: [
+		            {
+		                extend: 'excelHtml5',
+		                exportOptions: {
+		                    columns: [0,1,2,3,4]
+		                }
+		            }
+		        ]
+			});
+		}
+
+		if(!$("table#admin_table tr td").hasClass('null')) {
+			var adminTable = $('#admin_table').DataTable({
+				info: false,
+				dom: '<"top"B>flt<"bottom"p><"clear">',
+				oLanguage: {sLengthMenu: "_MENU_"},
+				lengthMenu: [[5, 10, 25, 50, -1], ["5 Rows","10 Rows", "25 Rows", "50 Rows", "All"]],
+				order: [[0, "asc"]],
+				buttons: [
+		            {
+		                extend: 'excelHtml5',
+		                exportOptions: {
+		                    columns: [0,1,2,3,4]
 		                }
 		            }
 		        ]

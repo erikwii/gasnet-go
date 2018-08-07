@@ -29,6 +29,9 @@ class Admin extends CI_Controller {
             'title'=> 'GasnetGo! - Pengaturan akun',
             'nav' => 'nav.php',
             'isi' => 'pages/data_akun',
+            'admin' => $this->admin_model->get_akun('admin'),
+            'supervisor' => $this->admin_model->get_akun('spv'),
+            'user' => $this->admin_model->get_akun('user'),
             'permohonan' => $this->admin_model->get_permohonan(),
             'nav_active' => 'akun'
         );

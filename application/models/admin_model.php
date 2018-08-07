@@ -17,4 +17,18 @@ class Admin_model extends CI_Model{
 		}
 	}
 
+	public function get_akun($role=null)
+	{
+		if ($role == null) {
+			return $this->db->get('users')->result();
+		} else {
+			if ($role == 'admin') {
+				return $this->db->get_where('users', array('level'=>3))->result();
+			} elseif($role == 'spv') {
+				return $this->db->get_where('users', array('level'=>2))->result();
+			} else {
+				return $this->db->get_where('users', array('level'=>1))->result();
+			}
+		}
+	}
 }
