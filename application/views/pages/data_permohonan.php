@@ -232,6 +232,8 @@
 	      			<?php $attributes = array('class' => 'needs-validation', 'id'=>'editform'); ?>
 	      			<?php if ($_SESSION['go_level'] == 1): ?>
 	      				<?php echo form_open_multipart('permohonan/edit_permohonan/', $attributes);?>
+	      			<?php elseif ($_SESSION['go_level'] == 2): ?>
+	      				<?php echo form_open_multipart('spv/edit_permohonan/', $attributes);?>
 	      			<?php else: ?>
 						<?php echo form_open_multipart('admin/edit_permohonan/', $attributes);?>
 	      			<?php endif ?>

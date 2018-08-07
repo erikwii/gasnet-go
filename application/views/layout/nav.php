@@ -51,6 +51,15 @@
 				        	<b><a class="nav-link" href="<?php echo base_url() ?>admin/"><i class="fa fa-inbox"></i> Data Permohonan</a></b>
 				      	</li>
 			      	<?php endif; ?>
+			      	<?php if (isset($nav_active) && $nav_active == 'akun'): ?>
+						<li class="nav-item active">
+				        	<b><a class="nav-link text-primary" href="<?php echo base_url() ?>admin/akun/"><i class="fa fa-users"></i> Data Akun</a></b>
+				      	</li>
+				    <?php else: ?>
+				    	<li class="nav-item">
+				        	<b><a class="nav-link" href="<?php echo base_url() ?>admin/akun/"><i class="fa fa-users"></i> Data Akun</a></b>
+				      	</li>
+					<?php endif ?>
 				<?php endif ?>
 			<?php endif ?>
 			<?php if (isset($_SESSION['go_email'])): ?>

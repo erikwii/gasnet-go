@@ -29,13 +29,95 @@ class Admin extends CI_Controller {
             'title'=> 'GasnetGo! - Pengaturan akun',
             'nav' => 'nav.php',
             'isi' => 'pages/data_akun',
-            'admin' => $this->admin_model->get_akun('admin'),
-            'supervisor' => $this->admin_model->get_akun('spv'),
-            'user' => $this->admin_model->get_akun('user'),
-            'permohonan' => $this->admin_model->get_permohonan(),
+            'admin' => $this->admin_model->get_akun_role('admin'),
+            'supervisor' => $this->admin_model->get_akun_role('spv'),
+            'user' => $this->admin_model->get_akun_role('user'),
             'nav_active' => 'akun'
         );
         $this->load->view('layout/wrapper',$data);
+	}
+
+	public function data_akun($email)
+	{
+		$data = $this->admin_model->get_akun(array('email' => $email));
+		echo json_encode($data);
+	}
+
+	public function tambah_akun()
+	{
+		$this->auth();
+
+		$nama = $this->input->post('nama');
+		$email = $this->input->post('email');
+		$password = $this->input->post('password');
+		$posisi = $this->input->post('posisi');
+		$level = $this->input->post('level');
+
+		$check = $this->home_model->is_UserExist($email);
+		if ($check > 0) {
+			$_SESSION['error'] = $email." telah digunakan! Silahkan gunakan email lain";
+			redirect(base_url()."admin/akun/");
+		}
+
+		$data = array(
+			'nama' => $nama,
+			'email' => $email,
+			'password'	=> password_hash($password, PASSWORD_DEFAULT),
+			'posisi' => $posisi,
+			'level' => $level,
+			'status' => 'aktif',
+		);
+		$this->db->insert('users',$data);
+
+		$_SESSION['success'] = 'Akun '.$nama.' berhasil ditambahkan :)';
+		redirect(base_url()."admin/akun");
+	}
+
+	public function edit_akun()
+	{
+		$this->auth();
+
+		$email = $this->input->post('thisemail'); 
+		$nama = $this->input->post('editnama');
+		$editemail = $this->input->post('editemail');
+		$password = $this->input->post('editpassword');
+		$posisi = $this->input->post('editposisi');
+		$level = $this->input->post('editlevel');
+
+		$data = array(
+			'nama' => $nama,
+			'password'	=> password_hash($password, PASSWORD_DEFAULT),
+			'posisi' => $posisi,
+			'level' => $level,
+			'status' => 'aktif',
+		);
+
+		if ($editemail != $email) {
+			$data['email'] = $editemail;
+
+			$check = $this->home_model->is_UserExist($editemail);
+			if ($check > 0) {
+				$_SESSION['error'] = $editemail." telah digunakan! Silahkan gunakan email lain";
+				redirect(base_url()."admin/akun/");
+			}
+		}
+
+		$this->db->set($data);
+		$this->db->where('email',$email);
+		$this->db->update('users');
+
+		$_SESSION['success'] = 'Akun '.$nama.' berhasil diupdate :)';
+		redirect(base_url()."admin/akun");
+	}
+
+	public function hapus_akun($email)
+	{
+		$this->auth();
+
+		$this->db->delete('users', array('email' => $email));
+
+		$_SESSION['success'] = 'Anda berhasil menghapus Akun'.$email;
+		redirect(base_url()."admin/akun/");
 	}
 
 	public function data_permohonan($IDpermohonan)

@@ -17,7 +17,7 @@ class Admin_model extends CI_Model{
 		}
 	}
 
-	public function get_akun($role=null)
+	public function get_akun_role($role=null)
 	{
 		if ($role == null) {
 			return $this->db->get('users')->result();
@@ -29,6 +29,15 @@ class Admin_model extends CI_Model{
 			} else {
 				return $this->db->get_where('users', array('level'=>1))->result();
 			}
+		}
+	}
+
+	public function get_akun($where)
+	{
+		if ($where == null) {
+			return $this->db->get('users')->result();
+		} else {
+			return $this->db->get_where('users',$where)->row_array();
 		}
 	}
 }

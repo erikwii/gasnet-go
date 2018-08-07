@@ -1,6 +1,7 @@
 <div class="container-fluid app">
 	<div class="row my-3">
         <div class="col-12 col-lg-12 col-md-4">
+        	<button class="btn btn-primary float-right my-2" data-toggle="modal" data-target="#exampleModalCenter">Tambah Akun</button>
         	<?php if (isset($_SESSION['error'])): ?>
         		<script>
         			swal({
@@ -64,8 +65,8 @@
 					      </td>
 					      <td>
 					      	<div class="btn-group">
-					      		<button class="btn btn-warning" onclick="edit_permohonan(<?php echo $u->email ?>)">Edit</button>
-					      		<button class="btn btn-danger" onclick='hapus_permohonan(<?php echo $u->email ?>)'>Hapus</button>
+					      		<button class="btn btn-warning" onclick="edit_akun('<?php echo $u->email ?>')">Edit</button>
+					      		<button class="btn btn-danger" onclick='hapus_akun("<?php echo $u->email ?>)"'>Hapus</button>
 					      	</div>
 					      </td>
 					    </tr>
@@ -105,8 +106,8 @@
 					      </td>
 					      <td>
 					      	<div class="btn-group">
-					      		<button class="btn btn-warning" onclick="edit_permohonan(<?php echo $spv->email ?>)">Edit</button>
-					      		<button class="btn btn-danger" onclick='hapus_permohonan(<?php echo $spv->email ?>)'>Hapus</button>
+					      		<button class="btn btn-warning" onclick="edit_akun('<?php echo $spv->email ?>')">Edit</button>
+					      		<button class="btn btn-danger" onclick="hapus_akun('<?php echo $spv->email ?>')">Hapus</button>
 					      	</div>
 					      </td>
 					    </tr>
@@ -146,8 +147,8 @@
 					      </td>
 					      <td>
 					      	<div class="btn-group">
-					      		<button class="btn btn-warning" onclick="edit_permohonan(<?php echo $a->email ?>)">Edit</button>
-					      		<button class="btn btn-danger" onclick='hapus_permohonan(<?php echo $a->email ?>)'>Hapus</button>
+					      		<button class="btn btn-warning" onclick="edit_akun('<?php echo $a->email ?>')">Edit</button>
+					      		<button class="btn btn-danger" onclick='hapus_akun("<?php echo $a->email ?>")'>Hapus</button>
 					      	</div>
 					      </td>
 					    </tr>
@@ -170,75 +171,63 @@
 	  	<div class="modal-dialog modal-dialog-centered" role="document">
 	    	<div class="modal-content">
 	      		<div class="modal-header">
-	        		<h5 class="modal-title" id="exampleModalCenterTitle">Form Permohonan</h5>
+	        		<h5 class="modal-title" id="exampleModalCenterTitle">Tambah Akun</h5>
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          			<span aria-hidden="true">&times;</span>
 	        		</button>
 	      		</div>
 	      		<div class="modal-body">
 	      			<?php $attributes = array('class' => 'needs-validation'); ?>
-	      			<?php echo form_open_multipart('admin/tambah_permohonan/', $attributes);?>
+	      			<?php echo form_open_multipart('admin/tambah_akun/', $attributes);?>
 					  	<div class="form-row">
-					    	<div class="form-group col-md-5">
-					      		<label for="tanggalBerangkat">Tgl. Keberangkatan</label>
+					    	<div class="form-group col-md-12">
+					      		<label for="nama">Nama Lengkap</label>
 					      		<div class="input-group">
-					      			<input type="date" class="form-control" id="tanggalBerangkat" name="tanggalBerangkat" placeholder="Tgl. Keberangkatan" required>
+					      			<input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Lengkap" required>
 					      			<div class="input-group-append">
-									    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar"></i></span>
+									    <span class="input-group-text" id="basic-addon2"><i class="fa fa-user"></i></span>
 									</div>
 					      		</div>
-					      		<div class="invalid-feedback">Anda harus mengisi Tanggal Keberangkatan</div>
-					    	</div>
-					    	<div class="form-group col-md-7">
-					      		<label for="namaPengguna">Nama Pengguna</label>
-					      		<input id="namaPengguna" name="namaPengguna" class="form-control" placeholder="Nama Pengguna" required/>
-					      		<div class="invalid-feedback">Anda harus mengisi Nama Pengguna</div>
+					      		<div class="invalid-feedback">Anda harus mengisi Nama Lengkap</div>
 					    	</div>
 					  	</div>
 					  	<div class="form-row">
-					  		<div class="form-group col-md-4" id="berangkat">
-					  			<label for="jamBerangkat">Jam Berangkat</label>
+					  		<div class="form-group col-md-12">
+					  			<label for="email">Email</label>
 					  			<div class="input-group">
-								    <input type="text" class="form-control" id="jamBerangkat" value="" name="jamBerangkat" placeholder="Berangkat" required>
+								    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
 								    <div class="input-group-append">
-									    <span class="input-group-text" id="basic-addon2"><i class="fa fa-clock-o"></i></span>
+									    <span class="input-group-text" id="basic-addon2"><i class="fa fa-envelope-o"></i></span>
 									</div>
 					  			</div>
-							    <div class="invalid-feedback">Anda harus mengisi Jam Berangkat</div>
+							    <div class="invalid-feedback">Format Email tidak benar</div>
 							</div>
-					  		<div class="form-group col-md-4" id="kembali">
-					  			<label for="jamKembali">Jam Kembali</label>
+					  		<div class="form-group col-md-12">
+					  			<label for="password">Password</label>
 					  			<div class="input-group">
-					  				<input type="text" class="form-control" id="jamKembali" name="jamKembali
-								    " placeholder="Kembali" required>
+					  				<input type="password" class="form-control" id="password" name="password
+								    " placeholder="Password" minlength="6" required>
 								    <div class="input-group-append">
-								        <span class="input-group-text"><span class="fa fa-clock-o"></span></span>
+								        <span class="input-group-text"><span class="fa fa-lock"></span></span>
 								    </div>
 					  			</div>
-							    <div class="invalid-feedback">Anda harus mengisi Jam Kembali</div>
+							    <div class="invalid-feedback">Anda harus mengisi Password</div>
 							</div>
-							<div class="form-group col-md-4">
-						    	<label for="noPol">No. Polisi</label>
-						    	<input type="text" class="form-control" id="noPol" name="noPol" placeholder='ex: "B 1234 CD"' required />
-						    	<div class="invalid-feedback">Anda harus mengisi Tujuan</div>
+							<div class="form-group col-md-6">
+					      		<label for="posisi">Posisi</label>
+					      		<input type="text" id="posisi" name="posisi" class="form-control" placeholder="Posisi" required/>
+					      		<div class="invalid-feedback">Anda harus mengisi Posisi</div>
+					    	</div>
+							<div class="form-group col-md-6">
+						    	<label for="level">Level</label>
+						    	<select name="level" id="level" class="form-control">
+						    		<option value="1" selected disabled>Pilih</option>
+						    		<option value="1">User</option>
+						    		<option value="2">Supervisor</option>
+						    		<option value="3">Admin</option>
+						    	</select>
+						    	<div class="invalid-feedback">Anda harus memilih Level</div>
 						  	</div>
-					  	</div>
-					  	<div class="form-row">
-					  		<div class="form-group col-md-6">
-						    	<label for="satuanKerja">Satuan Kerja</label>
-						    	<input type="text" class="form-control" id="satuanKerja" name="satuanKerja" list="satuan" placeholder="Satuan Kerja" required />
-						    	<div class="invalid-feedback">Anda harus mengisi Satuan Kerja</div>
-						  	</div>
-						  	<div class="form-group col-md-6">
-						    	<label for="namaPengemudi">Nama Pengemudi</label>
-						    	<input type="text" class="form-control" id="namaPengemudi" name="pengemudi" placeholder="Nama Pengemudi" required />
-						    	<div class="invalid-feedback">Anda harus mengisi Satuan Kerja</div>
-						  	</div>
-					  	</div>
-					  	<div class="form-group">
-					  		<label for="tujuan">Tujuan</label>
-					    	<textarea class="form-control" id="tujuan" name="tujuan" placeholder="Lokasi Tujuan" required></textarea>
-					    	<div class="invalid-feedback">Anda harus menyertakan lokasi</div>
 					  	</div>
 					  	<button type="submit" class="btn btn-primary">Tambah</button>
 					</form>
@@ -253,79 +242,64 @@
 	  	<div class="modal-dialog modal-dialog-centered" role="document">
 	    	<div class="modal-content">
 	      		<div class="modal-header">
-	        		<h5 class="modal-title" id="exampleModalCenterTitle">Edit Permohonan <span id="tgledit"></span></h5>
+	        		<h5 class="modal-title" id="exampleModalCenterTitle">Edit Akun</h5>
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          			<span aria-hidden="true">&times;</span>
 	        		</button>
 	      		</div>
 	      		<div class="modal-body">
 	      			<?php $attributes = array('class' => 'needs-validation', 'id'=>'editform'); ?>
-	      			<?php if ($_SESSION['go_level'] == 1): ?>
-	      				<?php echo form_open_multipart('permohonan/edit_permohonan/', $attributes);?>
-	      			<?php else: ?>
-						<?php echo form_open_multipart('admin/edit_permohonan/', $attributes);?>
-	      			<?php endif ?>
+	      			<?php echo form_open_multipart('admin/edit_akun/', $attributes);?>
 					  	<div class="form-row">
-					  		<input type="number" name="IDpermohonan" class="d-none">
-					    	<div class="form-group col-md-5">
-					      		<label for="edittanggalBerangkat">Tgl. Keberangkatan</label>
+					  		<input type="email" name="thisemail" class="d-none">
+					    	<div class="form-group col-md-12">
+					      		<label for="editnama">Nama Lengkap</label>
 					      		<div class="input-group">
-					      			<input type="text" class="form-control datepicker" id="edittanggalBerangkat" name="edittanggalBerangkat" placeholder="Tgl. Keberangkatan" required>
+					      			<input type="text" class="form-control" id="editnama" name="editnama" placeholder="Nama Lengkap" required>
 					      			<div class="input-group-append">
-									    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar"></i></span>
+									    <span class="input-group-text" id="basic-addon2"><i class="fa fa-user"></i></span>
 									</div>
 					      		</div>
-					      		<div class="invalid-feedback">Anda harus mengisi Tanggal Keberangkatan</div>
-					    	</div>
-					    	<div class="form-group col-md-7">
-					      		<label for="editnamaPengguna">Nama Pengguna</label>
-					      		<input id="editnamaPengguna" name="editnamaPengguna" class="form-control" placeholder="Nama Pengguna" required/>
-					      		<div class="invalid-feedback">Anda harus mengisi Nama Pengguna</div>
+					      		<div class="invalid-feedback">Anda harus mengisi Nama Lengkap</div>
 					    	</div>
 					  	</div>
 					  	<div class="form-row">
-					  		<div class="form-group col-md-4" id="editberangkat">
-					  			<label for="editjamBerangkat">Jam Berangkat</label>
+					  		<div class="form-group col-md-12">
+					  			<label for="editemail">Email</label>
 					  			<div class="input-group">
-								    <input type="text" class="form-control" id="editjamBerangkat" name="editjamBerangkat" placeholder="Berangkat" required>
+								    <input type="editemail" class="form-control" id="editemail" name="editemail" placeholder="Email" required>
 								    <div class="input-group-append">
-									    <span class="input-group-text" id="basic-addon2"><i class="fa fa-clock-o"></i></span>
+									    <span class="input-group-text" id="basic-addon2"><i class="fa fa-envelope-o"></i></span>
 									</div>
 					  			</div>
-							    <div class="invalid-feedback">Anda harus mengisi Jam Berangkat</div>
+							    <div class="invalid-feedback">Format Email tidak benar</div>
 							</div>
-					  		<div class="form-group col-md-4" id="editkembali">
-					  			<label for="editjamKembali">Jam Kembali</label>
+					  		<div class="form-group col-md-12">
+					  			<label for="editpassword">Password</label>
 					  			<div class="input-group">
-					  				<input type="text" class="form-control" id="editjamKembali" value="" name="editjamKembali" placeholder="Kembali" required>
+					  				<input type="password" class="form-control" id="editpassword" name="editpassword
+								    " placeholder="Password" minlength="6" required>
 								    <div class="input-group-append">
-								        <span class="input-group-text"><span class="fa fa-clock-o"></span></span>
+								        <span class="input-group-text"><span class="fa fa-lock"></span></span>
 								    </div>
 					  			</div>
-							    <div class="invalid-feedback">Anda harus mengisi Jam Kembali</div>
+							    <div class="invalid-feedback">Anda harus mengisi Password</div>
 							</div>
-							<div class="form-group col-md-4">
-						    	<label for="editnoPol">No. Polisi</label>
-						    	<input type="text" class="form-control" id="editnoPol" name="editnoPol" placeholder='ex: "B 1234 CD"' required />
-						    	<div class="invalid-feedback">Anda harus mengisi Tujuan</div>
+							<div class="form-group col-md-6">
+					      		<label for="editposisi">Posisi</label>
+					      		<input type="text" id="editposisi" name="editposisi" class="form-control" placeholder="Posisi" required/>
+					      		<div class="invalid-feedback">Anda harus mengisi Posisi</div>
+					    	</div>
+							<div class="form-group col-md-6">
+						    	<label for="editlevel">Level</label>
+						    	<select name="editlevel" id="editlevel" class="form-control">
+						    		<option selected disabled>Pilih</option>
+						    		<option value="1">User</option>
+						    		<option value="2">Supervisor</option>
+						    		<option value="3">Admin</option>
+						    	</select>
+						    	<div class="invalid-feedback">Anda harus memilih Level</div>
 						  	</div>
-					  	</div>
-					  	<div class="form-row">
-					  		<div class="form-group col-md-6">
-						    	<label for="editsatuanKerja">Satuan Kerja</label>
-						    	<input type="text" class="form-control" id="editsatuanKerja" name="editsatuanKerja" list="satuan" placeholder="Satuan Kerja" required />
-						    	<div class="invalid-feedback">Anda harus mengisi Satuan Kerja</div>
-						  	</div>
-						  	<div class="form-group col-md-6">
-						    	<label for="editpengemudi">Nama Pengemudi</label>
-						    	<input type="text" class="form-control" id="editpengemudi" name="editpengemudi" placeholder="Nama Pengemudi" required />
-						    	<div class="invalid-feedback">Anda harus mengisi Satuan Kerja</div>
-						  	</div>
-					  	</div>
-					  	<div class="form-group">
-					  		<label for="edittujuan">Tujuan</label>
-					    	<textarea class="form-control" id="edittujuan" name="edittujuan" placeholder="Lokasi Tujuan" required></textarea>
-					    	<div class="invalid-feedback">Anda harus menyertakan lokasi</div>
 					  	</div>
 					  	<button type="submit" class="btn btn-primary">Edit</button>
 					</form>
@@ -334,160 +308,23 @@
 	  	</div>
 	</div>
 	<!-- Edit Modal -->
-
-	<!-- Lihat Modal -->
-	<div class="modal fade" id="lihatModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	  	<div class="modal-dialog modal-dialog-centered" role="document">
-	    	<div class="modal-content">
-	      		<div class="modal-header">
-	        		<h5 class="modal-title" id="exampleModalCenterTitle">Data Permohonan <span id="tgldata"></span></h5>
-	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          			<span aria-hidden="true">&times;</span>
-	        		</button>
-	      		</div>
-	      		<div class="modal-body">
-	      			<form id="lihatform">
-	      				<div class="form-group">
-					  		<label for="lihatnama">Nama Pemohon</label>
-					    	<input type="text" class="form-control" id="lihatnama" name="lihatnama" placeholder="Nama Pemohon" readonly>
-					    	<div class="invalid-feedback">Anda harus menyertakan lokasi</div>
-					  	</div>
-					  	<div class="form-row">
-					    	<div class="form-group col-md-5">
-					      		<label for="lihattanggalBerangkat">Tgl. Keberangkatan</label>
-					      		<div class="input-group">
-					      			<input type="text" class="form-control" id="lihattanggalBerangkat" name="lihattanggalBerangkat" placeholder="Tgl. Keberangkatan" readonly>
-					      			<div class="input-group-append">
-									    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar"></i></span>
-									</div>
-					      		</div>
-					      		<div class="invalid-feedback">Anda harus mengisi Tanggal Keberangkatan</div>
-					    	</div>
-					    	<div class="form-group col-md-7">
-					      		<label for="lihatnamaPengguna">Nama Pengguna</label>
-					      		<input id="lihatnamaPengguna" name="lihatnamaPengguna" class="form-control" placeholder="Nama Pengguna" readonly />
-					      		<div class="invalid-feedback">Anda harus mengisi Nama Pengguna</div>
-					    	</div>
-					  	</div>
-					  	<div class="form-row">
-					  		<div class="form-group col-md-4">
-					  			<label for="lihatjamBerangkat">Jam Berangkat</label>
-					  			<div class="input-group">
-								    <input type="text" class="form-control" id="lihatjamBerangkat" name="lihatjamBerangkat" placeholder="Berangkat" readonly>
-								    <div class="input-group-append">
-									    <span class="input-group-text" id="basic-addon2"><i class="fa fa-clock-o"></i></span>
-									</div>
-					  			</div>
-							    <div class="invalid-feedback">Anda harus mengisi Jam Berangkat</div>
-							</div>
-					  		<div class="form-group col-md-4">
-					  			<label for="lihatjamKembali">Jam Kembali</label>
-					  			<div class="input-group">
-					  				<input type="text" class="form-control" id="lihatjamKembali" name="lihatjamKembali
-								    " placeholder="Kembali" readonly>
-								    <div class="input-group-append">
-								        <span class="input-group-text"><span class="fa fa-clock-o"></span></span>
-								    </div>
-					  			</div>
-							    <div class="invalid-feedback">Anda harus mengisi Jam Kembali</div>
-							</div>
-							<div class="form-group col-md-4">
-						    	<label for="lihatnoPol">No. Polisi</label>
-						    	<input type="text" class="form-control" id="lihatnoPol" name="lihatnoPol" placeholder='ex: "B 1234 CD"' readonly />
-						    	<div class="invalid-feedback">Anda harus mengisi Tujuan</div>
-						  	</div>
-					  	</div>
-					  	<div class="form-row">
-					  		<div class="form-group col-md-6">
-						    	<label for="lihatsatuanKerja">Satuan Kerja</label>
-						    	<input type="text" class="form-control" id="lihatsatuanKerja" name="lihatsatuanKerja" list="satuan" placeholder="Satuan Kerja" readonly />
-						    	<div class="invalid-feedback">Anda harus mengisi Satuan Kerja</div>
-						  	</div>
-						  	<div class="form-group col-md-6">
-						    	<label for="lihatpengemudi">Nama Pengemudi</label>
-						    	<input type="text" class="form-control" id="lihatpengemudi" name="lihatpengemudi" placeholder="Nama Pengemudi" readonly />
-						    	<div class="invalid-feedback">Anda harus mengisi Satuan Kerja</div>
-						  	</div>
-					  	</div>
-					  	<div class="form-group">
-					  		<label for="lihattujuan">Tujuan</label>
-					    	<textarea class="form-control" id="lihattujuan" name="lihattujuan" placeholder="Lokasi Tujuan" readonly></textarea>
-					    	<div class="invalid-feedback">Anda harus menyertakan lokasi</div>
-					  	</div>
-					</form>
-	      		</div>
-	    	</div>
-	  	</div>
-	</div>
-	<!-- Lihat Modal -->
 </div>
 <script>
 
-	$('.datepicker').datepicker({
-	    format: 'dd/mm/yyyy',
-	    startDate: '-3d',
-	    todayHighlight: true,
-	    language: 'id',
-	    autoclose: true
-	});
-
-	$('#berangkat').clockpicker({
-		autoclose: true,
-	    placement: 'bottom',
-	    align: 'left',
-	    donetext: 'Ok'
-	});
-
-	$('#kembali').clockpicker({
-		autoclose: true,
-	    placement: 'bottom',
-	    align: 'left',
-	    donetext: 'Ok'
-	});
-
-	$('#editberangkat').clockpicker({
-		autoclose: true,
-	    placement: 'bottom',
-	    align: 'left',
-	    donetext: 'Ok'
-	});
-
-	$('#editkembali').clockpicker({
-		autoclose: true,
-	    placement: 'bottom',
-	    align: 'left',
-	    donetext: 'Ok'
-	});
-
-	function read_date(date) {
-		var arrdate = date.split('-');
-
-		var bulan = {'01': 'Januari', '02': 'Februari', '03': 'Maret','04': 'April', '05': 'Mei', '06': 'Juni','07': 'Juli', '08': 'Agustus', '09': 'September','10': 'Oktober', '11': 'November', '12': 'Desember'};
-
-		return arrdate[2]+" "+bulan[arrdate[1]]+" "+arrdate[0];
-	}
-
-    function edit_permohonan(id){
+    function edit_akun(email){
         $('#editform')[0].reset();
 
         $.ajax({
-            url : "<?php echo site_url('admin/data_permohonan/')?>/" + id,
+            url : "<?php echo site_url('admin/data_akun/')?>" + email,
             type: "GET",
             dataType: "JSON",
             success: function(data)
             {
-            	data[0].tanggalPermohonan
-
-                $('[name="IDpermohonan"]').val(data[0].IDpermohonan);
-                $('[name="edittanggalBerangkat"]').val(data[0].tanggalBerangkat);
-                $('[name="editnamaPengguna"]').val(data[0].namaPengguna);
-                $('[name="editsatuanKerja"]').val(data[0].satuanKerja);
-                $('[name="edittujuan"]').val(data[0].tujuan);
-                $('[name="editjamBerangkat"]').val(data[0].jamBerangkat);
-                $('#editjamKembali').val(data[0].jamKembali);
-                $('[name="editnoPol"]').val(data[0].noPol);
-                $('[name="editpengemudi"]').val(data[0].pengemudi);
-                $('#tgledit').text(read_date(data[0].tanggalPermohonan));
+            	$('[name="thisemail"]').val(data.email);
+            	$('[name="editnama"]').val(data.nama);
+                $('[name="editemail"]').val(data.email);
+                $('[name="editposisi"]').val(data.posisi);
+                $('[name="editlevel"]').val(data.level);
                 $('#editModalCenter').modal('show');
 
             },
@@ -498,36 +335,7 @@
         });
     }
 
-    function lihat_permohonan(id){
-        $('#lihatform')[0].reset();
-
-        $.ajax({
-            url : "<?php echo site_url('admin/data_permohonan/')?>/" + id,
-            type: "GET",
-            dataType: "JSON",
-            success: function(data)
-            {
-                $('[name="lihattanggalBerangkat"]').val(read_date(data[0].tanggalBerangkat));
-                $('[name="lihatnamaPengguna"]').val(data[0].namaPengguna);
-                $('[name="lihatsatuanKerja"]').val(data[0].satuanKerja);
-                $('[name="lihattujuan"]').val(data[0].tujuan);
-                $('#lihatjamKembali').val(data[0].jamKembali);
-                $('[name="lihatjamBerangkat"]').val(data[0].jamBerangkat);
-                $('[name="lihatnoPol"]').val(data[0].noPol);
-                $('[name="lihatpengemudi"]').val(data[0].pengemudi);
-                $('[name="lihatnama"]').val(data[0].nama);
-                $('#tgldata').text(read_date(data[0].tanggalPermohonan));
-                $('#lihatModalCenter').modal('show');
-
-            },
-            error: function (jqXHR, textStatus, errorThrown)
-            {
-                console.log('failed get data');
-            }
-        });
-    }
-
-    function hapus_permohonan(id) {
+    function hapus_permohonan(email) {
     	swal({
 		  	title: "Apa Anda Yakin?",
 		  	text: "Saat menghapusnya Anda tidak akan bisa mengembalikannya seperti semula!",
@@ -537,7 +345,7 @@
 		})
 		.then((willDelete) => {
 		  	if (willDelete) {
-		    	window.location = '<?php echo base_url() ?>admin/hapus_permohonan/'+id;
+		    	window.location = '<?php echo base_url() ?>admin/hapus_akun/'+email;
 		  	} else {
 		    	swal("Data anda aman!");
 		  	}
