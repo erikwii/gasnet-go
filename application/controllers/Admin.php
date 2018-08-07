@@ -23,6 +23,18 @@ class Admin extends CI_Controller {
         $this->load->view('layout/wrapper',$data);
 	}
 
+	public function akun()
+	{
+		$data = array(
+            'title'=> 'GasnetGo! - Pengaturan akun',
+            'nav' => 'nav.php',
+            'isi' => 'pages/data_akun',
+            'permohonan' => $this->admin_model->get_permohonan(),
+            'nav_active' => 'akun'
+        );
+        $this->load->view('layout/wrapper',$data);
+	}
+
 	public function data_permohonan($IDpermohonan)
 	{
 		$data = $this->admin_model->get_permohonan(array('IDpermohonan' => $IDpermohonan));

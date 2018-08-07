@@ -3,7 +3,7 @@
 <!-- HAYO MAU NGAPAIN NGINTIP-NGINTIP ?? ^^, -->
 <!-- BELAJAR YANG RAJIN YA !! -->
 <!-- #MayTheCodeBuiltinYou -->
-<!-- <> with ❤ by Erik -->
+<!-- <> with ❤ by Erik si anak magang-->
 <!-- ga usah bilang-bilang abis liat ini ^^, -->
 <head>
 	<meta charset="utf-8">
@@ -12,7 +12,9 @@
 
     <link rel="shortcut icon" href="<?php echo base_url('assets/img/gasnet.png')?>"/>
 	<title><?php echo $title ?></title>
+    <meta name="description" content="Sistem informasi permohonan kendaraan operasional Gasnet PGASCOM">
 
+    <!-- font awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
 
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/bootstrap.min.css">
@@ -29,7 +31,8 @@
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/popper.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/bootstrap.min.js"></script>
-
+    
+    <!-- DataTables plugin start -->
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/jquery.dataTables.js"></script>
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/dataTables.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/dataTables.buttons.min.js"></script>
@@ -40,11 +43,14 @@
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/pdfmake.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/vfs_fonts.js"></script>
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/dataTables.bootstrap.js"></script>
-
+    <!-- DataTables plugin end -->
+    
+    <!-- Other lugin start -->
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/clockpicker.js"></script>
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/bootstrap-datepicker.id.min.js"></script>
+    <!-- Other plugin end -->
 
     <style>
         #loader {
