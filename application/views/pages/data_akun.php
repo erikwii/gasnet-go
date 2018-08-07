@@ -64,8 +64,8 @@
 					      </td>
 					      <td>
 					      	<div class="btn-group">
-					      		<button class="btn btn-outline-primary" onclick="edit_akun('<?php echo $u->email ?>')">Edit</button>
-					      		<button class="btn btn-danger" onclick='hapus_akun("<?php echo $u->email ?>)"'>Hapus</button>
+					      		<button class="btn btn-primary" onclick="edit_akun('<?php echo $u->email ?>')">Edit</button>
+					      		<button class="btn btn-outline-danger" onclick='hapus_akun("<?php echo $u->email ?>)"'>Hapus</button>
 					      	</div>
 					      </td>
 					    </tr>
@@ -105,8 +105,8 @@
 					      </td>
 					      <td>
 					      	<div class="btn-group">
-					      		<button class="btn btn-outline-primary" onclick="edit_akun('<?php echo $spv->email ?>')">Edit</button>
-					      		<button class="btn btn-danger" onclick="hapus_akun('<?php echo $spv->email ?>')">Hapus</button>
+					      		<button class="btn btn-primary" onclick="edit_akun('<?php echo $spv->email ?>')">Edit</button>
+					      		<button class="btn btn-outline-danger" onclick="hapus_akun('<?php echo $spv->email ?>')">Hapus</button>
 					      	</div>
 					      </td>
 					    </tr>
@@ -146,8 +146,8 @@
 					      </td>
 					      <td>
 					      	<div class="btn-group">
-					      		<button class="btn btn-outline-primary" onclick="edit_akun('<?php echo $a->email ?>')">Edit</button>
-					      		<button class="btn btn-danger" onclick='hapus_akun("<?php echo $a->email ?>")'>Hapus</button>
+					      		<button class="btn btn-primary" onclick="edit_akun('<?php echo $a->email ?>')">Edit</button>
+					      		<button class="btn btn-outline-danger" onclick='hapus_akun("<?php echo $a->email ?>")'>Hapus</button>
 					      	</div>
 					      </td>
 					    </tr>
