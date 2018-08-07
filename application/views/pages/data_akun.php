@@ -64,8 +64,8 @@
 					      </td>
 					      <td>
 					      	<div class="btn-group">
-					      		<button class="btn btn-primary" onclick="edit_akun('<?php echo $u->email ?>')">Edit</button>
-					      		<button class="btn btn-outline-danger" onclick='hapus_akun("<?php echo $u->email ?>)"'>Hapus</button>
+					      		<button class="btn btn-sm btn-primary" onclick="edit_akun('<?php echo $u->email ?>')">Edit</button>
+					      		<button class="btn btn-sm btn-outline-danger" onclick='hapus_akun("<?php echo $u->email ?>)"'>Hapus</button>
 					      	</div>
 					      </td>
 					    </tr>
