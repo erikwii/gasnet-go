@@ -257,6 +257,7 @@
               <!-- START MAIN CONTENT AREA -->
               <tr>
                 <td class="wrapper">
+                  <img src="http://www.gasnet.id/assets/img/LOGO_GASNET.png">
                   <table border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
