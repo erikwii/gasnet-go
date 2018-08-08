@@ -206,6 +206,11 @@ class Admin extends CI_Controller {
         $this->email->from('gasnet.dummy@gmail.com', 'Gasnet-doNotReply');
         $this->email->to('eriksantiago.science@gmail.com');
 
+        $content = array(
+        	'title' => 'Permohonan Kendaraan Operasional',
+        	'preheader' => ' dari bagian IT Development mengirimkan permohonan kendaraan operasional.',
+        	'nama' => 'Erik Santiago'
+        );
         $msg = $this->load->view('pages/email','',true);
         $this->email->subject('Permohonan untuk Anda');
         $this->email->message($msg);

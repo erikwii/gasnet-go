@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Permohonan Kendaraan Operasional</title>
+    <title><?php echo $title ?></title>
     <style>
       /* -------------------------------------
           GLOBAL RESETS
@@ -251,7 +251,7 @@
           <div class="content">
 
             <!-- START CENTERED WHITE CONTAINER -->
-            <span class="preheader">Erik Santiago dari bagian IT Development mengirimkan permohonan kendaraan operasional.</span>
+            <span class="preheader"><?php echo $nama ?><?php echo $preheader ?></span>
             <table class="main">
 
               <!-- START MAIN CONTENT AREA -->
@@ -262,7 +262,7 @@
                     <tr>
                       <td>
                         <p>Halo!</p>
-                        <p>Hari ini {Nama} mengajukan permohonan kendaraan operasional. berikut data permohonannya</p>
+                        <p>Hari ini <?php echo $nama ?> mengajukan permohonan kendaraan operasional. berikut data permohonannya</p>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
