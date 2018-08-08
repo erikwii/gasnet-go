@@ -293,6 +293,18 @@
 						    	<input type="text" class="form-control" id="editpengemudi" name="editpengemudi" placeholder="Nama Pengemudi" required />
 						    	<div class="invalid-feedback">Anda harus mengisi Satuan Kerja</div>
 						  	</div>
+						<?php if ($_SESSION['go_level'] == 0 || $_SESSION['go_level'] == 3): ?>
+						  	<div class="form-group col-md-6">
+						    	<label for="editkmAwal">KM Awal</label>
+						    	<input type="number" class="form-control" id="editkmAwal" name="editkmAwal" list="satuan" placeholder="KM Awal" required />
+						    	<div class="invalid-feedback">Anda harus mengisi KM Awal</div>
+						  	</div>
+						  	<div class="form-group col-md-6">
+						    	<label for="editkmAhir">KM Akhir</label>
+						    	<input type="number" class="form-control" id="editkmAhir" name="editkmAhir" placeholder="KM Akhir" required />
+						    	<div class="invalid-feedback">Anda harus mengisi KM AKhir</div>
+						  	</div>
+						<?php endif ?>
 					  	</div>
 					  	<div class="form-group">
 					  		<label for="edittujuan">Tujuan</label>

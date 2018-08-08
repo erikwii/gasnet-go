@@ -170,6 +170,8 @@ class Admin extends CI_Controller {
 		$tujuan = $this->input->post('edittujuan');
 		$jamBerangkat = $this->input->post('editjamBerangkat');
 		$jamKembali = $this->input->post('editjamKembali');
+		$kmAwal = $this->input->post('editkmAwal');
+		$kmAkhir = $this->input->post('editkmAkhir');
 		$noPol = $this->input->post('editnoPol');
 		$pengemudi = $this->input->post('editpengemudi');
 		
@@ -180,6 +182,8 @@ class Admin extends CI_Controller {
 			'tujuan' => $tujuan,
 			'jamBerangkat' => $jamBerangkat,
 			'jamKembali' => $jamKembali,
+			'kmAwal' => $kmAwal,
+			'kmAkhir' => $kmAkhir,
 			'noPol' => $noPol,
 			'pengemudi' => $pengemudi,
 		);
@@ -187,7 +191,31 @@ class Admin extends CI_Controller {
 		$this->db->where('IDpermohonan',$IDpermohonan);
 		$this->db->update('permohonan_kendaraan');
 
-		$_SESSION['success'] = 'Permohonan kendaraan berhasil diupdate!';
+		$config = Array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.gmail.com',
+            'smtp_port' => 465,
+            'smtp_user' => 'gasnet.dummy@gmail.com',
+            'smtp_pass' => 'passwordgasnet',
+            'mailtype'  => 'html', 
+            'charset'   => 'iso-8859-1'
+        );
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+
+        $this->email->from('gasnet.dummy@gmail.com', 'Gasnet-doNotReply');
+        $this->email->to('eriksantiago.science@gmail.com');
+
+        $msg = $this->load->view('pages/email','',true);
+        $this->email->subject('Permohonan untuk Anda');
+        $this->email->message($msg);
+
+        if ($this->email->send()) {
+            $_SESSION['success'] = 'Permohonan dan email berhasil dikirim ke supervisor.';
+        }else{
+            $_SESSION['error'] = 'gagal Mengirim email';
+        }
+        
 		redirect(base_url().'admin/');
 	}
 

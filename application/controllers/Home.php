@@ -115,18 +115,16 @@ class Home extends CI_Controller {
         $this->email->set_newline("\r\n");
 
         $this->email->from('gasnet.dummy@gmail.com', 'DoNotReply');
-        $this->email->to($email); 
+        $this->email->to($email);
 
         $this->email->subject('Email Test');
-        $this->email->message('Cobain euy');  
+        $this->email->message('Cobain euy');
 
         if ($this->email->send()) {
             echo "success";
         }else{
             echo $this->email->print_debugger();
         }
-
-        $result = $this->email->send();
     }
 
     public function check_auth()
@@ -140,6 +138,11 @@ class Home extends CI_Controller {
 				redirect(base_url()."permohonan/");
 			}
     	}
+    }
+
+    public function cekemail()
+    {
+        $this->load->view('pages/email');
     }
 
     public function bulan_to_romawi($val)

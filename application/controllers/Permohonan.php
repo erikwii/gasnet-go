@@ -65,7 +65,31 @@ class Permohonan extends CI_Controller {
 		);
 		$this->db->insert('permohonan_kendaraan',$data);
 
-		$_SESSION['success'] = 'Permohonan kendaraan berhasil dikirim. Silahkan cek data Persetujuan 1x24 jam';
+		$config = Array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.gmail.com',
+            'smtp_port' => 465,
+            'smtp_user' => 'gasnet.dummy@gmail.com',
+            'smtp_pass' => 'passwordgasnet',
+            'mailtype'  => 'html', 
+            'charset'   => 'iso-8859-1'
+        );
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+
+        $this->email->from('gasnet.dummy@gmail.com', 'Gasnet-doNotReply');
+        $this->email->to('eriksantiago.science@gmail.com');
+
+        $msg = $this->load->view('pages/email','',true);
+        $this->email->subject('Permohonan untuk Anda');
+        $this->email->message($msg);
+
+        if ($this->email->send()) {
+            $_SESSION['success'] = 'Permohonan dan email berhasil dikirim ke supervisor.';
+        }else{
+            $_SESSION['error'] = 'gagal Mengirim email';
+        }
+        
 		redirect(base_url().'permohonan/');
 	}
 
