@@ -300,8 +300,8 @@
 						    	<div class="invalid-feedback">Anda harus mengisi KM Awal</div>
 						  	</div>
 						  	<div class="form-group col-md-6">
-						    	<label for="editkmAhir">KM Akhir</label>
-						    	<input type="number" class="form-control" id="editkmAhir" name="editkmAhir" placeholder="KM Akhir" required />
+						    	<label for="editkmAkhir">KM Akhir</label>
+						    	<input type="number" class="form-control" id="editkmAkhir" name="editkmAkhir" placeholder="KM Akhir" required />
 						    	<div class="invalid-feedback">Anda harus mengisi KM AKhir</div>
 						  	</div>
 						<?php endif ?>
@@ -469,6 +469,8 @@
                 $('[name="edittujuan"]').val(data[0].tujuan);
                 $('[name="editjamBerangkat"]').val(data[0].jamBerangkat);
                 $('#editjamKembali').val(data[0].jamKembali);
+                $('[name="editkmAwal"]').val(data[0].kmAwal);
+                $('[name="editkmAkhir"]').val(data[0].kmAkhir);
                 $('[name="editnoPol"]').val(data[0].noPol);
                 $('[name="editpengemudi"]').val(data[0].pengemudi);
                 $('#tgledit').text(read_date(data[0].tanggalPermohonan));
