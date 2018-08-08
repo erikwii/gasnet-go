@@ -100,6 +100,35 @@ class Home extends CI_Controller {
        	redirect(base_url());
     }
 
+    public function send_mail($email)
+    {
+        $config = Array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.gmail.com',
+            'smtp_port' => 465,
+            'smtp_user' => 'gasnet.dummy@gmail.com',
+            'smtp_pass' => 'passwordgasnet',
+            'mailtype'  => 'html', 
+            'charset'   => 'iso-8859-1'
+        );
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+
+        $this->email->from('gasnet.dummy@gmail.com', 'DoNotReply');
+        $this->email->to($email); 
+
+        $this->email->subject('Email Test');
+        $this->email->message('Cobain euy');  
+
+        if ($this->email->send()) {
+            echo "success";
+        }else{
+            echo $this->email->print_debugger();
+        }
+
+        $result = $this->email->send();
+    }
+
     public function check_auth()
     {
     	if (isset($_SESSION['go_level'])) {
