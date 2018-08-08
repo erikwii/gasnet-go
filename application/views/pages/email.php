@@ -260,8 +260,8 @@
                   <table border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p>Hi there,</p>
-                        <p>Sometimes you just want to send a simple HTML email with a simple design and clear call to action. This is it.</p>
+                        <p>Halo!</p>
+                        <p>Hari ini {Nama} mengajukan permohonan kendaraan operasional. berikut data permohonannya</p>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
@@ -269,7 +269,22 @@
                                 <table border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td> <a href="http://bit.ly/sispakv2/" target="_blank">Call To Action</a> </td>
+                                      <td> <a href="http://bit.ly/sispakv2/" target="_blank">Setujui</a> </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
+                          <tbody>
+                            <tr>
+                              <td align="left">
+                                <table border="0" cellpadding="0" cellspacing="0">
+                                  <tbody>
+                                    <tr>
+                                      <td> <a href="http://bit.ly/sispakv2/" target="_blank">Tidak Setujui</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>
@@ -293,13 +308,13 @@
               <table border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-block">
-                    <span class="apple-link">Company Inc, 3 Abbey Road, San Francisco CA 94102</span>
+                    <span class="apple-link">Gasnet, Jaalan-jalan, Taman Sari Jakarta Barat 94102</span>
                     <br> Don't like these emails? <a href="http://i.imgur.com/CScmqnj.gif">Unsubscribe</a>.
                   </td>
                 </tr>
                 <tr>
                   <td class="content-block powered-by">
-                    Powered by <a href="http://htmlemail.io">HTMLemail</a>.
+                    Built with love by <a href="http://github.com/erikwii">Erik Santiago</a>.
                   </td>
                 </tr>
               </table>
