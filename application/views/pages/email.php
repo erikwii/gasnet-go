@@ -308,7 +308,7 @@
               <table border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-block">
-                    <span class="apple-link">Gasnet, Jaalan-jalan, Taman Sari Jakarta Barat 94102</span>
+                    <span class="apple-link">Jl. K. H. Zainul Arifin No. 20, Tamansari Jakarta Barat 11140</span>
                     <br> Don't like these emails? <a href="http://i.imgur.com/CScmqnj.gif">Unsubscribe</a>.
                   </td>
                 </tr>
