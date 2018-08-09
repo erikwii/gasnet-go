@@ -89,31 +89,31 @@
 					      		<?php endif ?>
 					      	<?php elseif ($_SESSION['go_level'] == 2): ?>
 					      		<?php if($p->approval == 'Disetujui Supervisor'): ?>
-					      			<a href="<?php echo base_url() ?>spv/batal_setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-outline-secondary">Batal Setuju</a>
+					      			<a href="<?php echo base_url() ?>spv/batal_setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-sm btn-outline-secondary">Batal Setuju</a>
 					      		<?php elseif($p->approval == 'Disetujui Pusat'): ?>
 					      			<span class="text-primary">Telah <?php echo $p->approval ?></span>
 					      		<?php elseif($p->approval == 'Tidak disetujui Supervisor'): ?>
-					      			<a href="<?php echo base_url() ?>spv/setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-outline-primary">Setujui</a>
+					      			<a href="<?php echo base_url() ?>spv/setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-sm btn-outline-primary">Setujui</a>
 					      		<?php elseif($p->approval == 'Tidak disetujui Pusat'): ?>
 					      			<span class="text-danger">Pusat tidak setuju</span>
 					      		<?php else: ?>
 					      			<div class="btn-group">
-							      		<a href="<?php echo base_url() ?>spv/setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-outline-primary">Setuju</a>
-							      		<a href="<?php echo base_url() ?>spv/tidak_setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-outline-secondary">Tidak</a>
+							      		<a href="<?php echo base_url() ?>spv/setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-sm btn-outline-primary">Setuju</a>
+							      		<a href="<?php echo base_url() ?>spv/tidak_setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-sm btn-outline-secondary">Tidak</a>
 							      	</div>
 					      		<?php endif ?>
 					      	<?php else: ?>
 					      		<?php if($p->approval == 'Disetujui Supervisor'): ?>
 					      			<div class="btn-group">
-							      		<a href="<?php echo base_url() ?>admin/setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-outline-primary">Setuju</a>
-							      		<a href="<?php echo base_url() ?>admin/tidak_setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-outline-secondary">Tidak</a>
+							      		<a href="<?php echo base_url() ?>admin/setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-sm btn-outline-primary">Setuju</a>
+							      		<a href="<?php echo base_url() ?>admin/tidak_setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-sm btn-outline-secondary">Tidak</a>
 							      	</div>
 					      		<?php elseif($p->approval == 'Disetujui Pusat'): ?>
-					      			<a href="<?php echo base_url() ?>admin/batal_setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-outline-secondary">Batal Setuju</a>
+					      			<a href="<?php echo base_url() ?>admin/batal_setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-sm btn-outline-secondary">Batal Setuju</a>
 					      		<?php elseif($p->approval == 'Tidak disetujui Supervisor'): ?>
 					      			<span class="text-danger"><?php echo $p->approval ?></span>
 					      		<?php elseif($p->approval == 'Tidak disetujui Pusat'): ?>
-							      	<a href="<?php echo base_url() ?>admin/setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-outline-primary">Setujui</a>
+							      	<a href="<?php echo base_url() ?>admin/setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-sm btn-outline-primary">Setujui</a>
 							    <?php else: ?>
 							    	<span class="text-warning">Belum ada persetujuan Supervisor</span>
 					      		<?php endif ?>
@@ -122,9 +122,9 @@
 					  	<?php endif; ?>
 					      <td>
 					      	<div class="btn-group">
-					      		<button class="btn btn-info" onclick="lihat_permohonan(<?php echo $p->IDpermohonan ?>)">Lihat Data</button>
-					      		<button class="btn btn-warning" onclick="edit_permohonan(<?php echo $p->IDpermohonan ?>)">Edit</button>
-					      		<button class="btn btn-danger" onclick='hapus_permohonan(<?php echo $p->IDpermohonan ?>)'>Hapus</button>
+					      		<button class="btn btn-sm btn-info" onclick="lihat_permohonan(<?php echo $p->IDpermohonan ?>)">Lihat Data</button>
+					      		<button class="btn btn-sm btn-warning" onclick="edit_permohonan(<?php echo $p->IDpermohonan ?>)">Edit</button>
+					      		<button class="btn btn-sm btn-danger" onclick='hapus_permohonan(<?php echo $p->IDpermohonan ?>)'>Hapus</button>
 					      	</div>
 					      </td>
 					    </tr>

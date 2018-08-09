@@ -95,7 +95,7 @@
 					      <th scope="row"><?php echo $i ?></th>
 					      <td><?php echo $spv->email ?></td>
 					      <td><?php echo $spv->nama ?></td>
-					      <td><?php echo $spv->posisi ?></td>
+					      <td>Supervisor <?php echo $spv->posisi ?></td>
 					      <td>
 					      	<?php if ($spv->status == 'aktif'): ?>
 					      		<h5><span class="badge badge-success"><?php echo $spv->status ?></span></h5>
@@ -105,8 +105,8 @@
 					      </td>
 					      <td>
 					      	<div class="btn-group">
-					      		<button class="btn btn-primary" onclick="edit_akun('<?php echo $spv->email ?>')">Edit</button>
-					      		<button class="btn btn-outline-danger" onclick="hapus_akun('<?php echo $spv->email ?>')">Hapus</button>
+					      		<button class="btn btn-sm btn-primary" onclick="edit_akun('<?php echo $spv->email ?>')">Edit</button>
+					      		<button class="btn btn-sm btn-outline-danger" onclick="hapus_akun('<?php echo $spv->email ?>')">Hapus</button>
 					      	</div>
 					      </td>
 					    </tr>
@@ -146,8 +146,8 @@
 					      </td>
 					      <td>
 					      	<div class="btn-group">
-					      		<button class="btn btn-primary" onclick="edit_akun('<?php echo $a->email ?>')">Edit</button>
-					      		<button class="btn btn-outline-danger" onclick='hapus_akun("<?php echo $a->email ?>")'>Hapus</button>
+					      		<button class="btn btn-sm btn-primary" onclick="edit_akun('<?php echo $a->email ?>')">Edit</button>
+					      		<button class="btn btn-sm btn-outline-danger" onclick='hapus_akun("<?php echo $a->email ?>")'>Hapus</button>
 					      	</div>
 					      </td>
 					    </tr>
