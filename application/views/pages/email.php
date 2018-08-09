@@ -267,19 +267,19 @@
                           <tr>
                             <td>Nama pengguna</td><td>:</td><td><?php echo $data['namaPengguna'] ?></td>
                           </tr>
-                          <tr><td></td><td></td><td></td></tr>
+                          <br>
                           <tr>
                             <td>Satuan kerja</td><td>:</td><td><?php echo $data['satuanKerja'] ?></td>
                           </tr>
-                          <tr><td></td><td></td><td></td></tr>
+                          <br>
                           <tr>
                             <td>Pengemudi</td><td>:</td><td><?php echo $data['pengemudi'] ?></td>
                           </tr>
-                          <tr><td></td><td></td><td></td></tr>
+                          <br>
                           <tr>
                             <td>Tujuan</td><td>:</td><td><?php echo $data['tujuan'] ?></td>
                           </tr>
-                          <tr><td></td><td></td><td></td></tr>
+                          <br>
                           <tr>
                             <?php 
                               $timestamp = strtotime($data['tanggalBerangkat']);
@@ -287,11 +287,11 @@
                             ?>
                             <td>Tanggal berangkat</td><td>:</td><td><?php echo $this->home_model->tranlate_day_to_indo($day)."/".$this->home_model->read_date($data['tanggalBerangkat']) ?></td>
                           </tr>
-                          <tr><td></td><td></td><td></td></tr>
+                          <br>
                           <tr>
                             <td>Jam berangkat</td><td>:</td><td><?php echo $data['jamBerangkat'] ?></td>
                           </tr>
-                          <tr><td></td><td></td><td></td></tr>
+                          <br>
                           <tr>
                             <td>Jam kembali</td><td>:</td><td><?php echo $data['jamKembali'] ?></td>
                           </tr>
