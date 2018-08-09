@@ -251,7 +251,7 @@
           <div class="content">
 
             <!-- START CENTERED WHITE CONTAINER -->
-            <span class="preheader"><?php echo $nama ?><?php echo $preheader ?></span>
+            <span class="preheader"><?php echo $preheader ?></span>
             <table class="main">
 
               <!-- START MAIN CONTENT AREA -->

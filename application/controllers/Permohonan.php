@@ -88,7 +88,7 @@ class Permohonan extends CI_Controller {
         	'data' => $data
         );
         $msg = $this->load->view('pages/email',$content,true);
-        $this->email->subject('[GasnetGo] Permohonan untuk Anda');
+        $this->email->subject('[GasnetGo] Permohonan kendaraan operasional');
         $this->email->message($msg);
 
         if ($this->email->send()) {
