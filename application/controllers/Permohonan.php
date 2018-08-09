@@ -80,12 +80,19 @@ class Permohonan extends CI_Controller {
         $this->email->from('gasnet.dummy@gmail.com', 'Gasnet-doNotReply');
         $this->email->to('eriksantiago.science@gmail.com');
 
-        $msg = $this->load->view('pages/email','',true);
+        $user = $this->home_model->get_users_data($email);
+        $content = array(
+        	'title' => 'Permohonan Kendaraan Operasional',
+        	'preheader' => $user->nama.' dari bagian '.$user->posisi.' Development mengirimkan permohonan kendaraan operasional.',
+        	'nama' => $user->nama,
+        	'data' => $data
+        );
+        $msg = $this->load->view('pages/email',$content,true);
         $this->email->subject('Permohonan untuk Anda');
         $this->email->message($msg);
 
         if ($this->email->send()) {
-            $_SESSION['success'] = 'Permohonan dan email berhasil dikirim ke supervisor.';
+            $_SESSION['success'] = ['Berhasil!','Permohonan dan email berhasil dikirim ke supervisor.'];
         }else{
             $_SESSION['error'] = 'gagal Mengirim email';
         }
@@ -136,8 +143,8 @@ class Permohonan extends CI_Controller {
 
 		$this->db->delete('permohonan_kendaraan', array('IDpermohonan' => $id));
 
-		$_SESSION['success'] = 'Anda berhasil menghapus data permohonan!';
-		redirect(base_url()."permohonan/");
+		$_SESSION['success'] = ['Berhasil Dihapus!','Anda berhasil menghapus data permohonan!'];
+		redirect(base_url()."permohonan/data");
 	}
 
 	public function auth()

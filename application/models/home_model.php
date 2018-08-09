@@ -28,6 +28,11 @@ class Home_model extends CI_Model{
         return $this->db->query($query)->row();
     }
 
+    function get_users_data($email){
+        $query = "select * from users where email = '".$email."'";
+        return $this->db->query($query)->row();
+    }
+
 	function is_UserExist($email){
 		$this->db->select('*');
 		$this->db->from('users');

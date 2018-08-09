@@ -69,7 +69,7 @@ class Admin extends CI_Controller {
 		);
 		$this->db->insert('users',$data);
 
-		$_SESSION['success'] = 'Akun '.$nama.' berhasil ditambahkan :)';
+		$_SESSION['success'] = ['Berhasil!','Akun '.$nama.' berhasil ditambahkan :)'];
 		redirect(base_url()."admin/akun");
 	}
 
@@ -106,7 +106,7 @@ class Admin extends CI_Controller {
 		$this->db->where('email',$email);
 		$this->db->update('users');
 
-		$_SESSION['success'] = 'Akun '.$nama.' berhasil diupdate :)';
+		$_SESSION['success'] = ['Berhasil!','Akun '.$nama.' berhasil diupdate :)'];
 		redirect(base_url()."admin/akun");
 	}
 
@@ -116,7 +116,7 @@ class Admin extends CI_Controller {
 
 		$this->db->delete('users', array('email' => $email));
 
-		$_SESSION['success'] = 'Anda berhasil menghapus Akun'.$email;
+		$_SESSION['success'] = ['Berhasil','Anda berhasil menghapus Akun '.$email];
 		redirect(base_url()."admin/akun/");
 	}
 
@@ -155,7 +155,7 @@ class Admin extends CI_Controller {
 		);
 		$this->db->insert('permohonan_kendaraan',$data);
 
-		$_SESSION['success'] = 'Permohonan kendaraan berhasil ditambahkan :)';
+		$_SESSION['success'] = ['Berhasil!','Permohonan kendaraan berhasil ditambahkan :)'];
 		redirect(base_url().'/home/inventaris');
 	}
 
@@ -211,12 +211,12 @@ class Admin extends CI_Controller {
         	'preheader' => ' dari bagian IT Development mengirimkan permohonan kendaraan operasional.',
         	'nama' => 'Erik Santiago'
         );
-        $msg = $this->load->view('pages/email','',true);
+        $msg = $this->load->view('pages/email',$content,true);
         $this->email->subject('Permohonan untuk Anda');
         $this->email->message($msg);
 
         if ($this->email->send()) {
-            $_SESSION['success'] = 'Permohonan dan email berhasil dikirim ke supervisor.';
+            $_SESSION['success'] = ['Berhasil!','Permohonan dan email berhasil dikirim ke supervisor.'];
         }else{
             $_SESSION['error'] = 'gagal Mengirim email';
         }

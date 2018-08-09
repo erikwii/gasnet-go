@@ -251,7 +251,7 @@
           <div class="content">
 
             <!-- START CENTERED WHITE CONTAINER -->
-            <span class="preheader"><?php echo $nama ?><?php echo $preheader ?></span>
+            <span class="preheader"><?php echo $preheader ?></span>
             <table class="main">
 
               <!-- START MAIN CONTENT AREA -->
@@ -261,61 +261,8 @@
                   <table border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p>Halo!</p>
-                        <p>Hari ini <?php echo $nama ?> mengajukan permohonan kendaraan operasional. berikut data permohonannya</p>
-                        <table>
-                          <tr>
-                            <td>Nama Pengguna</td><td>:</td><td><?php echo $data['namaPengguna'] ?></td>
-                          </tr>
-                          <tr>
-                            <td>Satuan Kerja</td><td>:</td><td><?php echo $data['satuanKerja'] ?></td>
-                          </tr>
-                          <tr>
-                            <td>Pengemudi</td><td>:</td><td><?php echo $data['pengemudi'] ?></td>
-                          </tr>
-                          <tr>
-                            <td>Tujuan</td><td>:</td><td><?php echo $data['tujuan'] ?></td>
-                          </tr>
-                          <tr>
-                            <td>Tanggal Berangkat</td><td>:</td><td><?php echo $data['tanggalBerangkat'] ?></td>
-                          </tr>
-                          <tr>
-                            <td>Jam Berangkat</td><td>:</td><td><?php echo $data['jamBerangkat'] ?></td>
-                          </tr>
-                          <tr>
-                            <td>Jam Kembali</td><td>:</td><td><?php echo $data['jamKembali'] ?></td>
-                          </tr>
-                        </table>
-                        <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
-                          <tbody>
-                            <tr>
-                              <td align="left">
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                  <tbody>
-                                    <tr>
-                                      <td> <a href="https://bit.ly/sispakv2/" target="_blank">Setujui</a> </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
-                          <tbody>
-                            <tr>
-                              <td align="left">
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                  <tbody>
-                                    <tr>
-                                      <td> <a href="https://bit.ly/sispakv2/" target="_blank">Tidak Setujui</a> </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                        <p>Halo <?php echo $nama ?>!<br>
+                        <?php echo $main ?></p>
                         <p>Jika ada masalah dengan email ini mohon hubungi admin/divisi IT.</p>
                         <p>Selamat Bekerja!</p>
                       </td>

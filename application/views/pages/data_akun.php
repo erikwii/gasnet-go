@@ -15,8 +15,8 @@
         	<?php if (isset($_SESSION['success'])): ?>
         		<script>
         			swal({
-					  	title: "Berhasil!",
-					  	text: "<?php echo $_SESSION['success'] ?>",
+					  	title: "<?php echo $_SESSION['success'][0] ?>",
+					  	text: "<?php echo $_SESSION['success'][1] ?>",
 					  	icon: "success",
 					});
         		</script>
@@ -65,7 +65,7 @@
 					      <td>
 					      	<div class="btn-group">
 					      		<button class="btn btn-sm btn-primary" onclick="edit_akun('<?php echo $u->email ?>')">Edit</button>
-					      		<button class="btn btn-sm btn-outline-danger" onclick='hapus_akun("<?php echo $u->email ?>)"'>Hapus</button>
+					      		<button class="btn btn-sm btn-outline-danger" onclick='hapus_akun("<?php echo $u->email ?>")'>Hapus</button>
 					      	</div>
 					      </td>
 					    </tr>
@@ -203,8 +203,7 @@
 					  		<div class="form-group col-md-12">
 					  			<label for="password">Password</label>
 					  			<div class="input-group">
-					  				<input type="password" class="form-control" id="password" name="password
-								    " placeholder="Password" minlength="6" required>
+					  				<input type="password" class="form-control" id="password" name="password" placeholder="Password" minlength="6" required>
 								    <div class="input-group-append">
 								        <span class="input-group-text"><span class="fa fa-lock"></span></span>
 								    </div>
@@ -275,8 +274,7 @@
 					  		<div class="form-group col-md-12">
 					  			<label for="editpassword">Password</label>
 					  			<div class="input-group">
-					  				<input type="password" class="form-control" id="editpassword" name="editpassword
-								    " placeholder="Password" minlength="6" required>
+					  				<input type="password" class="form-control" id="editpassword" name="editpassword" placeholder="Password" minlength="6" required>
 								    <div class="input-group-append">
 								        <span class="input-group-text"><span class="fa fa-lock"></span></span>
 								    </div>
@@ -333,7 +331,7 @@
         });
     }
 
-    function hapus_permohonan(email) {
+    function hapus_akun(email) {
     	swal({
 		  	title: "Apa Anda Yakin?",
 		  	text: "Saat menghapusnya Anda tidak akan bisa mengembalikannya seperti semula!",

@@ -32,11 +32,7 @@ class Home extends CI_Controller {
 
 		$data = array(
 			'email' => $email,
-			'password' => $password,
-			'title'=> 'My Karamel - Beranda',
-			'nav' => 'nav.php',
-			'isi' => 'pages/beranda',
-			'nav_active' => 'beranda'
+			'password' => $password			
 		);
 
 		$whereS = array(
@@ -61,6 +57,7 @@ class Home extends CI_Controller {
             	redirect(base_url()."home/");
             }else{
                 $db_pass = $this->home_model->get_users_pass($email)->password;
+                $name = $this->home_model->get_users_data($email)->nama;
                 $level = $this->home_model->get_users_level($email);
 
                 if(password_verify($password, $db_pass)){
@@ -68,7 +65,7 @@ class Home extends CI_Controller {
                     $this->session->set_userdata('go_password', $password);
                     $this->session->set_userdata('go_level', $level);
 
-                    $_SESSION['success'] = "Selamat datang kembali di GasnetGo!";
+                    $_SESSION['success'] = ["Berhasil Login!","Selamat datang kembali di GasnetGo, ".$name];
 
                     if ($_SESSION['go_level'] == 0 || $_SESSION['go_level'] == 3) {
                     	redirect(base_url()."admin");

@@ -14,8 +14,8 @@
         	<?php if (isset($_SESSION['success'])): ?>
         		<script>
         			swal({
-					  	title: "Berhasil!",
-					  	text: "<?php echo $_SESSION['success'] ?>",
+					  	title: "<?php echo $_SESSION['success'][0] ?>",
+					  	text: "<?php echo $_SESSION['success'][1] ?>",
 					  	icon: "success",
 					});
         		</script>
@@ -122,7 +122,7 @@
 					  	<?php endif; ?>
 					      <td>
 					      	<div class="btn-group">
-					      		<button class="btn btn-sm btn-info" onclick="lihat_permohonan(<?php echo $p->IDpermohonan ?>)">Lihat Data</button>
+					      		<button class="btn btn-sm btn-primary" onclick="lihat_permohonan(<?php echo $p->IDpermohonan ?>)">Lihat Data</button>
 					      		<button class="btn btn-sm btn-warning" onclick="edit_permohonan(<?php echo $p->IDpermohonan ?>)">Edit</button>
 					      		<button class="btn btn-sm btn-danger" onclick='hapus_permohonan(<?php echo $p->IDpermohonan ?>)'>Hapus</button>
 					      	</div>
@@ -523,7 +523,13 @@
 		})
 		.then((willDelete) => {
 		  	if (willDelete) {
-		    	window.location = '<?php echo base_url() ?>admin/hapus_permohonan/'+id;
+		  		<?php if($_SESSION['go_level'] == 1): ?>
+		  			window.location = '<?php echo base_url() ?>permohonan/hapus_permohonan/'+id;
+		  		<?php elseif($_SESSION['go_level'] == 2): ?>
+		  			window.location = '<?php echo base_url() ?>spv/hapus_permohonan/'+id;
+		  		<?php else: ?>
+		    		window.location = '<?php echo base_url() ?>admin/hapus_permohonan/'+id;
+		    	<?php endif ?>
 		  	} else {
 		    	swal("Data anda aman!");
 		  	}

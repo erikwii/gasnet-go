@@ -1,6 +1,6 @@
 <div class="container form-app">
 	<div class="row my-3">
-        <div class="col-8 offset-2 col-lg-8 col-md-4">
+        <div class="col-12 offset-3 col-lg-6 col-md-12">
         	<?php if (isset($_SESSION['error'])): ?>
         		<script>
         			swal({
@@ -14,8 +14,8 @@
         	<?php if (isset($_SESSION['success'])): ?>
         		<script>
         			swal({
-					  	title: "Berhasil!",
-					  	text: "<?php echo $_SESSION['success'] ?>",
+					  	title: "<?php echo $_SESSION['success'][0] ?>",
+					  	text: "<?php echo $_SESSION['success'][1] ?>",
 					  	icon: "success",
 					});
         		</script>
@@ -89,7 +89,7 @@
 					    	<textarea class="form-control" id="tujuan" name="tujuan" placeholder="Lokasi Tujuan" required></textarea>
 					    	<div class="invalid-feedback">Anda harus menyertakan lokasi</div>
 					  	</div>
-					  	<button type="submit" class="btn btn-primary">Tambah</button>
+					  	<button type="submit" class="btn btn-block btn-lg btn-primary">Tambah</button>
 					</form>
 	      		</div>
 	    	</div>

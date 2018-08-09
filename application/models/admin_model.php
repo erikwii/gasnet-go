@@ -17,6 +17,14 @@ class Admin_model extends CI_Model{
 		}
 	}
 
+	public function get_permohonan_data($where)
+	{
+		$this->db->order_by('IDpermohonan', 'DESC');
+			$this->db->join('users', 'users.email = permohonan_kendaraan.email');
+			$query = $this->db->get_where('permohonan_kendaraan',$where);
+			return $query->row_array();
+	}
+
 	public function get_akun_role($role=null)
 	{
 		if ($role == null) {
