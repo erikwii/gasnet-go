@@ -29,7 +29,7 @@
 	      			<?php $attributes = array('class' => 'needs-validation'); ?>
 	      			<?php echo form_open_multipart('permohonan/tambah_permohonan', $attributes);?>
 					  	<div class="form-row">
-					    	<div class="form-group col-md-5">
+					    	<div class="form-group col-md-6">
 					      		<label for="tanggalBerangkat">Tgl. Keberangkatan</label>
 					      		<div class="input-group">
 					      			<input type="date" class="form-control" id="tanggalBerangkat" name="tanggalBerangkat" placeholder="Tgl. Keberangkatan" required>
@@ -39,14 +39,14 @@
 					      		</div>
 					      		<div class="invalid-feedback">Anda harus mengisi Tanggal Keberangkatan</div>
 					    	</div>
-					    	<div class="form-group col-md-7">
+					    	<div class="form-group col-md-6">
 					      		<label for="namaPengguna">Nama Pengguna</label>
 					      		<input id="namaPengguna" name="namaPengguna" class="form-control" placeholder="Nama Pengguna" required/>
 					      		<div class="invalid-feedback">Anda harus mengisi Nama Pengguna</div>
 					    	</div>
 					  	</div>
 					  	<div class="form-row">
-					  		<div class="form-group col-md-4 clockpicker" id="berangkat">
+					  		<div class="form-group col-md-3 clockpicker" id="berangkat">
 					  			<label for="jamBerangkat">Jam Berangkat</label>
 					  			<div class="input-group">
 								    <input type="text" class="form-control" id="jamBerangkat" name="jamBerangkat" placeholder="Berangkat" required>
@@ -56,7 +56,7 @@
 					  			</div>
 							    <div class="invalid-feedback">Anda harus mengisi Jam Berangkat</div>
 							</div>
-					  		<div class="form-group col-md-4 clockpicker" id="kembali">
+					  		<div class="form-group col-md-3 clockpicker" id="kembali">
 					  			<label for="jamKembali">Jam Kembali</label>
 					  			<div class="input-group">
 								    <input type="text" class="form-control" id="jamKembali" name="jamKembali" placeholder="Kembali" required>
@@ -66,9 +66,14 @@
 					  			</div>
 							    <div class="invalid-feedback">Anda harus mengisi Jam Kembali</div>
 							</div>
-							<div class="form-group col-md-4">
+							<div class="form-group col-md-6">
 						    	<label for="noPol">No. Polisi</label>
-						    	<input type="text" class="form-control" id="noPol" name="noPol" placeholder='ex: "B 1234 CD"' required />
+						    	<div class="input-group">
+						    		<input type="text" class="form-control" id="noPol" name="noPol" placeholder='ex: "B 1234 CD"' required />
+						    		<div class="input-group-append">
+									    <span class="input-group-text" id="basic-addon2"><i class="fa fa-car"></i></span>
+									</div>
+						    	</div>
 						    	<div class="invalid-feedback">Anda harus mengisi Tujuan</div>
 						  	</div>
 					  	</div>
