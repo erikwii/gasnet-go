@@ -12,11 +12,13 @@ class Spv extends CI_Controller {
 	public function index()
 	{
 		$this->auth();
+
+		$posisi = $this->home_model->get_users_data($_SESSION['go_email'])->posisi;
 		$data = array(
             'title'=> 'GasnetGo! - Data permohonan kendaraan operasional',
             'nav' => 'nav.php',
             'isi' => 'pages/data_permohonan',
-            'permohonan' => $this->admin_model->get_permohonan(),
+            'permohonan' => $this->admin_model->get_permohonan(array('satuanKerja'=> $posisi)),
             'nav_active' => 'data'
         );
         $this->load->view('layout/wrapper',$data);

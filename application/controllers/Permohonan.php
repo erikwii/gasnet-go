@@ -128,7 +128,7 @@ class Permohonan extends CI_Controller {
 		$this->db->where('IDpermohonan',$IDpermohonan);
 		$this->db->update('permohonan_kendaraan');
 
-		$_SESSION['success'] = 'Permohonan kendaraan berhasil diupdate!';
+		$_SESSION['success'] = ['Berhasil!','Permohonan kendaraan berhasil diupdate!'];
 		redirect(base_url().'permohonan/data/');
 	}
 
