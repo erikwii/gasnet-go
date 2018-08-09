@@ -265,29 +265,35 @@
                         <p>Hari ini <?php echo $nama ?> mengajukan permohonan kendaraan operasional. berikut data permohonannya</p>
                         <table>
                           <tr>
-                            <td>Nama Pengguna</td><td>:</td><td><?php echo $data['namaPengguna'] ?></td>
+                            <td>Nama pengguna</td><td>:</td><td><?php echo $data['namaPengguna'] ?></td>
                           </tr>
+                          <tr><td></td><td></td><td></td></tr>
                           <tr>
-                            <td>Satuan Kerja</td><td>:</td><td><?php echo $data['satuanKerja'] ?></td>
+                            <td>Satuan kerja</td><td>:</td><td><?php echo $data['satuanKerja'] ?></td>
                           </tr>
+                          <tr><td></td><td></td><td></td></tr>
                           <tr>
                             <td>Pengemudi</td><td>:</td><td><?php echo $data['pengemudi'] ?></td>
                           </tr>
+                          <tr><td></td><td></td><td></td></tr>
                           <tr>
                             <td>Tujuan</td><td>:</td><td><?php echo $data['tujuan'] ?></td>
                           </tr>
+                          <tr><td></td><td></td><td></td></tr>
                           <tr>
                             <?php 
                               $timestamp = strtotime($data['tanggalBerangkat']);
                               $day = date('D', $timestamp);
                             ?>
-                            <td>Tanggal Berangkat</td><td>:</td><td><?php echo $this->home_model->tranlate_day_to_indo($day)."/".$this->home_model->read_date($data['tanggalBerangkat']) ?></td>
+                            <td>Tanggal berangkat</td><td>:</td><td><?php echo $this->home_model->tranlate_day_to_indo($day)."/".$this->home_model->read_date($data['tanggalBerangkat']) ?></td>
                           </tr>
+                          <tr><td></td><td></td><td></td></tr>
                           <tr>
-                            <td>Jam Berangkat</td><td>:</td><td><?php echo $data['jamBerangkat'] ?></td>
+                            <td>Jam berangkat</td><td>:</td><td><?php echo $data['jamBerangkat'] ?></td>
                           </tr>
+                          <tr><td></td><td></td><td></td></tr>
                           <tr>
-                            <td>Jam Kembali</td><td>:</td><td><?php echo $data['jamKembali'] ?></td>
+                            <td>Jam kembali</td><td>:</td><td><?php echo $data['jamKembali'] ?></td>
                           </tr>
                         </table>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
