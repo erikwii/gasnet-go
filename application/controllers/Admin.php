@@ -252,6 +252,38 @@ class Admin extends CI_Controller {
 		$this->db->set($data);
 		$this->db->where('IDpermohonan',$id);
 		$this->db->update('permohonan_kendaraan');
+
+		$permohonan = $this->admin_model->get_permohonan_data(array('IDpermohonan'=>$id));
+		$config = Array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.gmail.com',
+            'smtp_port' => 465,
+            'smtp_user' => 'gasnet.dummy@gmail.com',
+            'smtp_pass' => 'passwordgasnet',
+            'mailtype'  => 'html', 
+            'charset'   => 'iso-8859-1'
+        );
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+
+        $this->email->from('gasnet.dummy@gmail.com', 'Gasnet-doNotReply');
+        $this->email->to('eriksantiago.science@gmail.com');
+
+        $content = array(
+        	'title' => 'Permohonan Kendaraan Operasional',
+        	'preheader' => 'Persetujuan Permohonan Kendaraan Operasional.',
+        	'main' => 'Selamat, permohonan Anda <b>disetujui</b> oleh Admin! Silahkan gunakan kendaraan operasional dengan baik dan hati-hati di jalan.',
+        	'nama' => $permohonan['nama']
+        );
+        $msg = $this->load->view('pages/email_approval',$content,true);
+        $this->email->subject('[GasnetGo] Persetujuan dari Admin');
+        $this->email->message($msg);
+
+        if ($this->email->send()) {
+            $_SESSION['success'] = ['Berhasil!','Permohonan berhasil disetujui.'];
+        }else{
+            $_SESSION['error'] = 'gagal Mengirim email';
+        }
 		redirect(base_url()."admin/");
 	}
 

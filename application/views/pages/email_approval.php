@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-16" />
     <title><?php echo $title ?></title>
     <style>
       /* -------------------------------------
@@ -284,7 +284,7 @@
                 </tr>
                 <tr>
                   <td class="content-block powered-by">
-                    Built with love by <a href="http://github.com/erikwii">Erik Santiago</a>.
+                    &lt;/&gt; with ❤ by <a href="http://github.com/erikwii">Erik Santiago</a>.
                   </td>
                 </tr>
               </table>
