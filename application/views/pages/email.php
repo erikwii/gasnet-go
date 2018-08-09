@@ -277,7 +277,11 @@
                             <td>Tujuan</td><td>:</td><td><?php echo $data['tujuan'] ?></td>
                           </tr>
                           <tr>
-                            <td>Tanggal Berangkat</td><td>:</td><td><?php echo $data['tanggalBerangkat'] ?></td>
+                            <?php 
+                              $timestamp = strtotime($data['tanggalBerangkat']);
+                              $day = date('D', $timestamp);
+                            ?>
+                            <td>Tanggal Berangkat</td><td>:</td><td><?php echo $this->home_model->tranlate_day_to_indo($day)."/".$this->home_model->read_date($data['tanggalBerangkat']) ?></td>
                           </tr>
                           <tr>
                             <td>Jam Berangkat</td><td>:</td><td><?php echo $data['jamBerangkat'] ?></td>
