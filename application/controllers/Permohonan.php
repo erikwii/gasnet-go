@@ -83,12 +83,12 @@ class Permohonan extends CI_Controller {
         $user = $this->home_model->get_users_data($email);
         $content = array(
         	'title' => 'Permohonan Kendaraan Operasional',
-        	'preheader' => $user->nama.' dari bagian '.$user->posisi.' Development mengirimkan permohonan kendaraan operasional.',
+        	'preheader' => $user->nama.' dari bagian '.$user->posisi.' mengirimkan permohonan kendaraan operasional.',
         	'nama' => $user->nama,
         	'data' => $data
         );
         $msg = $this->load->view('pages/email',$content,true);
-        $this->email->subject('Permohonan untuk Anda');
+        $this->email->subject('[GasnetGo] Permohonan untuk Anda');
         $this->email->message($msg);
 
         if ($this->email->send()) {
