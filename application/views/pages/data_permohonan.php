@@ -22,7 +22,7 @@
 				<?php unset($_SESSION['success']) ?>
         	<?php endif ?>
         	<div class="table-responsive">
-        		<table class="table table-striped w-100" id="permohonan_table">
+        		<table class="table table-responsive table-striped w-100" id="permohonan_table">
 				  <thead>
 				    <tr>
 				      <th scope="col">No</th>
