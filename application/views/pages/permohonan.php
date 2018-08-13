@@ -41,7 +41,7 @@
 					    	</div>
 					    	<div class="form-group col-md-6">
 					      		<label for="namaPengguna">Nama Pengguna</label>
-					      		<input id="namaPengguna" name="namaPengguna" class="form-control" placeholder="Nama Pengguna" required/>
+					      		<input id="namaPengguna" name="namaPengguna" class="form-control" placeholder="Nama Pengguna" value="<?php echo $this->home_model->get_users_data($_SESSION['go_email'])->nama ?>" required/>
 					      		<div class="invalid-feedback">Anda harus mengisi Nama Pengguna</div>
 					    	</div>
 					  	</div>
@@ -80,7 +80,7 @@
 					  	<div class="form-row">
 					  		<div class="form-group col-md-6">
 						    	<label for="satuanKerja">Satuan Kerja</label>
-						    	<input type="text" class="form-control" id="satuanKerja" name="satuanKerja" list="satuan" placeholder="Satuan Kerja" required />
+						    	<input type="text" class="form-control" id="satuanKerja" name="satuanKerja" list="satuan" placeholder="Satuan Kerja" value="<?php echo $this->home_model->get_users_data($_SESSION['go_email'])->posisi ?>" required />
 						    	<div class="invalid-feedback">Anda harus mengisi Satuan Kerja</div>
 						  	</div>
 						  	<div class="form-group col-md-6">
