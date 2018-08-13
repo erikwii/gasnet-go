@@ -1,4 +1,4 @@
-<div class="container form-app">
+<div class="container form-app" onload="window.print()">
 	<div class="row my-3">
         <div class="col-12 offset-lg-3 col-lg-6 col-md-12">
         	<?php if (isset($_SESSION['error'])): ?>
@@ -41,7 +41,7 @@
 					    	</div>
 					    	<div class="form-group col-md-6">
 					      		<label for="namaPengguna">Nama Pengguna</label>
-					      		<input id="namaPengguna" name="namaPengguna" class="form-control" placeholder="Nama Pengguna" value="<?php echo $this->home_model->get_users_data($_SESSION['go_email'])->nama ?>" required/>
+					      		<input id="namaPengguna" name="namaPengguna" class="form-control" placeholder="Nama Pengguna" required/>
 					      		<div class="invalid-feedback">Anda harus mengisi Nama Pengguna</div>
 					    	</div>
 					  	</div>
@@ -80,7 +80,7 @@
 					  	<div class="form-row">
 					  		<div class="form-group col-md-6">
 						    	<label for="satuanKerja">Satuan Kerja</label>
-						    	<input type="text" class="form-control" id="satuanKerja" name="satuanKerja" list="satuan" placeholder="Satuan Kerja" value="<?php echo $this->home_model->get_users_data($_SESSION['go_email'])->posisi ?>" required />
+						    	<input type="text" class="form-control" id="satuanKerja" name="satuanKerja" list="satuan" placeholder="Satuan Kerja" required />
 						    	<div class="invalid-feedback">Anda harus mengisi Satuan Kerja</div>
 						  	</div>
 						  	<div class="form-group col-md-6">

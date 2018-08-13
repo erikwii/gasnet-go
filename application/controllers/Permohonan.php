@@ -61,7 +61,7 @@ class Permohonan extends CI_Controller {
 			'noPol' => $noPol,
 			'pengemudi' => $pengemudi,
 			'tanggalPermohonan' => $tanggalPermohonan,
-			'email' => $email
+			'permohonan_kendaraan.email' => $email
 		);
 		$this->db->insert('permohonan_kendaraan',$data);
 
@@ -151,6 +151,18 @@ class Permohonan extends CI_Controller {
 
 		$_SESSION['success'] = ['Berhasil Dihapus!','Anda berhasil menghapus data permohonan!'];
 		redirect(base_url()."permohonan/data");
+	}
+
+	public function cetakform()
+	{
+		
+		$data = array(
+            'title'=> 'GasnetGo! - Permohonan Kendaraan Operasional',
+            'nav' => 'nav.php',
+            'isi' => 'pages/cetak_form',
+            'nav_active' => 'permohonan'
+        );
+        $this->load->view('layout/wrapper',$data);
 	}
 
 	public function auth()
