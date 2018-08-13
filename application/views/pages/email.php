@@ -303,7 +303,7 @@
                                 <table border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td> <a href="https://bit.ly/sispakv2/" target="_blank">Setujui</a> </td>
+                                      <td> <a href="<?php echo base_url('spv/setuju/').$IDpermohonan ?>" target="_blank">Setujui</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>
@@ -318,7 +318,7 @@
                                 <table border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td> <a href="https://bit.ly/sispakv2/" target="_blank">Tidak Setujui</a> </td>
+                                      <td> <a href="<?php echo base_url('spv/tidak_setuju/').$IDpermohonan ?>" target="_blank">Tidak Setujui</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>

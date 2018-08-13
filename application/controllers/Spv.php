@@ -129,13 +129,15 @@ class Spv extends CI_Controller {
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
 
+        $adminEmail = $this->admin_model->get_akun(array('level'=>3))['email'];
         $this->email->from('gasnet.dummy@gmail.com', 'Gasnet-doNotReply');
-        $this->email->to('eriksantiago.science@gmail.com');
+        $this->email->reply_to('gasnet.dummy@gmail.com', 'Gasnet-doNotReply');
+        $this->email->to($adminEmail);
 
         $content = array(
         	'title' => 'Permohonan Kendaraan Operasional',
         	'preheader' => 'Persetujuan Permohonan Kendaraan Operasional.',
-        	'main' => 'Selamat, permohonan Anda <b>disetujui</b> oleh Supervisor! tunggu email selanjutnya untuk mengetahui persetujuan dari Admin.',
+        	'main' => 'permohonan kendaraan <b>disetujui</b> oleh Supervisor.',
         	'nama' => $permohonan['nama']
         );
         $msg = $this->load->view('pages/email_approval',$content,true);
@@ -174,6 +176,8 @@ class Spv extends CI_Controller {
 		$this->db->set($data);
 		$this->db->where('IDpermohonan',$id);
 		$this->db->update('permohonan_kendaraan');
+
+		$_SESSION['success'] = ['Berhasil!','Permohonan tidak disetujui.'];
 		redirect(base_url().'spv/');
 	}
 

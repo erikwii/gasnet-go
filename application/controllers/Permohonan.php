@@ -65,6 +65,10 @@ class Permohonan extends CI_Controller {
 		);
 		$this->db->insert('permohonan_kendaraan',$data);
 
+		$IDpermohonan = $this->admin_model->get_permohonan_data($data)['IDpermohonan'];
+		$posisi = $this->home_model->get_users_data($email)->posisi;
+		$SPVemail = $this->admin_model->get_akun(array('posisi'=>$posisi,'level'=>2))['email'];
+
 		$config = Array(
             'protocol' => 'smtp',
             'smtp_host' => 'ssl://smtp.gmail.com',
@@ -78,14 +82,16 @@ class Permohonan extends CI_Controller {
         $this->email->set_newline("\r\n");
 
         $this->email->from('gasnet.dummy@gmail.com', 'Gasnet-doNotReply');
-        $this->email->to('eriksantiago.science@gmail.com');
+        $this->email->reply_to('gasnet.dummy@gmail.com', 'Gasnet-doNotReply');
+        $this->email->to($SPVemail);
 
         $user = $this->home_model->get_users_data($email);
         $content = array(
         	'title' => 'Permohonan Kendaraan Operasional',
         	'preheader' => $user->nama.' dari bagian '.$user->posisi.' mengirimkan permohonan kendaraan operasional.',
         	'nama' => $user->nama,
-        	'data' => $data
+        	'data' => $data,
+        	'IDpermohonan' => $IDpermohonan
         );
         $msg = $this->load->view('pages/email',$content,true);
         $this->email->subject('[GasnetGo] Permohonan kendaraan operasional');
