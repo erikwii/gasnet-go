@@ -153,16 +153,22 @@ class Permohonan extends CI_Controller {
 		redirect(base_url()."permohonan/data");
 	}
 
-	public function cetakform()
-	{
+	public function cetakform($id)
+	{	
+		$permohonan = $this->admin_model->get_permohonan_data(array('IDpermohonan'=>$id));
 		
+		if ($permohonan['approval'] == 'Belum ada persetujuan') {
+			redirect(base_url()."permohonan/data");
+		}
+
 		$data = array(
             'title'=> 'GasnetGo! - Permohonan Kendaraan Operasional',
             'nav' => 'nav.php',
             'isi' => 'pages/cetak_form',
-            'nav_active' => 'permohonan'
+            'nav_active' => 'permohonan',
+            'permohonan' => $permohonan
         );
-        $this->load->view('layout/wrapper',$data);
+        $this->load->view('pages/cetak_form',$data);
 	}
 
 	public function auth()
