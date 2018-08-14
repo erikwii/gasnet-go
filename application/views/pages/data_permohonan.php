@@ -41,6 +41,7 @@
 				      <?php if ($_SESSION['go_level'] != 1): ?>
 				      	<th scope="col">Setujui</th>
 				      <?php endif ?>
+				      <th scope="col">Print</th>
 				      <th scope="col">Action</th>
 				    </tr>
 				  </thead>
@@ -74,6 +75,13 @@
 				      		<?php else: ?>
 				      			<span class="text-danger"><?php echo $p->approval ?></span>
 				      		<?php endif ?>
+					      </td>
+					      <td>
+					      	<?php if ($p->approval == 'Belum ada persetujuan'): ?>
+					      		<button class="btn btn-sm btn-secondary" disabled><i class="fa fa-file-o"></i> Print</button>
+					      	<?php else: ?>
+								<a href="<?php echo base_url('permohonan/cetakform/').$p->IDpermohonan ?>" class="btn btn-sm btn-success"><i class="fa fa-file-o"></i> Print</a>
+					      	<?php endif ?>
 					      </td>
 					    <?php if ($_SESSION['go_level'] != 1): ?>
 					      <td>

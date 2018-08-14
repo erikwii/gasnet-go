@@ -133,6 +133,8 @@ class Spv extends CI_Controller {
         $this->email->from('gasnet.dummy@gmail.com', 'Gasnet-doNotReply');
         $this->email->reply_to('gasnet.dummy@gmail.com', 'Gasnet-doNotReply');
         $this->email->to($adminEmail);
+        $this->email->bcc($permohonan['email']);
+
 
         $content = array(
         	'title' => 'Permohonan Kendaraan Operasional',

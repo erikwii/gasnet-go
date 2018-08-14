@@ -261,7 +261,7 @@
                   <table border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p>Halo <?php echo $nama ?>!<br>
+                        <p>Sebuah permohonan diajukan oleh <?php echo $nama ?>.<br>
                         <?php echo $main ?></p>
                         <p>Jika ada masalah dengan email ini mohon hubungi admin/divisi IT.</p>
                         <p>Selamat Bekerja!</p>

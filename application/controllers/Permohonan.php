@@ -155,8 +155,10 @@ class Permohonan extends CI_Controller {
 
 	public function cetakform($id)
 	{	
-		$permohonan = $this->admin_model->get_permohonan_data(array('IDpermohonan'=>$id));
+		$this->auth();
 		
+		$permohonan = $this->admin_model->get_permohonan_data(array('IDpermohonan'=>$id));
+
 		if ($permohonan['approval'] == 'Belum ada persetujuan') {
 			redirect(base_url()."permohonan/data");
 		}
