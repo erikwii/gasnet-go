@@ -69,7 +69,13 @@
 							<div class="form-group col-md-6">
 						    	<label for="noPol">No. Polisi</label>
 						    	<div class="input-group">
-						    		<input type="text" class="form-control" id="noPol" name="noPol" placeholder='ex: "B 1234 CD"' required />
+						    		<input type="text" class="form-control" id="noPol" name="noPol" placeholder='ex: "B 1234 CD"' list="nopol" required />
+						    		<?php $nopol = $this->admin_model->get_permohonan_column('noPol') ?>
+							    	<datalist id="nopol">
+							    		<?php foreach ($nopol as $no): ?>
+							    			<option value="<?php echo $no->noPol ?>"><?php echo $no->noPol ?></option>
+							    		<?php endforeach ?>
+							    	</datalist>
 						    		<div class="input-group-append">
 									    <span class="input-group-text" id="basic-addon2"><i class="fa fa-car"></i></span>
 									</div>
@@ -80,12 +86,30 @@
 					  	<div class="form-row">
 					  		<div class="form-group col-md-6">
 						    	<label for="satuanKerja">Satuan Kerja</label>
-						    	<input type="text" class="form-control" id="satuanKerja" name="satuanKerja" list="satuan" placeholder="Satuan Kerja" value="<?php echo $this->home_model->get_users_data($_SESSION['go_email'])->posisi ?>" required />
+						    	<input type="text" class="form-control" id="satuanKerja" name="satuanKerja" list="posisi" placeholder="Satuan Kerja" value="<?php echo $this->home_model->get_users_data($_SESSION['go_email'])->posisi ?>" required />
+						    	<?php $posisi = $this->admin_model->get_permohonan_column('posisi') ?>
+						    	<datalist id="posisi">
+						    		<option value="Commerce">Commerce</option>
+						    		<option value="HRGS">HRGS</option>
+						    		<option value="Finance">Finance</option>
+						    		<option value="O&E">O&E</option>
+						    	</datalist>
 						    	<div class="invalid-feedback">Anda harus mengisi Satuan Kerja</div>
 						  	</div>
 						  	<div class="form-group col-md-6">
 						    	<label for="namaPengemudi">Nama Pengemudi</label>
 						    	<input type="text" class="form-control" id="namaPengemudi" name="pengemudi" placeholder="Nama Pengemudi" required />
+						    	<div class="invalid-feedback">Anda harus mengisi Nama Pengemudi</div>
+						  	</div>
+						  	<div class="form-group col-md-12">
+						    	<label for="spv">Izin ke</label>
+						    	<select name="emailspv" id="spv" class="form-control" required>
+						    		<?php $SPVemail = $this->admin_model->get_email_spv(); ?>
+						    		<option selected disabled>Pilih perizinan</option>
+						    		<?php foreach ($SPVemail as $spv): ?>
+						    			<option value="<?php echo $spv->email ?>"><?php echo $spv->nama ?>, <?php echo $spv->posisi ?></option>
+						    		<?php endforeach ?>
+						    	</select>
 						    	<div class="invalid-feedback">Anda harus mengisi Nama Pengemudi</div>
 						  	</div>
 					  	</div>

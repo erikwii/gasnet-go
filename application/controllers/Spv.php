@@ -18,7 +18,7 @@ class Spv extends CI_Controller {
             'title'=> 'GasnetGo! - Data permohonan kendaraan operasional',
             'nav' => 'nav.php',
             'isi' => 'pages/data_permohonan',
-            'permohonan' => $this->admin_model->get_permohonan(array('satuanKerja'=> $posisi)),
+            'permohonan' => $this->admin_model->get_permohonan(),
             'nav_active' => 'data'
         );
         $this->load->view('layout/wrapper',$data);
@@ -101,12 +101,13 @@ class Spv extends CI_Controller {
 
 		$this->db->delete('permohonan_kendaraan', array('IDpermohonan' => $id));
 
-		$_SESSION['success'] = 'Anda berhasil menghapus data permohonan!';
+		$_SESSION['success'] = ['Berhaisl!','Anda berhasil menghapus data permohonan!'];
 		redirect(base_url()."spv/");
 	}
 
 	public function setuju($id)
 	{
+		$_SESSION['goto'] = base_url().'spv/setuju/'.$id;
 		$this->auth();
 
 		$data = array(
@@ -124,7 +125,7 @@ class Spv extends CI_Controller {
             'smtp_user' => 'gasnet.dummy@gmail.com',
             'smtp_pass' => 'passwordgasnet',
             'mailtype'  => 'html', 
-            'charset'   => 'iso-8859-1'
+            'charset'   => 'utf-8'
         );
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
@@ -170,6 +171,7 @@ class Spv extends CI_Controller {
 
 	public function tidak_setuju($id)
 	{
+		$_SESSION['goto'] = base_url().'spv/tidak_setuju/'.$id;
 		$this->auth();
 
 		$data = array(

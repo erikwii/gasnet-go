@@ -6,12 +6,14 @@ class Admin_model extends CI_Model{
 		if ($where == null) {
 			$this->db->order_by('IDpermohonan', 'DESC');
 			$this->db->join('users', 'users.email = permohonan_kendaraan.email');
+			$this->db->like('tanggalPermohonan', date('Y-m'), 'after');
 			$query = $this->db->get('permohonan_kendaraan');
 			return $query->result();
 			
 		} else {
 			$this->db->order_by('IDpermohonan', 'DESC');
 			$this->db->join('users', 'users.email = permohonan_kendaraan.email');
+			$this->db->like('tanggalPermohonan', date('Y-m'), 'after');
 			$query = $this->db->get_where('permohonan_kendaraan',$where);
 			return $query->result();
 		}
@@ -20,9 +22,18 @@ class Admin_model extends CI_Model{
 	public function get_permohonan_data($where)
 	{
 		$this->db->order_by('IDpermohonan', 'DESC');
-			$this->db->join('users', 'users.email = permohonan_kendaraan.email');
-			$query = $this->db->get_where('permohonan_kendaraan',$where);
-			return $query->row_array();
+		$this->db->join('users', 'users.email = permohonan_kendaraan.email');
+		$this->db->like('tanggalPermohonan', date('Y-m'), 'after');
+		$query = $this->db->get_where('permohonan_kendaraan',$where);
+		return $query->row_array();
+	}
+
+	public function get_permohonan_column($select)
+	{
+		$this->db->distinct();
+		$this->db->join('users', 'users.email = permohonan_kendaraan.email');
+		$this->db->select($select);
+		return $this->db->get('permohonan_kendaraan')->result();
 	}
 
 	public function get_akun_role($role=null)
@@ -47,5 +58,10 @@ class Admin_model extends CI_Model{
 		} else {
 			return $this->db->get_where('users',$where)->row_array();
 		}
+	}
+
+	public function get_email_spv()
+	{
+		return $this->db->get_where('users',array('level'=>2))->result();
 	}
 }

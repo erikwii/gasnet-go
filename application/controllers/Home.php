@@ -68,11 +68,23 @@ class Home extends CI_Controller {
                     $_SESSION['success'] = ["Berhasil Login!","Selamat datang kembali di GasnetGo, ".$name];
 
                     if ($_SESSION['go_level'] == 0 || $_SESSION['go_level'] == 3) {
-                    	redirect(base_url()."admin");
+                        if (isset($_SESSION['goto'])) {
+                            redirect($_SESSION['goto']);
+                        } else {
+                            redirect(base_url()."admin");
+                        }
                     }elseif ($_SESSION['go_level'] == 1) {
-                    	redirect(base_url()."permohonan");
+                        if (isset($_SESSION['goto'])) {
+                            redirect($_SESSION['goto']);
+                        } else {
+                        	redirect(base_url()."permohonan");
+                        }
                     }elseif ($_SESSION['go_level'] == 2){
-                    	redirect(base_url()."spv");
+                        if (isset($_SESSION['goto'])) {
+                            redirect($_SESSION['goto']);
+                        } else {
+                            redirect(base_url()."spv");
+                        }
                     }
                 }else{
                 	$this->session->set_userdata('login_error', 'Password yang dimasukkan salah....');

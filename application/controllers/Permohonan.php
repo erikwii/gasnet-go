@@ -66,8 +66,7 @@ class Permohonan extends CI_Controller {
 		$this->db->insert('permohonan_kendaraan',$data);
 
 		$IDpermohonan = $this->admin_model->get_permohonan_data($data)['IDpermohonan'];
-		$posisi = $this->home_model->get_users_data($email)->posisi;
-		$SPVemail = $this->admin_model->get_akun(array('posisi'=>$posisi,'level'=>2))['email'];
+		$SPVemail = $this->input->post('emailspv');
 
 		$config = Array(
             'protocol' => 'smtp',
@@ -76,13 +75,13 @@ class Permohonan extends CI_Controller {
             'smtp_user' => 'gasnet.dummy@gmail.com',
             'smtp_pass' => 'passwordgasnet',
             'mailtype'  => 'html', 
-            'charset'   => 'iso-8859-1'
+            'charset'   => 'utf-8'
         );
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
 
-        $this->email->from('gasnet.dummy@gmail.com', 'Gasnet-doNotReply');
-        $this->email->reply_to('gasnet.dummy@gmail.com', 'Gasnet-doNotReply');
+        $this->email->from('no-reply@go.gasnet.id', 'Gasnet-doNotReply');
+        $this->email->reply_to('no-reply@go.gasnet.id', 'Gasnet-doNotReply');
         $this->email->to($SPVemail);
 
         $user = $this->home_model->get_users_data($email);

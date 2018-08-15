@@ -1,6 +1,6 @@
 <div class="container app">
 	<div class="row my-3">
-        <div class="col-12 col-lg-12 col-md-4">
+        <div class="col-12 col-lg-12 col-md-12">
         	<?php if (isset($_SESSION['error'])): ?>
         		<script>
         			swal({
@@ -38,7 +38,7 @@
 				      <th scope="col">KM. Akhir</th>
 				      <th scope="col">Pemohon</th>
 				      <th scope="col">Persetujuan</th>
-				      <?php if ($_SESSION['go_level'] != 1): ?>
+				      <?php if ($_SESSION['go_level'] == 2): ?>
 				      	<th scope="col">Setujui</th>
 				      <?php endif ?>
 				      <th scope="col">Print</th>
@@ -66,6 +66,7 @@
 					      <td><?php echo $p->kmAkhir ?></td>
 					      <td><?php echo $p->nama ?></td>
 					      <td>
+					      	<!-- Bagian keterangan -->
 				      		<?php if ($p->approval == 'Belum ada persetujuan'): ?>
 				      			<span class="text-warning"><?php echo $p->approval ?></span>
 				      		<?php elseif($p->approval == 'Disetujui Supervisor'): ?>
@@ -75,16 +76,13 @@
 				      		<?php else: ?>
 				      			<span class="text-danger"><?php echo $p->approval ?></span>
 				      		<?php endif ?>
+				      		<!-- Bagian keterangan -->
 					      </td>
+
+					      <!-- Bagian Approval -->
+					    <?php if ($_SESSION['go_level'] == 2): ?>
 					      <td>
-					      	<?php if ($p->approval == 'Belum ada persetujuan'): ?>
-					      		<button class="btn btn-sm btn-secondary" disabled><i class="fa fa-file-o"></i> Print</button>
-					      	<?php else: ?>
-								<a href="<?php echo base_url('permohonan/cetakform/').$p->IDpermohonan ?>" class="btn btn-sm btn-success"><i class="fa fa-file-o"></i> Print</a>
-					      	<?php endif ?>
-					      </td>
-					    <?php if ($_SESSION['go_level'] != 1): ?>
-					      <td>
+					      	<!-- keterangn Approval pada users -->
 					      	<?php if ($_SESSION['go_level'] == 1): ?>
 					      		<?php if ($p->approval == 'Belum ada persetujuan'): ?>
 					      			<span class="text-warning"><?php echo $p->approval ?></span>
@@ -95,6 +93,9 @@
 					      		<?php else: ?>
 					      			<span class="text-danger"><?php echo $p->approval ?></span>
 					      		<?php endif ?>
+					      	<!-- keterangn Approval pada users -->
+
+					      	<!-- bagian persetujuan oleh Supervisor -->
 					      	<?php elseif ($_SESSION['go_level'] == 2): ?>
 					      		<?php if($p->approval == 'Disetujui Supervisor'): ?>
 					      			<a href="<?php echo base_url() ?>spv/batal_setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-sm btn-outline-secondary">Batal Setuju</a>
@@ -110,24 +111,22 @@
 							      		<a href="<?php echo base_url() ?>spv/tidak_setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-sm btn-outline-secondary">Tidak</a>
 							      	</div>
 					      		<?php endif ?>
-					      	<?php else: ?>
-					      		<?php if($p->approval == 'Disetujui Supervisor'): ?>
-					      			<div class="btn-group">
-							      		<a href="<?php echo base_url() ?>admin/setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-sm btn-outline-primary">Setuju</a>
-							      		<a href="<?php echo base_url() ?>admin/tidak_setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-sm btn-outline-secondary">Tidak</a>
-							      	</div>
-					      		<?php elseif($p->approval == 'Disetujui Pusat'): ?>
-					      			<a href="<?php echo base_url() ?>admin/batal_setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-sm btn-outline-secondary">Batal Setuju</a>
-					      		<?php elseif($p->approval == 'Tidak disetujui Supervisor'): ?>
-					      			<span class="text-danger"><?php echo $p->approval ?></span>
-					      		<?php elseif($p->approval == 'Tidak disetujui Pusat'): ?>
-							      	<a href="<?php echo base_url() ?>admin/setuju/<?php echo $p->IDpermohonan ?>" class="btn btn-sm btn-outline-primary">Setujui</a>
-							    <?php else: ?>
-							    	<span class="text-warning">Belum ada persetujuan Supervisor</span>
-					      		<?php endif ?>
+					      	<!-- bagian persetujuan oleh Supervisor -->
 					      	<?php endif ?>
 					      </td>
 					  	<?php endif; ?>
+					  	<!-- Bagian Approval -->
+
+					      <td>
+					      	<!-- Bagian Print Form -->
+					      	<?php if ($p->approval == 'Disetujui Supervisor'): ?>
+								<a href="<?php echo base_url('permohonan/cetakform/').$p->IDpermohonan ?>" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-file-o"></i> Print</a>
+					      	<?php else: ?>
+					      		<button class="btn btn-sm btn-secondary" disabled><i class="fa fa-file-o"></i> Print</button>
+					      	<?php endif ?>
+					      	<!-- Bagian Print Form -->
+					      </td>
+					  	
 					      <td>
 					      	<div class="btn-group">
 					      		<button class="btn btn-sm btn-primary" onclick="lihat_permohonan(<?php echo $p->IDpermohonan ?>)">Lihat Lengkap</button>
@@ -197,7 +196,13 @@
 							</div>
 							<div class="form-group col-md-4">
 						    	<label for="noPol">No. Polisi</label>
-						    	<input type="text" class="form-control" id="noPol" name="noPol" placeholder='ex: "B 1234 CD"' required />
+						    	<input type="text" class="form-control" id="noPol" name="noPol" placeholder='ex: "B 1234 CD"' list="nopol" required />
+						    	<?php $nopol = $this->admin_model->get_permohonan_column('noPol') ?>
+						    	<datalist id="nopol">
+						    		<?php foreach ($nopol as $no): ?>
+						    			<option value="<?php echo $no->noPol ?>"><?php echo $no->noPol ?></option>
+						    		<?php endforeach ?>
+						    	</datalist>
 						    	<div class="invalid-feedback">Anda harus mengisi Tujuan</div>
 						  	</div>
 					  	</div>
@@ -603,13 +608,7 @@
 		                "targets": [ 11 ],
 		                "visible": false
 		            }
-		            <?php if($_SESSION['go_level'] == 0 || $_SESSION['go_level'] == 3): ?>
-		            	,
-			            {
-			                "targets": [ 12 ],
-			                "visible": false
-			            }
-		            <?php endif; ?>
+		            
 		        ],
 				buttons: [
 		            {

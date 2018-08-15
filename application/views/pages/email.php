@@ -3,6 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
     <title><?php echo $title ?></title>
     <style>
       /* -------------------------------------
@@ -347,7 +348,7 @@
                 </tr>
                 <tr>
                   <td class="content-block powered-by">
-                    &lt;/&gt; with ❤ by <a href="http://github.com/erikwii">Erik Santiago</a>.
+                    &lt;/&gt; with &lt;3 by <a href="http://github.com/erikwii">Erik Santiago</a>.
                   </td>
                 </tr>
               </table>

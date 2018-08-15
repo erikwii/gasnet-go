@@ -116,7 +116,7 @@ class Admin extends CI_Controller {
 
 		$this->db->delete('users', array('email' => $email));
 
-		$_SESSION['success'] = ['Berhasil','Anda berhasil menghapus Akun '.$email];
+		$_SESSION['success'] = ['Berhasil!','Anda berhasil menghapus Akun '.$email];
 		redirect(base_url()."admin/akun/");
 	}
 
@@ -230,7 +230,7 @@ class Admin extends CI_Controller {
 
 		$this->db->delete('permohonan_kendaraan', array('IDpermohonan' => $id));
 
-		$_SESSION['success'] = 'Anda berhasil menghapus data permohonan!';
+		$_SESSION['success'] = ['Berhasil!', 'Anda berhasil menghapus data permohonan!'];
 		redirect(base_url()."admin/");
 	}
 
