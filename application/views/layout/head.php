@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="<?php echo base_url()?>assets/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url()?>assets/css/dataTables.min.css">
     <link rel="stylesheet" href="<?php echo base_url()?>assets/css/animate.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>assets/css/sweetalert2.css">
     <link rel="stylesheet" href="<?php echo base_url()?>assets/css/clockpicker.css">
     <link rel="stylesheet" href="<?php echo base_url()?>assets/css/bootstrap-datepicker.css">
 
@@ -46,7 +47,7 @@
     <!-- DataTables plugin end -->
     
     <!-- Other lugin start -->
-    <script type="text/javascript" src="<?php echo base_url()?>assets/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url()?>assets/js/sweetalert2.js"></script>
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/clockpicker.js"></script>
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/bootstrap-datepicker.id.min.js"></script>

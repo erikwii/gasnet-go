@@ -7,7 +7,7 @@
         			swal({
 					  	title: "Error!",
 					  	text: "<?php echo $_SESSION['error'] ?>",
-					  	icon: "error",
+					  	type: "error",
 					});
         		</script>
 				<?php unset($_SESSION['error']) ?>
@@ -17,7 +17,7 @@
         			swal({
 					  	title: "<?php echo $_SESSION['success'][0] ?>",
 					  	text: "<?php echo $_SESSION['success'][1] ?>",
-					  	icon: "success",
+					  	type: "success",
 					});
         		</script>
 				<?php unset($_SESSION['success']) ?>
@@ -335,7 +335,7 @@
     	swal({
 		  	title: "Apa Anda Yakin?",
 		  	text: "Saat menghapusnya Anda tidak akan bisa mengembalikannya seperti semula!",
-		  	icon: "warning",
+		  	type: "question",
 		  	buttons: true,
 		  	dangerMode: true,
 		})

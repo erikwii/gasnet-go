@@ -11,7 +11,7 @@
         			swal({
 					  	title: "Error!",
 					  	text: "<?php echo $_SESSION['login_error']?>",
-					  	icon: "error",
+					  	type: "error",
 					});
         		</script>
 				<?php unset($_SESSION['error']) ?>
@@ -21,7 +21,7 @@
         			swal({
 					  	title: "Berhasil!",
 					  	text: "<?php echo $_SESSION['login_success'] ?>",
-					  	icon: "success",
+					  	type: "success",
 					});
         		</script>
 				<?php unset($_SESSION['success']) ?>
