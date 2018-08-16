@@ -1,2 +1,2 @@
 # gasnet-go
-Web Application for operational vehicles request in Gasnet.inc (Project Magang)
+Web Application for operational vehicles request in Gasnet.inc (Internship Project)
