@@ -159,6 +159,31 @@ class Admin extends CI_Controller {
 		redirect(base_url().'/home/inventaris');
 	}
 
+	public function tindak_lanjut_permohonan()
+	{
+		$this->auth();
+
+		$IDpermohonan = $this->input->post('TDIDpermohonan');
+		$noPol = $this->input->post('TDnoPol');
+		$pengemudi = $this->input->post('TDpengemudi');
+		$kmAwal = $this->input->post('TDkmAwal');
+		$kmAkhir = $this->input->post('TDkmAkhir');
+		
+		$data = array(
+			'kmAwal' => $kmAwal,
+			'kmAkhir' => $kmAkhir,
+			'noPol' => $noPol,
+			'pengemudi' => $pengemudi,
+		);
+		
+		$this->db->set($data);
+		$this->db->where('IDpermohonan',$IDpermohonan);
+		$this->db->update('permohonan_kendaraan');
+
+        $_SESSION['success'] = ['Berhasil!','Permohonan berhasil diupdate.'];
+		redirect(base_url().'admin/');
+	}
+
 	public function edit_permohonan()
 	{
 		$this->auth();
@@ -191,36 +216,7 @@ class Admin extends CI_Controller {
 		$this->db->where('IDpermohonan',$IDpermohonan);
 		$this->db->update('permohonan_kendaraan');
 
-		$config = Array(
-            'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.gmail.com',
-            'smtp_port' => 465,
-            'smtp_user' => 'gasnet.dummy@gmail.com',
-            'smtp_pass' => 'passwordgasnet',
-            'mailtype'  => 'html', 
-            'charset'   => 'iso-8859-1'
-        );
-        $this->load->library('email', $config);
-        $this->email->set_newline("\r\n");
-
-        $this->email->from('gasnet.dummy@gmail.com', 'Gasnet-doNotReply');
-        $this->email->to('eriksantiago.science@gmail.com');
-
-        $content = array(
-        	'title' => 'Permohonan Kendaraan Operasional',
-        	'preheader' => ' dari bagian IT Development mengirimkan permohonan kendaraan operasional.',
-        	'nama' => 'Erik Santiago'
-        );
-        $msg = $this->load->view('pages/email',$content,true);
-        $this->email->subject('Permohonan untuk Anda');
-        $this->email->message($msg);
-
-        if ($this->email->send()) {
-            $_SESSION['success'] = ['Berhasil!','Permohonan dan email berhasil dikirim ke supervisor.'];
-        }else{
-            $_SESSION['error'] = 'gagal Mengirim email';
-        }
-        
+        $_SESSION['success'] = ['Berhasil!','Permohonan berhasil diupdate.'];
 		redirect(base_url().'admin/');
 	}
 

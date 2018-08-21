@@ -124,7 +124,7 @@
 					      	<!-- Bagian Print Form -->
 					      	<?php if ($p->approval == 'Disetujui Supervisor'): ?>
 					      		<?php if ($p->pengemudi == null || $p->noPol == null): ?>
-					      			<button class="btn btn-sm btn-success" data-toggle="modal" data-target="#TDModalCenter">Isi kelengkapan</button>
+					      			<button class="btn btn-sm btn-warning" onclick="tindak_lanjut_permohonan(<?php echo $p->IDpermohonan ?>)"><i class="fa fa-file-o"></i> Print</button>
 					      		<?php else: ?>
 									<a href="<?php echo base_url('permohonan/cetakform/').$p->IDpermohonan ?>" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-file-o"></i> Print</a>
 					      		<?php endif ?>
@@ -156,24 +156,26 @@
 	  	<div class="modal-dialog modal-dialog-centered" role="document">
 	    	<div class="modal-content">
 	      		<div class="modal-header">
-	        		<h5 class="modal-title" id="exampleModalCenterTitle">Tindak Lanjut Permohonan <span id="tgledit"></span></h5>
+	        		<h5 class="modal-title" id="exampleModalCenterTitle">Isi Kelengkapan</span></h5>
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          			<span aria-hidden="true">&times;</span>
 	        		</button>
 	      		</div>
 	      		<div class="modal-body">
-	      			<?php $attributes = array('class' => 'needs-validation', 'id'=>'editform'); ?>
+	      			<?php $attributes = array('class' => 'needs-validation', 'id'=>'TDform'); ?>
 					<?php echo form_open_multipart('admin/tindak_lanjut_permohonan/', $attributes);?>
+						<input type="number" name="TDIDpermohonan" class="d-none">
 					  	<div class="form-row">
 							<div class="form-group col-md-6">
 						    	<label for="TDnoPol">No. Polisi</label>
-						    	<input type="text" class="form-control" id="TDnoPol" name="TDnoPol" placeholder='ex: "B 1234 CD"' required list="" />
+						    	<input type="text" class="form-control" id="TDnoPol" name="TDnoPol" placeholder='B 1234 CD' required list="nopol" />
+						    	<?php $nopol = $this->admin_model->get_permohonan_column('noPol') ?>
 						    	<datalist id="nopol">
 						    		<?php foreach ($nopol as $no): ?>
 						    			<option value="<?php echo $no->noPol ?>"><?php echo $no->noPol ?></option>
 						    		<?php endforeach ?>
 						    	</datalist>
-						    	<div class="invalid-feedback">Anda harus mengisi Tujuan</div>
+						    	<div class="invalid-feedback">Anda harus mengisi No Polisi</div>
 						  	</div>
 						  	<div class="form-group col-md-6">
 						    	<label for="TDpengemudi">Nama Pengemudi</label>
@@ -182,16 +184,16 @@
 						  	</div>
 						  	<div class="form-group col-md-6">
 						    	<label for="TDkmAwal">KM Awal</label>
-						    	<input type="number" class="form-control" id="TDkmAwal" name="TDkmAwal" list="satuan" placeholder="KM Awal" required />
+						    	<input type="number" class="form-control" id="TDkmAwal" name="TDkmAwal" list="satuan" placeholder="KM Awal" />
 						    	<div class="invalid-feedback">Anda harus mengisi KM Awal</div>
 						  	</div>
 						  	<div class="form-group col-md-6">
 						    	<label for="TDkmAkhir">KM Akhir</label>
-						    	<input type="number" class="form-control" id="TDkmAkhir" name="TDkmAkhir" placeholder="KM Akhir" required />
+						    	<input type="number" class="form-control" id="TDkmAkhir" name="TDkmAkhir" placeholder="KM Akhir"/>
 						    	<div class="invalid-feedback">Anda harus mengisi KM AKhir</div>
 						  	</div>
 					  	</div>
-					  	<button type="submit" class="btn btn-primary">Edit</button>
+					  	<button type="submit" class="btn btn-lg btn-block btn-primary">GO!</button>
 					</form>
 	      		</div>
 	    	</div>
@@ -259,7 +261,7 @@
 							</div>
 							<div class="form-group col-md-4">
 						    	<label for="editnoPol">No. Polisi</label>
-						    	<input type="text" class="form-control" id="editnoPol" name="editnoPol" placeholder='ex: "B 1234 CD"' required />
+						    	<input type="text" class="form-control" id="editnoPol" name="editnoPol" placeholder='ex: "B 1234 CD"'  />
 						    	<div class="invalid-feedback">Anda harus mengisi Tujuan</div>
 						  	</div>
 					  	</div>
@@ -271,18 +273,18 @@
 						  	</div>
 						  	<div class="form-group col-md-6">
 						    	<label for="editpengemudi">Nama Pengemudi</label>
-						    	<input type="text" class="form-control" id="editpengemudi" name="editpengemudi" placeholder="Nama Pengemudi" required />
+						    	<input type="text" class="form-control" id="editpengemudi" name="editpengemudi" placeholder="Nama Pengemudi"  />
 						    	<div class="invalid-feedback">Anda harus mengisi Satuan Kerja</div>
 						  	</div>
 						<?php if ($_SESSION['go_level'] == 0 || $_SESSION['go_level'] == 3): ?>
 						  	<div class="form-group col-md-6">
 						    	<label for="editkmAwal">KM Awal</label>
-						    	<input type="number" class="form-control" id="editkmAwal" name="editkmAwal" list="satuan" placeholder="KM Awal" required />
+						    	<input type="number" class="form-control" id="editkmAwal" name="editkmAwal" list="satuan" placeholder="KM Awal"  />
 						    	<div class="invalid-feedback">Anda harus mengisi KM Awal</div>
 						  	</div>
 						  	<div class="form-group col-md-6">
 						    	<label for="editkmAkhir">KM Akhir</label>
-						    	<input type="number" class="form-control" id="editkmAkhir" name="editkmAkhir" placeholder="KM Akhir" required />
+						    	<input type="number" class="form-control" id="editkmAkhir" name="editkmAkhir" placeholder="KM Akhir"  />
 						    	<div class="invalid-feedback">Anda harus mengisi KM AKhir</div>
 						  	</div>
 						<?php endif ?>
@@ -430,6 +432,28 @@
 		var bulan = {'01': 'Januari', '02': 'Februari', '03': 'Maret','04': 'April', '05': 'Mei', '06': 'Juni','07': 'Juli', '08': 'Agustus', '09': 'September','10': 'Oktober', '11': 'November', '12': 'Desember'};
 
 		return arrdate[2]+" "+bulan[arrdate[1]]+" "+arrdate[0];
+	}
+
+	function tindak_lanjut_permohonan(id) {
+		$('#TDform')[0].reset();
+
+        $.ajax({
+            url : "<?php echo site_url('admin/data_permohonan/')?>/" + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function(data)
+            {
+            	data[0].tanggalPermohonan
+
+                $('[name="TDIDpermohonan"]').val(data[0].IDpermohonan);
+                $('#TDModalCenter').modal('show');
+
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                console.log('failed get data');
+            }
+        });
 	}
 
     function edit_permohonan(id){
