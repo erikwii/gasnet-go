@@ -44,11 +44,11 @@
 			    <?php else: ?>
 			    	<?php if (isset($nav_active) && $nav_active == 'data'): ?>
 				    	<li class="nav-item active">
-				        	<b><a class="nav-link text-primary" href="<?php echo base_url() ?>admin/"><i class="fa fa-inbox"></i> Data Permohonan</a></b>
+				        	<b><a class="nav-link text-primary" href="<?php echo base_url() ?>admin/"><i class="fa fa-inbox"></i> Data Permohonan <span class="badge badge-primary"><?php echo $this->admin_model->get_permohonan_notif() ?></span></a></b>
 				      	</li>
 				    <?php else: ?>
 				    	<li class="nav-item">
-				        	<b><a class="nav-link" href="<?php echo base_url() ?>admin/"><i class="fa fa-inbox"></i> Data Permohonan</a></b>
+				        	<b><a class="nav-link" href="<?php echo base_url() ?>admin/"><i class="fa fa-inbox"></i> Data Permohonan <span class="badge badge-primary"><?php echo $this->admin_model->get_permohonan_notif() ?></span></a></b>
 				      	</li>
 			      	<?php endif; ?>
 			      	<?php if (isset($nav_active) && $nav_active == 'akun'): ?>

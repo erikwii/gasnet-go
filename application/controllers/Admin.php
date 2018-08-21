@@ -175,12 +175,12 @@ class Admin extends CI_Controller {
 			'noPol' => $noPol,
 			'pengemudi' => $pengemudi,
 		);
-		
+
 		$this->db->set($data);
 		$this->db->where('IDpermohonan',$IDpermohonan);
 		$this->db->update('permohonan_kendaraan');
 
-        $_SESSION['success'] = ['Berhasil!','Permohonan berhasil diupdate.'];
+        $_SESSION['success'] = ['Berhasil!','Permohonan berhasil ditindaklanjuti. Kini Anda dapat mencetak form permohonan'];
 		redirect(base_url().'admin/');
 	}
 

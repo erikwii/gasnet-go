@@ -360,7 +360,7 @@
 							</div>
 							<div class="form-group col-md-4">
 						    	<label for="lihatnoPol">No. Polisi</label>
-						    	<input type="text" class="form-control" id="lihatnoPol" name="lihatnoPol" placeholder='ex: "B 1234 CD"' readonly />
+						    	<input type="text" class="form-control" id="lihatnoPol" name="lihatnoPol" placeholder='No. Pol' readonly />
 						    	<div class="invalid-feedback">Anda harus mengisi Tujuan</div>
 						  	</div>
 					  	</div>
@@ -446,6 +446,10 @@
             	data[0].tanggalPermohonan
 
                 $('[name="TDIDpermohonan"]').val(data[0].IDpermohonan);
+                $('[name="TDnoPol"]').val(data[0].noPol);
+                $('[name="TDpengemudi"]').val(data[0].pengemudi);
+                $('[name="TDkmAwal"]').val(data[0].kmAwal);
+                $('[name="TDkmAkhir"]').val(data[0].kmAkhir);
                 $('#TDModalCenter').modal('show');
 
             },
