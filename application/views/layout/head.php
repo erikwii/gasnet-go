@@ -47,7 +47,7 @@
     <!-- DataTables plugin end -->
     
     <!-- Other lugin start -->
-    <script type="text/javascript" src="<?php echo base_url()?>assets/js/sweetalert2.js"></script>
+    <script type="text/javascript" src="<?php echo base_url()?>assets/js/sweetalert2.all.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/clockpicker.js"></script>
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="<?php echo base_url()?>assets/js/bootstrap-datepicker.id.min.js"></script>

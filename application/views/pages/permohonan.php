@@ -6,18 +6,24 @@
         			swal({
 					  	title: "Error!",
 					  	text: "<?php echo $_SESSION['error'] ?>",
-					  	icon: "error",
+					  	type: "error",
 					});
         		</script>
 				<?php unset($_SESSION['error']) ?>
         	<?php endif ?>
         	<?php if (isset($_SESSION['success'])): ?>
         		<script>
-        			swal({
-					  	title: "<?php echo $_SESSION['success'][0] ?>",
-					  	text: "<?php echo $_SESSION['success'][1] ?>",
-					  	icon: "success",
+        			const toast = swal.mixin({
+					  toast: true,
+					  position: 'bottom-end',
+					  showConfirmButton: false,
+					  timer: 5000
 					});
+
+					toast({
+					  type: 'success',
+					  title: '<?php echo $_SESSION['success'][1] ?>'
+					})
         		</script>
 				<?php unset($_SESSION['success']) ?>
         	<?php endif ?>
