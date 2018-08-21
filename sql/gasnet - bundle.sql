@@ -509,7 +509,7 @@ ALTER TABLE `permohonan_kendaraan`
 -- Constraints for table `permohonan_kendaraan`
 --
 ALTER TABLE `permohonan_kendaraan`
-  ADD CONSTRAINT `email_permohonan_kendaraan_users` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `email_permohonan_kendaraan_users` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
