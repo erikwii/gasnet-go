@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 class Admin_model extends CI_Model{
 
 	public function get_permohonan($where=null)
@@ -41,6 +42,7 @@ class Admin_model extends CI_Model{
 		$this->db->join('users', 'users.email = permohonan_kendaraan.email');
 		$this->db->where('pengemudi is null', null, false);
 		$this->db->or_where('noPol is null', null, false);
+		$this->db->like('tanggalPermohonan', date('Y-m'), 'after');
 		return $this->db->get('permohonan_kendaraan')->num_rows();
 	}
 
