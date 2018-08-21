@@ -28,7 +28,7 @@
 	  <div class="col-2 fixed-top" style="margin-top: 90px">
 	    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 	      <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">User</a>
-	      <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Supervisor</a>
+	      <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Approval</a>
 	      <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Admin</a>
 	    </div>
 	  </div>
@@ -95,7 +95,7 @@
 					      <th scope="row"><?php echo $i ?></th>
 					      <td><?php echo $spv->email ?></td>
 					      <td><?php echo $spv->nama ?></td>
-					      <td>Supervisor <?php echo $spv->posisi ?></td>
+					      <td><?php echo $spv->posisi ?></td>
 					      <td>
 					      	<?php if ($spv->status == 'aktif'): ?>
 					      		<h5><span class="badge badge-success"><?php echo $spv->status ?></span></h5>
@@ -220,7 +220,7 @@
 						    	<select name="level" id="level" class="form-control">
 						    		<option value="1" selected disabled>Pilih</option>
 						    		<option value="1">User</option>
-						    		<option value="2">Supervisor</option>
+						    		<option value="2">Approval</option>
 						    		<option value="3">Admin</option>
 						    	</select>
 						    	<div class="invalid-feedback">Anda harus memilih Level</div>

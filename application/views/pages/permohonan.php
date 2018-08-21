@@ -46,7 +46,7 @@
 					    	</div>
 					  	</div>
 					  	<div class="form-row">
-					  		<div class="form-group col-md-3 clockpicker" id="berangkat">
+					  		<div class="form-group col-md-4 clockpicker" id="berangkat">
 					  			<label for="jamBerangkat">Jam Berangkat</label>
 					  			<div class="input-group">
 								    <input type="text" class="form-control" id="jamBerangkat" name="jamBerangkat" placeholder="Berangkat" required>
@@ -56,7 +56,7 @@
 					  			</div>
 							    <div class="invalid-feedback">Anda harus mengisi Jam Berangkat</div>
 							</div>
-					  		<div class="form-group col-md-3 clockpicker" id="kembali">
+					  		<div class="form-group col-md-4 clockpicker" id="kembali">
 					  			<label for="jamKembali">Jam Kembali</label>
 					  			<div class="input-group">
 								    <input type="text" class="form-control" id="jamKembali" name="jamKembali" placeholder="Kembali" required>
@@ -66,7 +66,7 @@
 					  			</div>
 							    <div class="invalid-feedback">Anda harus mengisi Jam Kembali</div>
 							</div>
-							<div class="form-group col-md-6">
+							<!-- <div class="form-group col-md-6">
 						    	<label for="noPol">No. Polisi</label>
 						    	<div class="input-group">
 						    		<input type="text" class="form-control" id="noPol" name="noPol" placeholder='ex: "B 1234 CD"' list="nopol" required />
@@ -81,10 +81,8 @@
 									</div>
 						    	</div>
 						    	<div class="invalid-feedback">Anda harus mengisi Tujuan</div>
-						  	</div>
-					  	</div>
-					  	<div class="form-row">
-					  		<div class="form-group col-md-6">
+						  	</div> -->
+					  		<div class="form-group col-md-4">
 						    	<label for="satuanKerja">Satuan Kerja</label>
 						    	<input type="text" class="form-control" id="satuanKerja" name="satuanKerja" list="posisi" placeholder="Satuan Kerja" value="<?php echo $this->home_model->get_users_data($_SESSION['go_email'])->posisi ?>" required />
 						    	<?php $posisi = $this->admin_model->get_permohonan_column('posisi') ?>
@@ -96,11 +94,11 @@
 						    	</datalist>
 						    	<div class="invalid-feedback">Anda harus mengisi Satuan Kerja</div>
 						  	</div>
-						  	<div class="form-group col-md-6">
+						  	<!-- <div class="form-group col-md-6">
 						    	<label for="namaPengemudi">Nama Pengemudi</label>
 						    	<input type="text" class="form-control" id="namaPengemudi" name="pengemudi" placeholder="Nama Pengemudi" required />
 						    	<div class="invalid-feedback">Anda harus mengisi Nama Pengemudi</div>
-						  	</div>
+						  	</div> -->
 						  	<div class="form-group col-md-12">
 						    	<label for="spv">Izin ke</label>
 						    	<select name="emailspv" id="spv" class="form-control" required>

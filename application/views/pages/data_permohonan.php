@@ -41,7 +41,9 @@
 				      <?php if ($_SESSION['go_level'] == 2): ?>
 				      	<th scope="col">Setujui</th>
 				      <?php endif ?>
-				      <th scope="col">Print</th>
+				      <?php if ($_SESSION['go_level'] == 3 || $_SESSION['go_level'] == 0): ?>
+				      	<th scope="col">Print</th>
+				      <?php endif ?>
 				      <th scope="col">Action</th>
 				    </tr>
 				  </thead>
@@ -116,16 +118,22 @@
 					      </td>
 					  	<?php endif; ?>
 					  	<!-- Bagian Approval -->
-
+						
+						<?php if ($_SESSION['go_level'] == 3 || $_SESSION['go_level'] == 0): ?>
 					      <td>
 					      	<!-- Bagian Print Form -->
 					      	<?php if ($p->approval == 'Disetujui Supervisor'): ?>
-								<a href="<?php echo base_url('permohonan/cetakform/').$p->IDpermohonan ?>" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-file-o"></i> Print</a>
+					      		<?php if ($p->pengemudi == null || $p->noPol == null): ?>
+					      			<button class="btn btn-sm btn-success" data-toggle="modal" data-target="#TDModalCenter">Isi kelengkapan</button>
+					      		<?php else: ?>
+									<a href="<?php echo base_url('permohonan/cetakform/').$p->IDpermohonan ?>" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-file-o"></i> Print</a>
+					      		<?php endif ?>
 					      	<?php else: ?>
 					      		<button class="btn btn-sm btn-secondary" disabled><i class="fa fa-file-o"></i> Print</button>
 					      	<?php endif ?>
 					      	<!-- Bagian Print Form -->
 					      </td>
+						<?php endif ?>
 					  	
 					      <td>
 					      	<div class="btn-group">
@@ -142,62 +150,24 @@
         	</div>
         </div>
     </div>
-    <!-- Modal -->
-	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	
+	<!-- tindak lanjut Modal -->
+	<div class="modal fade" id="TDModalCenter" tabindex="-1" role="dialog" aria-labelledby="TDModalCenterTitle" aria-hidden="true">
 	  	<div class="modal-dialog modal-dialog-centered" role="document">
 	    	<div class="modal-content">
 	      		<div class="modal-header">
-	        		<h5 class="modal-title" id="exampleModalCenterTitle">Form Permohonan</h5>
+	        		<h5 class="modal-title" id="exampleModalCenterTitle">Tindak Lanjut Permohonan <span id="tgledit"></span></h5>
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          			<span aria-hidden="true">&times;</span>
 	        		</button>
 	      		</div>
 	      		<div class="modal-body">
-	      			<?php $attributes = array('class' => 'needs-validation'); ?>
-	      			<?php echo form_open_multipart('admin/tambah_permohonan/', $attributes);?>
+	      			<?php $attributes = array('class' => 'needs-validation', 'id'=>'editform'); ?>
+					<?php echo form_open_multipart('admin/tindak_lanjut_permohonan/', $attributes);?>
 					  	<div class="form-row">
-					    	<div class="form-group col-md-5">
-					      		<label for="tanggalBerangkat">Tgl. Keberangkatan</label>
-					      		<div class="input-group">
-					      			<input type="date" class="form-control" id="tanggalBerangkat" name="tanggalBerangkat" placeholder="Tgl. Keberangkatan" required>
-					      			<div class="input-group-append">
-									    <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar"></i></span>
-									</div>
-					      		</div>
-					      		<div class="invalid-feedback">Anda harus mengisi Tanggal Keberangkatan</div>
-					    	</div>
-					    	<div class="form-group col-md-7">
-					      		<label for="namaPengguna">Nama Pengguna</label>
-					      		<input id="namaPengguna" name="namaPengguna" class="form-control" placeholder="Nama Pengguna" required/>
-					      		<div class="invalid-feedback">Anda harus mengisi Nama Pengguna</div>
-					    	</div>
-					  	</div>
-					  	<div class="form-row">
-					  		<div class="form-group col-md-4" id="berangkat">
-					  			<label for="jamBerangkat">Jam Berangkat</label>
-					  			<div class="input-group">
-								    <input type="text" class="form-control" id="jamBerangkat" value="" name="jamBerangkat" placeholder="Berangkat" required>
-								    <div class="input-group-append">
-									    <span class="input-group-text" id="basic-addon2"><i class="fa fa-clock-o"></i></span>
-									</div>
-					  			</div>
-							    <div class="invalid-feedback">Anda harus mengisi Jam Berangkat</div>
-							</div>
-					  		<div class="form-group col-md-4" id="kembali">
-					  			<label for="jamKembali">Jam Kembali</label>
-					  			<div class="input-group">
-					  				<input type="text" class="form-control" id="jamKembali" name="jamKembali
-								    " placeholder="Kembali" required>
-								    <div class="input-group-append">
-								        <span class="input-group-text"><span class="fa fa-clock-o"></span></span>
-								    </div>
-					  			</div>
-							    <div class="invalid-feedback">Anda harus mengisi Jam Kembali</div>
-							</div>
-							<div class="form-group col-md-4">
-						    	<label for="noPol">No. Polisi</label>
-						    	<input type="text" class="form-control" id="noPol" name="noPol" placeholder='ex: "B 1234 CD"' list="nopol" required />
-						    	<?php $nopol = $this->admin_model->get_permohonan_column('noPol') ?>
+							<div class="form-group col-md-6">
+						    	<label for="TDnoPol">No. Polisi</label>
+						    	<input type="text" class="form-control" id="TDnoPol" name="TDnoPol" placeholder='ex: "B 1234 CD"' required list="" />
 						    	<datalist id="nopol">
 						    		<?php foreach ($nopol as $no): ?>
 						    			<option value="<?php echo $no->noPol ?>"><?php echo $no->noPol ?></option>
@@ -205,31 +175,29 @@
 						    	</datalist>
 						    	<div class="invalid-feedback">Anda harus mengisi Tujuan</div>
 						  	</div>
-					  	</div>
-					  	<div class="form-row">
-					  		<div class="form-group col-md-6">
-						    	<label for="satuanKerja">Satuan Kerja</label>
-						    	<input type="text" class="form-control" id="satuanKerja" name="satuanKerja" list="satuan" placeholder="Satuan Kerja" required />
+						  	<div class="form-group col-md-6">
+						    	<label for="TDpengemudi">Nama Pengemudi</label>
+						    	<input type="text" class="form-control" id="TDpengemudi" name="TDpengemudi" placeholder="Nama Pengemudi" required />
 						    	<div class="invalid-feedback">Anda harus mengisi Satuan Kerja</div>
 						  	</div>
 						  	<div class="form-group col-md-6">
-						    	<label for="namaPengemudi">Nama Pengemudi</label>
-						    	<input type="text" class="form-control" id="namaPengemudi" name="pengemudi" placeholder="Nama Pengemudi" required />
-						    	<div class="invalid-feedback">Anda harus mengisi Satuan Kerja</div>
+						    	<label for="TDkmAwal">KM Awal</label>
+						    	<input type="number" class="form-control" id="TDkmAwal" name="TDkmAwal" list="satuan" placeholder="KM Awal" required />
+						    	<div class="invalid-feedback">Anda harus mengisi KM Awal</div>
+						  	</div>
+						  	<div class="form-group col-md-6">
+						    	<label for="TDkmAkhir">KM Akhir</label>
+						    	<input type="number" class="form-control" id="TDkmAkhir" name="TDkmAkhir" placeholder="KM Akhir" required />
+						    	<div class="invalid-feedback">Anda harus mengisi KM AKhir</div>
 						  	</div>
 					  	</div>
-					  	<div class="form-group">
-					  		<label for="tujuan">Tujuan</label>
-					    	<textarea class="form-control" id="tujuan" name="tujuan" placeholder="Lokasi Tujuan" required></textarea>
-					    	<div class="invalid-feedback">Anda harus menyertakan lokasi</div>
-					  	</div>
-					  	<button type="submit" class="btn btn-primary">Tambah</button>
+					  	<button type="submit" class="btn btn-primary">Edit</button>
 					</form>
 	      		</div>
 	    	</div>
 	  	</div>
 	</div>
-	<!-- Modal -->
+	<!-- tindak lanjut Modal -->
 
 	<!-- Edit Modal -->
 	<div class="modal fade" id="editModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

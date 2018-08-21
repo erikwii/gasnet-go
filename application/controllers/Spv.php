@@ -11,8 +11,6 @@ class Spv extends CI_Controller {
 
 	public function index()
 	{
-		$this->auth();
-
 		$posisi = $this->home_model->get_users_data($_SESSION['go_email'])->posisi;
 		$data = array(
             'title'=> 'GasnetGo! - Data permohonan kendaraan operasional',
@@ -108,7 +106,6 @@ class Spv extends CI_Controller {
 	public function setuju($id)
 	{
 		$_SESSION['goto'] = base_url().'spv/setuju/'.$id;
-		$this->auth();
 
 		$data = array(
 			'approval' => 'Disetujui Supervisor'
@@ -172,7 +169,6 @@ class Spv extends CI_Controller {
 	public function tidak_setuju($id)
 	{
 		$_SESSION['goto'] = base_url().'spv/tidak_setuju/'.$id;
-		$this->auth();
 
 		$data = array(
 			'approval' => 'Tidak disetujui Supervisor'

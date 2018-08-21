@@ -30,7 +30,7 @@ class Permohonan extends CI_Controller {
             'title'=> 'GasnetGo! - Permohonan Kendaraan Operasional',
             'nav' => 'nav.php',
             'isi' => 'pages/data_permohonan',
-            'permohonan' => $this->admin_model->get_permohonan(array('permohonan_kendaraan.email' => $_SESSION['go_email'])),
+            'permohonan' => $this->admin_model->get_permohonan(),
             'nav_active' => 'data'
         );
         $this->load->view('layout/wrapper',$data);

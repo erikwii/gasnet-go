@@ -104,9 +104,9 @@
 				</div>
 			</div>
 			<div class="col">
-				Komplek PT PGN (Persero) Tbk. Gedung B Lantai 4<br>
+				Komplek PT PGN (Persero) Tbk. Gedung B Lantai 3<br>
 				Jl. KH. Zainul Arifin No. 20 Jakarta Barat 11140, Indonesia<br>
-				T +6221 633 1314  F +6221 633 3080 | www.pgascom.co.id
+				T +6221 300 10645, F +6221 633 3080 | www.gasnet.id
 			</div>
 		</div>
 		<div class="row my-2">
@@ -200,8 +200,10 @@
 		    </div>
 		</div>
 		<div class="row">
-			<div class="col-3">
+			<div class="col-2 text-right">
 				Koordinator Pool
+			</div>
+			<div class="col-3">
 				<div class="form-row">
 			  		<div class="form-group col-6">
 				    	<label for="satuanKerja">KM Awal</label>
@@ -213,23 +215,7 @@
 				  	</div>
 			  	</div>
 			</div>
-			<div class="col-3">
-				<div class="form-row">
-			  		<div class="form-group col-12">
-			  			<label for="wiw">Menyetujui</label>
-				    	<textarea class="form-control" id="wiw" required></textarea>
-				  	</div>
-			  	</div>
-			</div>
-			<div class="col-3">			
-				<div class="form-row">
-			  		<div class="form-group col-12">
-			  			<label for="wow">Pemohon</label>
-				    	<textarea class="form-control" id="wow" required></textarea>
-				  	</div>
-			  	</div>
-			</div>
-			<div class="col-3">Jakarta, <?php echo $this->home_model->read_date(date('Y-m-d')) ?></div>
+			<div class="col-3 offset-2 text-center">Jakarta, <?php echo $this->home_model->read_date(date('Y-m-d')) ?></div>
 		</div>
 	</div>
 	<script type="text/javascript">
