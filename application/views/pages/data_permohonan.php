@@ -523,26 +523,41 @@
     }
 
     function hapus_permohonan(id) {
-    	swal({
-		  	title: "Apa Anda Yakin?",
-		  	text: "Saat menghapusnya Anda tidak akan bisa mengembalikannya seperti semula!",
-		  	type: "question",
-		  	buttons: true,
-		  	dangerMode: true,
+    	const swalWithBootstrapButtons = swal.mixin({
+		  	confirmButtonClass: 'btn btn-danger mx-2',
+		  	cancelButtonClass: 'btn btn-primary mx-2',
+		  	buttonsStyling: false,
 		})
-		.then((willDelete) => {
-		  	if (willDelete) {
-		  		<?php if($_SESSION['go_level'] == 1): ?>
-		  			window.location = '<?php echo base_url() ?>permohonan/hapus_permohonan/'+id;
-		  		<?php elseif($_SESSION['go_level'] == 2): ?>
+
+		swalWithBootstrapButtons({
+		  	title: 'Apa Anda Yakin?',
+		  	text: "Saat menghapusnya Anda tidak akan bisa mengembalikannya seperti semula!",
+		  	type: 'warning',
+		  	showCancelButton: true,
+		  	showCloseButton: true,
+		  	confirmButtonText: 'Ya, Hapus!',
+		  	cancelButtonText: 'Batalkan!',
+		  	reverseButtons: true
+		}).then((result) => {
+		  	if (result.value) {
+		    	<?php if($_SESSION['go_level'] == 1): ?>
+	  				window.location = '<?php echo base_url() ?>permohonan/hapus_permohonan/'+id;
+	  			<?php elseif($_SESSION['go_level'] == 2): ?>
 		  			window.location = '<?php echo base_url() ?>spv/hapus_permohonan/'+id;
-		  		<?php else: ?>
-		    		window.location = '<?php echo base_url() ?>admin/hapus_permohonan/'+id;
-		    	<?php endif ?>
-		  	} else {
-		    	swal("Data anda aman!");
+	  			<?php else: ?>
+	    			window.location = '<?php echo base_url() ?>admin/hapus_permohonan/'+id;
+	    		<?php endif ?>
+		  	} else if (
+		    	// Read more about handling dismissals
+		    	result.dismiss === swal.DismissReason.cancel
+		  	) {
+		    	swalWithBootstrapButtons(
+		      		'Dibatalkan',
+		      		'Data Anda berhasil diamankan :)',
+		      		'error'
+		    	)
 		  	}
-		});
+		})
     }
 
 	// Example starter JavaScript for disabling form submissions if there are invalid fields

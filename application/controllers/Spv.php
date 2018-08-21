@@ -149,6 +149,7 @@ class Spv extends CI_Controller {
         }else{
             $_SESSION['error'] = 'gagal Mengirim email';
         }
+        $this->auth();
 		redirect(base_url()."spv/");
 	}
 
@@ -178,6 +179,7 @@ class Spv extends CI_Controller {
 		$this->db->update('permohonan_kendaraan');
 
 		$_SESSION['success'] = ['Berhasil!','Permohonan tidak disetujui.'];
+		$this->auth();
 		redirect(base_url().'spv/');
 	}
 

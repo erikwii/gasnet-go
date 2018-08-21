@@ -332,20 +332,35 @@
     }
 
     function hapus_akun(email) {
-    	swal({
-		  	title: "Apa Anda Yakin?",
-		  	text: "Saat menghapusnya Anda tidak akan bisa mengembalikannya seperti semula!",
-		  	type: "question",
-		  	buttons: true,
-		  	dangerMode: true,
+    	const swalWithBootstrapButtons = swal.mixin({
+		  confirmButtonClass: 'btn btn-danger mx-2',
+		  cancelButtonClass: 'btn btn-primary mx-2',
+		  buttonsStyling: false,
 		})
-		.then((willDelete) => {
-		  	if (willDelete) {
-		    	window.location = '<?php echo base_url() ?>admin/hapus_akun/'+email;
-		  	} else {
-		    	swal("Data anda aman!");
-		  	}
-		});
+
+		swalWithBootstrapButtons({
+		  title: 'Apa Anda Yakin?',
+		  text: "Saat menghapusnya Anda tidak akan bisa mengembalikannya seperti semula!",
+		  type: 'warning',
+		  showCancelButton: true,
+		  showCloseButton: true,
+		  confirmButtonText: 'Ya, Hapus!',
+		  cancelButtonText: 'Batalkan!',
+		  reverseButtons: true
+		}).then((result) => {
+		  if (result.value) {
+		    window.location = '<?php echo base_url() ?>admin/hapus_akun/'+email;
+		  } else if (
+		    // Read more about handling dismissals
+		    result.dismiss === swal.DismissReason.cancel
+		  ) {
+		    swalWithBootstrapButtons(
+		      'Dibatalkan',
+		      'Data Anda berhasil diamankan :)',
+		      'error'
+		    )
+		  }
+		})
     }
 
 	// Example starter JavaScript for disabling form submissions if there are invalid fields
