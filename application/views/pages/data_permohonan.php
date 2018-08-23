@@ -36,6 +36,7 @@
 				      <th scope="col">Pengemudi</th>
 				      <th scope="col">KM. Awal</th>
 				      <th scope="col">KM. Akhir</th>
+				      <th scope="col">Persekot</th>
 				      <th scope="col">Pemohon</th>
 				      <th scope="col">Persetujuan</th>
 				      <?php if ($_SESSION['go_level'] == 2): ?>
@@ -66,6 +67,7 @@
 					      <td><?php echo $p->pengemudi ?></td>
 					      <td><?php echo $p->kmAwal ?></td>
 					      <td><?php echo $p->kmAkhir ?></td>
+					      <td><?php echo $p->persekot ?></td>
 					      <td><?php echo $p->nama ?></td>
 					      <td>
 					      	<!-- Bagian keterangan -->
@@ -182,15 +184,24 @@
 						    	<input type="text" class="form-control" id="TDpengemudi" name="TDpengemudi" placeholder="Nama Pengemudi" required />
 						    	<div class="invalid-feedback">Anda harus mengisi Satuan Kerja</div>
 						  	</div>
-						  	<div class="form-group col-md-6">
+						  	<div class="form-group col-md-3">
 						    	<label for="TDkmAwal">KM Awal</label>
 						    	<input type="number" class="form-control" id="TDkmAwal" name="TDkmAwal" list="satuan" placeholder="KM Awal" />
 						    	<div class="invalid-feedback">Anda harus mengisi KM Awal</div>
 						  	</div>
-						  	<div class="form-group col-md-6">
+						  	<div class="form-group col-md-3">
 						    	<label for="TDkmAkhir">KM Akhir</label>
 						    	<input type="number" class="form-control" id="TDkmAkhir" name="TDkmAkhir" placeholder="KM Akhir"/>
 						    	<div class="invalid-feedback">Anda harus mengisi KM AKhir</div>
+						  	</div>
+						  	<div class="form-group col-md-6">
+						    	<label for="TDpersekot">Persekot</label>
+						    	<div class="input-group">
+							    	<div class="input-group-prepend">
+								        <span class="input-group-text">Rp.</span>
+								    </div>
+							    	<input type="number" class="form-control" id="TDpersekot" name="TDpersekot" placeholder="Persekot"/>
+						    	</div>
 						  	</div>
 					  	</div>
 					  	<button type="submit" class="btn btn-lg btn-block btn-primary">GO!</button>
@@ -277,15 +288,22 @@
 						    	<div class="invalid-feedback">Anda harus mengisi Satuan Kerja</div>
 						  	</div>
 						<?php if ($_SESSION['go_level'] == 0 || $_SESSION['go_level'] == 3): ?>
-						  	<div class="form-group col-md-6">
+						  	<div class="form-group col-md-3">
 						    	<label for="editkmAwal">KM Awal</label>
 						    	<input type="number" class="form-control" id="editkmAwal" name="editkmAwal" list="satuan" placeholder="KM Awal"  />
-						    	<div class="invalid-feedback">Anda harus mengisi KM Awal</div>
+						  	</div>
+						  	<div class="form-group col-md-3">
+						    	<label for="editkmAkhir">KM Akhir</label>
+						    	<input type="number" class="form-control" id="editkmAkhir" name="editkmAkhir" placeholder="KM Akhir"/>
 						  	</div>
 						  	<div class="form-group col-md-6">
-						    	<label for="editkmAkhir">KM Akhir</label>
-						    	<input type="number" class="form-control" id="editkmAkhir" name="editkmAkhir" placeholder="KM Akhir"  />
-						    	<div class="invalid-feedback">Anda harus mengisi KM AKhir</div>
+						    	<label for="editpersekot">Persekot</label>
+						    	<div class="input-group">
+							    	<div class="input-group-prepend">
+								        <span class="input-group-text">Rp.</span>
+								    </div>
+							    	<input type="number" class="form-control" id="editpersekot" name="editpersekot" placeholder="Persekot"/>
+						    	</div>
 						  	</div>
 						<?php endif ?>
 					  	</div>
@@ -375,6 +393,23 @@
 						    	<input type="text" class="form-control" id="lihatpengemudi" name="lihatpengemudi" placeholder="Nama Pengemudi" readonly />
 						    	<div class="invalid-feedback">Anda harus mengisi Satuan Kerja</div>
 						  	</div>
+						  	<div class="form-group col-md-3">
+						    	<label for="lihatkmAwal">KM Awal</label>
+						    	<input type="number" class="form-control" id="lihatkmAwal" name="lihatkmAwal" list="satuan" placeholder="KM Awal" readonly/>
+						  	</div>
+						  	<div class="form-group col-md-3">
+						    	<label for="lihatkmAkhir">KM Akhir</label>
+						    	<input type="number" class="form-control" id="lihatkmAkhir" name="lihatkmAkhir" placeholder="KM Akhir" readonly />
+						  	</div>
+						  	<div class="form-group col-md-6">
+						    	<label for="lihatpersekot">Persekot</label>
+						    	<div class="input-group">
+							    	<div class="input-group-prepend">
+								        <span class="input-group-text">Rp.</span>
+								    </div>
+							    	<input type="number" class="form-control" id="lihatpersekot" name="lihatpersekot" placeholder="Persekot" readonly />
+						    	</div>
+						  	</div>
 					  	</div>
 					  	<div class="form-group">
 					  		<label for="lihattujuan">Tujuan</label>
@@ -450,6 +485,7 @@
                 $('[name="TDpengemudi"]').val(data[0].pengemudi);
                 $('[name="TDkmAwal"]').val(data[0].kmAwal);
                 $('[name="TDkmAkhir"]').val(data[0].kmAkhir);
+                $('[name="TDpersekot"]').val(data[0].persekot);
                 $('#TDModalCenter').modal('show');
 
             },
@@ -511,9 +547,14 @@
                 $('[name="lihatnoPol"]').val(data[0].noPol);
                 $('[name="lihatpengemudi"]').val(data[0].pengemudi);
                 $('[name="lihatnama"]').val(data[0].nama);
+                $('[name="lihatkmAwal"]').val(data[0].kmAwal);
+                $('[name="lihatkmAkhir"]').val(data[0].kmAkhir);
+                $('[name="lihatpersekot"]').val(data[0].persekot);
                 $('#tgldata').text(read_date(data[0].tanggalPermohonan));
+                var wow = $("#lihatpersekot").val();
+                wow = parseInt(wow).toLocaleString('id');
+                $("#lihatpersekot").val(wow);
                 $('#lihatModalCenter').modal('show');
-
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
@@ -583,12 +624,13 @@
 <script>
 
 	$(document).ready(function(){
+
 		if(!$("table#permohonan_table tr td").hasClass('null')) {
 			var preRegTable = $('#permohonan_table').DataTable({
 				info: false,
 				dom: '<"top"B>flt<"bottom"p><"clear">',
 				oLanguage: {sLengthMenu: "_MENU_"},
-				lengthMenu: [[5, 10, 25, 50, -1], ["5 Rows","10 Rows", "25 Rows", "50 Rows", "All"]],
+				lengthMenu: [[5, 10, 25, 50, -1], ["5 Baris","10 Baris", "25 Baris", "50 Baris", "Semua"]],
 				order: [[0, "asc"]],
 				"columnDefs": [
 		            {
@@ -618,14 +660,17 @@
 		            {
 		                "targets": [ 11 ],
 		                "visible": false
+		            },
+		            {
+		                "targets": [ 12 ],
+		                "visible": false
 		            }
-		            
 		        ],
 				buttons: [
 		            {
 		                extend: 'excelHtml5',
 		                exportOptions: {
-		                    columns: [0,1,2,3,5,4,6,7,8,9,10,11,12]
+		                    columns: [0,1,2,3,5,4,6,7,8,9,10,11,12,13]
 		                }
 		            }
 		        ]

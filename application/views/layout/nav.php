@@ -47,16 +47,21 @@
 					    	<li class="nav-item active">
 					        	<b>
 					        		<a class="nav-link text-primary" href="<?php echo base_url() ?>admin/">
-					        			<i class="fa fa-inbox"></i> Data Permohonan 
-					        			<span class="badge badge-primary"><?php echo $this->admin_model->get_permohonan_notif() ?></span>
+					        			<i class="fa fa-inbox"></i> Data Permohonan
+					        			<?php if ($this->admin_model->get_permohonan_notif() > 0): ?>
+					        				<span class="badge badge-primary" data-toggle="tooltip" data-placement="top" data-html="true" title="Terdapat <?php echo $this->admin_model->get_permohonan_notif() ?> permohonan pending"><?php echo $this->admin_model->get_permohonan_notif() ?></span>
+					        			<?php endif ?> 
 					        		</a>
 					        	</b>
 					      	</li>
 					    <?php else: ?>
 					    	<li class="nav-item">
 					        	<b>
-					        		<a class="nav-link" href="<?php echo base_url() ?>admin/"><i class="fa fa-inbox"></i> Data Permohonan 
-					        			<span class="badge badge-primary"><?php echo $this->admin_model->get_permohonan_notif() ?></span>
+					        		<a class="nav-link" href="<?php echo base_url() ?>admin/">
+					        			<i class="fa fa-inbox"></i> Data Permohonan 
+					        			<?php if ($this->admin_model->get_permohonan_notif() > 0): ?>
+					        				<span class="badge badge-primary" data-toggle="tooltip" data-placement="top" data-html="true" title="Terdapat <?php echo $this->admin_model->get_permohonan_notif() ?> permohonan pending"><?php echo $this->admin_model->get_permohonan_notif() ?></span>
+					        			<?php endif ?> 
 					        		</a>
 					        	</b>
 					      	</li>
@@ -81,3 +86,8 @@
 		</div>
   	<?php endif ?>
 </nav>
+<script type="text/javascript">
+	$(function () {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
+</script>

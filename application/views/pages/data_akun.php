@@ -36,7 +36,7 @@
 	    <div class="tab-content" id="v-pills-tabContent">
 	      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
 	      	<div class="table-responsive">
-        		<table class="table table-striped w-100" id="user_table">
+        		<table class="table table-responsive table-striped w-100" style="min-width: 100%" id="user_table">
 				  <thead>
 				    <tr>
 				      <th scope="col">No</th>
@@ -77,7 +77,7 @@
 	      </div>
 	      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
 	      	<div class="table-responsive">
-        		<table class="table table-striped w-100" id="spv_table">
+        		<table class="table table-responsive table-striped w-100" style="min-width: 100%" id="spv_table">
 				  <thead>
 				    <tr>
 				      <th scope="col">No</th>
@@ -118,7 +118,7 @@
 	      </div>
 	      <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
 	      	<div class="table-responsive">
-        		<table class="table table-striped w-100" id="admin_table">
+        		<table class="table table-striped table-responsive w-100" style="min-width: 100%" id="admin_table">
 				  <thead>
 				    <tr>
 				      <th scope="col">No</th>
@@ -354,7 +354,7 @@
 		    // Read more about handling dismissals
 		    result.dismiss === swal.DismissReason.cancel
 		  ) {
-		    swalWithBootstrapButtons(
+		    swal(
 		      'Dibatalkan',
 		      'Data Anda berhasil diamankan :)',
 		      'error'
@@ -391,7 +391,7 @@
 				info: false,
 				dom: '<"top"B>flt<"bottom"p><"clear">',
 				oLanguage: {sLengthMenu: "_MENU_"},
-				lengthMenu: [[5, 10, 25, 50, -1], ["5 Rows","10 Rows", "25 Rows", "50 Rows", "All"]],
+				lengthMenu: [[5, 10, 25, 50, -1], ["5 Baris","10 Baris", "25 Baris", "50 Baris", "Semua"]],
 				order: [[0, "asc"]],
 				buttons: [
 		            {
@@ -409,7 +409,7 @@
 				info: false,
 				dom: '<"top"B>flt<"bottom"p><"clear">',
 				oLanguage: {sLengthMenu: "_MENU_"},
-				lengthMenu: [[5, 10, 25, 50, -1], ["5 Rows","10 Rows", "25 Rows", "50 Rows", "All"]],
+				lengthMenu: [[5, 10, 25, 50, -1], ["5 Baris","10 Baris", "25 Baris", "50 Baris", "Semua"]],
 				order: [[0, "asc"]],
 				buttons: [
 		            {
@@ -427,7 +427,7 @@
 				info: false,
 				dom: '<"top"B>flt<"bottom"p><"clear">',
 				oLanguage: {sLengthMenu: "_MENU_"},
-				lengthMenu: [[5, 10, 25, 50, -1], ["5 Rows","10 Rows", "25 Rows", "50 Rows", "All"]],
+				lengthMenu: [[5, 10, 25, 50, -1], ["5 Baris","10 Baris", "25 Baris", "50 Baris", "Semua"]],
 				order: [[0, "asc"]],
 				buttons: [
 		            {

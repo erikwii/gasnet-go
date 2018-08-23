@@ -168,11 +168,13 @@ class Admin extends CI_Controller {
 		$pengemudi = $this->input->post('TDpengemudi');
 		$kmAwal = $this->input->post('TDkmAwal');
 		$kmAkhir = $this->input->post('TDkmAkhir');
+		$persekot = $this->input->post('TDpersekot');
 		
 		$data = array(
 			'kmAwal' => $kmAwal,
 			'kmAkhir' => $kmAkhir,
 			'noPol' => $noPol,
+			'persekot' => $persekot,
 			'pengemudi' => $pengemudi,
 		);
 
@@ -197,6 +199,7 @@ class Admin extends CI_Controller {
 		$jamKembali = $this->input->post('editjamKembali');
 		$kmAwal = $this->input->post('editkmAwal');
 		$kmAkhir = $this->input->post('editkmAkhir');
+		$persekot = $this->input->post('editpersekot');
 		$noPol = $this->input->post('editnoPol');
 		$pengemudi = $this->input->post('editpengemudi');
 		
@@ -209,6 +212,7 @@ class Admin extends CI_Controller {
 			'jamKembali' => $jamKembali,
 			'kmAwal' => $kmAwal,
 			'kmAkhir' => $kmAkhir,
+			'persekot' => $persekot,
 			'noPol' => $noPol,
 			'pengemudi' => $pengemudi,
 		);
