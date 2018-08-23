@@ -22,7 +22,7 @@
 				<?php unset($_SESSION['success']) ?>
         	<?php endif ?>
         	<div class="table-responsive">
-        		<table class="table table-responsive table-striped w-100" id="permohonan_table">
+        		<table class="table table-responsive table-striped w-100" style="min-width: 100%" id="permohonan_table">
 				  <thead>
 				    <tr>
 				      <th scope="col">No</th>
@@ -551,7 +551,7 @@
 		    	// Read more about handling dismissals
 		    	result.dismiss === swal.DismissReason.cancel
 		  	) {
-		    	swalWithBootstrapButtons(
+		    	swal(
 		      		'Dibatalkan',
 		      		'Data Anda berhasil diamankan :)',
 		      		'error'

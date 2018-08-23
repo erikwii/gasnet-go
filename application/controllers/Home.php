@@ -35,7 +35,7 @@ class Home extends CI_Controller {
 
         if($email == "" || $password == ""){
         	$this->session->set_userdata('login_error', 'Harap masukkan semua input...');
-        	redirect(base_url()."home/");
+        	redirect(base_url());
         }else{
             $login = $this->home_model->get_users($data);
 
@@ -43,13 +43,13 @@ class Home extends CI_Controller {
                 $status = $this->home_model->get_usersStatus($whereS)->status;
             }
 
-            if( $login == "not_registered"){
+            if($login == "not_registered") {
             	$this->session->set_userdata('login_error', 'Email belum terdaftar....');
-            	redirect(base_url()."home/");
-            }elseif ($status != "aktif"){
+            	redirect(base_url());
+            } elseif($status != "aktif") {
             	$this->session->set_userdata('login_error', 'Akun anda sudah di nonaktifkan....');
-            	redirect(base_url()."home/");
-            }else{
+            	redirect(base_url());
+            } else {
                 $db_pass = $this->home_model->get_users_pass($email)->password;
                 $name = $this->home_model->get_users_data($email)->nama;
                 $level = $this->home_model->get_users_level($email);
@@ -61,28 +61,28 @@ class Home extends CI_Controller {
 
                     $_SESSION['success'] = ["Berhasil Login!","Selamat datang kembali di GasnetGo, ".$name];
 
-                    if ($_SESSION['go_level'] == 0 || $_SESSION['go_level'] == 3) {
-                        if (isset($_SESSION['goto'])) {
-                            redirect($_SESSION['goto']);
-                        } else {
+                    if (isset($_SESSION['goto'])) {
+                        $goto = $_SESSION['goto']; // value transfer to new variable
+                        unset($_SESSION['goto']); // unset session
+
+                        redirect($goto);
+                    } else {
+                        if ($_SESSION['go_level'] == 0 || $_SESSION['go_level'] == 3)
+                        {
                             redirect(base_url()."admin");
                         }
-                    }elseif ($_SESSION['go_level'] == 1) {
-                        if (isset($_SESSION['goto'])) {
-                            redirect($_SESSION['goto']);
-                        } else {
-                        	redirect(base_url()."permohonan");
+                        elseif ($_SESSION['go_level'] == 1)
+                        {
+                            redirect(base_url()."permohonan");
                         }
-                    }elseif ($_SESSION['go_level'] == 2){
-                        if (isset($_SESSION['goto'])) {
-                            redirect($_SESSION['goto']);
-                        } else {
+                        elseif ($_SESSION['go_level'] == 2)
+                        {
                             redirect(base_url()."spv");
                         }
                     }
-                }else{
+                } else {
                 	$this->session->set_userdata('login_error', 'Password yang dimasukkan salah....');
-                	redirect(base_url()."home/");
+                	redirect(base_url());
                 }
             }
         }
@@ -98,11 +98,33 @@ class Home extends CI_Controller {
                 $_SESSION['go_level']
             );
             $this->session->sess_destroy();
-       	}
-       	$_SESSION['login_success'] = "Anda berhasil logout";
-       	redirect(base_url());
+        }
+        $_SESSION['login_success'] = "Anda berhasil logout";
+        redirect(base_url());
     }
 
+    // user authentication based on session 'go_level'
+    public function check_auth()
+    {
+        if (isset($_SESSION['go_level'])) {
+            if ($_SESSION['go_level'] == 0 || $_SESSION['go_level'] == 3) {
+                redirect(base_url()."admin/");
+            }elseif($_SESSION['go_level'] == 2){
+                redirect(base_url()."spv/");
+            }else{
+                redirect(base_url()."permohonan/");
+            }
+        }
+    }
+
+    // function for convert month number to romawi
+    public function bulan_to_romawi($val)
+    {
+    	$romawi = ['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'];
+    	return $romawi[$val+1];
+    }
+
+    // dummy function for sending email
     public function send_mail($email)
     {
         $config = Array(
@@ -130,27 +152,9 @@ class Home extends CI_Controller {
         }
     }
 
-    public function check_auth()
-    {
-    	if (isset($_SESSION['go_level'])) {
-    		if ($_SESSION['go_level'] == 0 || $_SESSION['go_level'] == 3) {
-				redirect(base_url()."admin/");
-			}elseif($_SESSION['go_level'] == 2){
-				redirect(base_url()."spv/");
-			}else{
-				redirect(base_url()."permohonan/");
-			}
-    	}
-    }
-
+    // dummy function for cek view of email body
     public function cekemail()
     {
         $this->load->view('pages/email');
-    }
-
-    public function bulan_to_romawi($val)
-    {
-    	$romawi = ['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'];
-    	return $romawi[$val+1];
     }
 }

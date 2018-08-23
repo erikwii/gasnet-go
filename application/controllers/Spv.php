@@ -185,8 +185,25 @@ class Spv extends CI_Controller {
 
 	public function auth()
 	{
-		if (!isset($_SESSION['go_email']) || ($_SESSION['go_level'] != 2)) {
-			$_SESSION['login_error'] = 'Anda belum melakukan login ke halaman supervisor';
+		if (!isset($_SESSION['go_email']) || ($_SESSION['go_level'] != 2)) // check session of user
+		{
+			if (isset($_SESSION['goto'])) // check if session goto is set
+			{ 
+				if (strpos($_SESSION['goto'], 'spv/setuju/'))
+				{
+					$_SESSION['login_error'] = 'Anda berhasil menyetujui permohonan. Silahkan Login untuk mengakses data permohonan.';
+				}
+				else
+				{
+					$_SESSION['login_error'] = 'Anda berhasil menolak permohonan. Silahkan Login untuk mengakses data permohonan.';
+				}
+
+			}
+			else
+			{
+				$_SESSION['login_error'] = 'Anda belum melakukan login ke halaman supervisor';
+			}
+
 			redirect(base_url()."home/");
 		}
 	}
