@@ -1,6 +1,6 @@
 <!-- Image and text -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #f8f9fa;">
-  	<a href="<?php echo base_url() ?>home/Inventaris" class="navbar-brand">
+  	<a href="<?php echo base_url() ?>" class="navbar-brand">
     	<img src="<?php echo base_url() ?>assets/img/gasnet.png" width="60" height="35" class="d-inline-block align-top" alt="logo">
     	<span class="text-success">GO!</span>
   	</a>
