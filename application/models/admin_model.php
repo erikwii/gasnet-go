@@ -40,9 +40,9 @@ class Admin_model extends CI_Model{
 	public function get_permohonan_notif()
 	{
 		$this->db->join('users', 'users.email = permohonan_kendaraan.email');
-		$this->db->where('pengemudi is null', null, false);
-		$this->db->or_where('noPol is null', null, false);
 		$this->db->like('tanggalPermohonan', date('Y-m'), 'after');
+		$this->db->where('pengemudi is null', null, false);
+		$this->db->where('noPol is null', null, false);
 		return $this->db->get('permohonan_kendaraan')->num_rows();
 	}
 
