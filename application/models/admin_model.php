@@ -7,14 +7,14 @@ class Admin_model extends CI_Model{
 		if ($where == null) {
 			$this->db->order_by('IDpermohonan', 'DESC');
 			$this->db->join('users', 'users.email = permohonan_kendaraan.email');
-			$this->db->like('tanggalPermohonan', date('Y-m'), 'after');
+			$this->db->like('tanggalPermohonan', date('Y'), 'after');
 			$query = $this->db->get('permohonan_kendaraan');
 			return $query->result();
 			
 		} else {
 			$this->db->order_by('IDpermohonan', 'DESC');
 			$this->db->join('users', 'users.email = permohonan_kendaraan.email');
-			$this->db->like('tanggalPermohonan', date('Y-m'), 'after');
+			$this->db->like('tanggalPermohonan', date('Y'), 'after');
 			$query = $this->db->get_where('permohonan_kendaraan',$where);
 			return $query->result();
 		}
@@ -24,7 +24,7 @@ class Admin_model extends CI_Model{
 	{
 		$this->db->order_by('IDpermohonan', 'DESC');
 		$this->db->join('users', 'users.email = permohonan_kendaraan.email');
-		$this->db->like('tanggalPermohonan', date('Y-m'), 'after');
+		$this->db->like('tanggalPermohonan', date('Y'), 'after');
 		$query = $this->db->get_where('permohonan_kendaraan',$where);
 		return $query->row_array();
 	}
@@ -40,7 +40,7 @@ class Admin_model extends CI_Model{
 	public function get_permohonan_notif()
 	{
 		$this->db->join('users', 'users.email = permohonan_kendaraan.email');
-		$this->db->like('tanggalPermohonan', date('Y-m'), 'after');
+		$this->db->like('tanggalPermohonan', date('Y'), 'after');
 		$this->db->where('pengemudi is null', null, false);
 		$this->db->where('noPol is null', null, false);
 		return $this->db->get('permohonan_kendaraan')->num_rows();
