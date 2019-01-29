@@ -99,7 +99,7 @@ class Spv extends CI_Controller {
 
 		$this->db->delete('permohonan_kendaraan', array('IDpermohonan' => $id));
 
-		$_SESSION['success'] = ['Berhaisl!','Anda berhasil menghapus data permohonan!'];
+		$_SESSION['success'] = ['Berhasil!','Anda berhasil menghapus data permohonan!'];
 		redirect(base_url()."spv/");
 	}
 

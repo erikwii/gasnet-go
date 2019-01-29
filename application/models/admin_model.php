@@ -20,6 +20,13 @@ class Admin_model extends CI_Model{
 		}
 	}
 
+	public function check_jumlah_permohonan($date, $jumlah_mobil)
+	{
+		$num = $this->db->get_where('permohonan_kendaraan', ['tanggalBerangkat' => $date])->num_rows();
+
+		return $num < $jumlah_mobil ? true : false;
+	}
+
 	public function get_permohonan_data($where)
 	{
 		$this->db->order_by('IDpermohonan', 'DESC');

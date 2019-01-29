@@ -7,6 +7,9 @@ class Permohonan extends CI_Controller {
 		parent::__construct();
 		$this->load->model('home_model');
 		$this->load->model('admin_model');
+
+		// jumlah mobil gasnet saat ini
+		$this->jumlah_mobil_gasnet = 2;
 	}
 
 	public function index()
@@ -50,6 +53,12 @@ class Permohonan extends CI_Controller {
 		$pengemudi = $this->input->post('pengemudi');
 		$tanggalPermohonan = date('Y-m-d');
 		$email = $_SESSION['go_email'];
+
+		$check = $this->admin_model->check_jumlah_permohonan($tanggalBerangkat, $this->jumlah_mobil_gasnet);
+		if (!$check) {
+			$_SESSION['error'] = 'Kendaraan operasional sudah terpakai seluruhnya di tanggal tersebut.';
+			redirect(base_url('permohonan/'));
+		}
 		
 		$data = array(
 			'tanggalBerangkat' => $tanggalBerangkat,
